@@ -1,5 +1,5 @@
 {
-    "name": "test-app-server",
+    "name": "concert-connect-server",
     "version": "1.0.0",
     "description": "",
     "main": "server.js",
