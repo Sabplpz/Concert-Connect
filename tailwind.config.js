@@ -2,7 +2,15 @@
 module.exports = {
   content: [],
   theme: {
-    extend: {},
+    extend: {
+
+    },
+    fontFamily: {
+      
+    }
   },
   plugins: [require("daisyui")],
+  daisyui: {
+    themes: ['synthwave','dark']
+  }
 }
