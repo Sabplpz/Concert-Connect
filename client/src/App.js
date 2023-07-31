@@ -2,6 +2,8 @@ import Footer from './components/footer'
 import Header from './components/header'
 import Landing from './pages/Landing'
 
+
+
 function App() {
   return (
     <div>
@@ -11,5 +13,6 @@ function App() {
     </div>
   );
 }
+
 
 export default App;
