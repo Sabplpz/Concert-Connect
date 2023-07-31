@@ -27,9 +27,16 @@ function LoginSignUpModal({ isOpen, onClose }) {
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
-    const { email, password } = formState;
+    const { email, password, verifyPassword } = formState;
 
     try {
+      if (!isLogin) {
+        if (password !== verifyPassword) {
+          console.error("Passwords do not match.");
+          return;
+        }
+      }
+
       if (isLogin) {
         const { data } = await login({ variables: { email, password } });
         Auth.login(data.login.token);
@@ -50,19 +57,55 @@ function LoginSignUpModal({ isOpen, onClose }) {
       <form onSubmit={handleFormSubmit}>
         {!isLogin && (
           <>
-            <input type="text" name="firstName" placeholder="First Name" value={formState.firstName} onChange={handleFormChange} />
+            <input
+              type="text"
+              name="firstName"
+              placeholder="First Name"
+              value={formState.firstName}
+              onChange={handleFormChange}
+            />
 
-            <input type="text" name="lastName" placeholder="Last Name" value={formState.lastName} onChange={handleFormChange} />
+            <input
+              type="text"
+              name="lastName"
+              placeholder="Last Name"
+              value={formState.lastName}
+              onChange={handleFormChange}
+            />
 
-            <input type="text" name="username" placeholder="Username" value={formState.username} onChange={handleFormChange} />
+            <input
+              type="text"
+              name="username"
+              placeholder="Username"
+              value={formState.username}
+              onChange={handleFormChange}
+            />
 
-            <input type="password" name="verifyPassword" placeholder="Verify Password" value={formState.verifyPassword} onChange={handleFormChange} />
+            <input
+              type="password"
+              name="verifyPassword"
+              placeholder="Verify Password"
+              value={formState.verifyPassword}
+              onChange={handleFormChange}
+            />
           </>
         )}
 
-        <input type="email" name="email" placeholder="Email" value={formState.email} onChange={handleFormChange} />
+        <input
+          type="email"
+          name="email"
+          placeholder="Email"
+          value={formState.email}
+          onChange={handleFormChange}
+        />
 
-        <input type="password" name="password" placeholder="Password" value={formState.password} onChange={handleFormChange} />
+        <input
+          type="password"
+          name="password"
+          placeholder="Password"
+          value={formState.password}
+          onChange={handleFormChange}
+        />
 
         <button type="submit">
           {isLogin ? 'Log In' : 'Sign Up'}
