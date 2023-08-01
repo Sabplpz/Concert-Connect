@@ -143,9 +143,49 @@ export default function Home() {
     </tbody>
   </table>
 </div>
+{/* Logged in user post form */}
 <div className="container mx-auto">
-<input type="text" placeholder="Share Your Next Concert..." className="input input-bordered input-primary w-full max-w-xs" />
-
+  <div className="join">
+    <input className="input input-bordered input-primary join-item" type="text" placeholder="Email"/>
+    <button className="btn join-item rounded-r-full">Post</button>
+  </div>
+  {/* End of logged in used post form */}
+  {/* Users friends post */}
+  <div className="card w-96 bg-base-100 shadow-xl">
+  <div className="card-body">
+    <h2 className="card-title">Sabrina Lopez</h2>
+    <p>Just saw Beyonce</p>
+    <div className="card-actions justify-end">
+      <button className="btn btn-primary">Like</button>
+      <button className="btn btn-secondary">Comment</button>
+    </div>
+  </div>
+</div>
+{/* End of friends post */}
+{/* Users friends post */}
+<div className="card w-96 bg-base-100 shadow-xl">
+  <div className="card-body">
+    <h2 className="card-title">Sabrina Lopez</h2>
+    <p>Just saw Beyonce</p>
+    <div className="card-actions justify-end">
+      <button className="btn btn-primary">Like</button>
+      <button className="btn btn-secondary">Comment</button>
+    </div>
+  </div>
+</div>
+{/* End of friends post */}
+{/* Users friends post */}
+<div className="card w-96 bg-base-100 shadow-xl">
+  <div className="card-body">
+    <h2 className="card-title">Sabrina Lopez</h2>
+    <p>Just saw Beyonce</p>
+    <div className="card-actions justify-end">
+      <button className="btn btn-primary">Like</button>
+      <button className="btn btn-secondary">Comment</button>
+    </div>
+  </div>
+</div>
+{/* End of friends post */}
 </div>
 {/* End of top venues table */}
 </div>
