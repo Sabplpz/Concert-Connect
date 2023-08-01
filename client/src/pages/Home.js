@@ -4,10 +4,11 @@
 import React from 'react';
 import calendarIcon from '../assets/calendar.png';
 import musicIcon from '../assets/music.png';
+import userIcon from '../assets/user.png';
 
 export default function Home() {
     return(
-    <div>
+      <div className="container mx-auto">
         <div className="hero min-h-screen bg-base-200">
             <div className="hero-content text-center">
                 <div className="max-w-md">
@@ -141,6 +142,10 @@ export default function Home() {
       </tr>
     </tbody>
   </table>
+</div>
+<div className="container mx-auto">
+<input type="text" placeholder="Share Your Next Concert..." className="input input-bordered input-primary w-full max-w-xs" />
+
 </div>
 {/* End of top venues table */}
 </div>
