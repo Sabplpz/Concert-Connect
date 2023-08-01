@@ -4,6 +4,7 @@ import React from 'react';
 import placeholder from '../assets/placeholder-image.png';
 
 export default function Landing() {
+  return (
     <div>
         <div>
             <h1>The best way to remember incredible concert experiences</h1>
@@ -33,10 +34,10 @@ export default function Landing() {
     {/* head */}
     <thead>
       <tr>
-        <th></th>
-        <th>Name</th>
-        <th>Job</th>
-        <th>Favorite Color</th>
+        <th>Date</th>
+        <th>Concert</th>
+        <th>Venue</th>
+        <th>Location</th>
       </tr>
     </thead>
     <tbody>
@@ -68,4 +69,5 @@ export default function Landing() {
 <button className="btn btn-outline btn-secondary">View More Concerts</button>
         </div>
     </div>
+  )
 }
