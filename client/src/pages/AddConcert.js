@@ -17,10 +17,9 @@ function ConcertList({ onSelectConcert, onConcertDataChange }) {
           },
         });
 
-        // Extract concert data from the API response
         const data = response.data?._embedded?.events || [];
         setConcertsData(data);
-        onConcertDataChange(data); // Pass the concert data to the parent component
+        onConcertDataChange(data);
       } catch (error) {
         console.error('Error fetching concert names:', error.message);
       }
@@ -43,8 +42,8 @@ function ConcertList({ onSelectConcert, onConcertDataChange }) {
       <select onChange={(e) => onSelectConcert(e.target.value)}>
         <option value="">Select Concert</option>
         {concertsData.map((concert, index) => (
-          <option key={index} value={concert.name}>
-            {concert.name}
+          <option key={index} value={index}>
+            {concert.name} - {concert.dates?.start?.localDate} - {concert?._embedded?.venues[0]?.city?.name}
           </option>
         ))}
       </select>
@@ -54,53 +53,45 @@ function ConcertList({ onSelectConcert, onConcertDataChange }) {
 
 function AddConcert() {
   const [selectedConcert, setSelectedConcert] = useState(null);
-  const [band, setBand] = useState('');
+  const [artist, setArtist] = useState('');
   const [date, setDate] = useState('');
   const [venue, setVenue] = useState('');
   const [city, setCity] = useState('');
   const [concertsData, setConcertsData] = useState([]);
 
-  const handleConcertSelection = (eventName) => {
-    // Find the selected concert data by matching the event name
-    const selectedConcertData = concertsData.find((concert) => concert.name === eventName);
+  const handleConcertSelection = (concertIndex) => {
+    const selectedConcertData = concertsData[concertIndex];
     setSelectedConcert(selectedConcertData);
 
-    // Autofill the "Band" field with the attractions data
     const attractionsData = selectedConcertData?._embedded?.attractions || [];
-    const bandName = attractionsData[0]?.name || ''; // Assuming the first attraction is the band name
-    setBand(bandName);
+    const artistName = attractionsData[0]?.name || '';
+    setArtist(artistName);
 
-    // Autofill the "Date" field with the concert date
     const concertDate = selectedConcertData?.dates?.start?.localDate || '';
     setDate(concertDate);
 
-    // Autofill the "Venue" field with the venue name
     const venueName = selectedConcertData?._embedded?.venues[0]?.name || '';
     setVenue(venueName);
 
-    // Autofill the "City" field with the city name
     const cityName = selectedConcertData?._embedded?.venues[0]?.city?.name || '';
     setCity(cityName);
   };
 
   const handleConcertDataChange = (data) => {
-    // Store the concert data in the state
     setConcertsData(data);
   };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    // Your form submission logic to add the concert to the database
     console.log('Submitting concert data:', {
-      band,
+      artist,
       date,
       venue,
       city,
     });
 
-    // Clear the form fields after successful submission
-    setBand('');
+    setArtist('');
     setDate('');
     setVenue('');
     setCity('');
@@ -119,8 +110,8 @@ function AddConcert() {
           <label htmlFor="concert">Select Concert:</label>
           <ConcertList onSelectConcert={handleConcertSelection} onConcertDataChange={handleConcertDataChange} />
 
-          <label htmlFor="band">Band:</label>
-          <input type="text" name="band" value={band} onChange={(e) => setBand(e.target.value)} />
+          <label htmlFor="artist">Artist:</label>
+          <input type="text" name="artist" value={artist} onChange={(e) => setArtist(e.target.value)} />
 
           <label htmlFor="date">Date:</label>
           <input type="date" name="date" value={date} onChange={(e) => setDate(e.target.value)} />
