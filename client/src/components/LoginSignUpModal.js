@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useMutation } from '@apollo/client';
-import { LOGIN_USER, SIGNUP_USER } from '../utils/mutations';
+import { LOGIN_USER, ADD_USER } from '../utils/mutations';
 import Auth from '../utils/auth';
 
 function LoginSignUpModal({ isOpen, onClose }) {
@@ -15,7 +15,7 @@ function LoginSignUpModal({ isOpen, onClose }) {
   });
 
   const [login, { error: loginError }] = useMutation(LOGIN_USER);
-  const [signup, { error: signupError }] = useMutation(SIGNUP_USER);
+  const [signup, { error: signupError }] = useMutation(ADD_USER);
 
   const handleFormChange = (event) => {
     const { name, value } = event.target;
