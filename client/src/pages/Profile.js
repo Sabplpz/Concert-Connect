@@ -8,8 +8,7 @@ import ButtonPic from '../assets/Button.png'
 function profile() {
 
     return(
-
-      <html data-theme="dark">
+      <div>
       <h1>Mia's Page</h1>
       <h3>1,000,000 followers</h3>
       <button> 
@@ -256,8 +255,8 @@ function profile() {
 
       <button>View All Concerts</button>
     </div>
-    </html>
-
+    
+  </div>
 
 
 
