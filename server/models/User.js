@@ -26,6 +26,30 @@ const userSchema = new Schema(
       type: String,
       required: true,
     },
+    concerts: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "Concert",
+      },
+    ],
+    artists: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "Artist",
+      },
+    ],
+    venues: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "Venue",
+      },
+    ],
+    reviews: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "Review",
+      },
+    ],
   },
   // set this to use virtual below
   {

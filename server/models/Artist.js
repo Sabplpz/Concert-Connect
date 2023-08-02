@@ -13,7 +13,6 @@ const artistSchema = new Schema(
     ],
     genre: {
       type: String,
-      required: true,
     }
   },
 );

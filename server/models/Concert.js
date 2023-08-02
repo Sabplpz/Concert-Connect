@@ -14,17 +14,18 @@ const concertSchema = new Schema(
       type: Date,
       required: true,
     },
-    artist: {
-      type: String,
-      required: true,
+    artist: [{
+        type: Schema.Types.ObjectId,
+        ref: 'Artist',
+      },
+    ],
+    venue: [{
+      type: Schema.Types.ObjectId,
+      ref: 'Venue',
     },
-    venue: {
-      type: String,
-      required: true,
-    },
+  ],
     genre: {
       type: String,
-      required: true,
     }
   },
 );
