@@ -66,7 +66,7 @@ function App() {
               <Route path="/venues"
               element={<Venues />}
               />
-              <Route path="/profile/:username"
+              <Route path="/profile"
               element={<Profile />}
               />
               <Route path="/concerts"
