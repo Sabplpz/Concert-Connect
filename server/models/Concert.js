@@ -15,12 +15,12 @@ const concertSchema = new Schema(
       required: true,
     },
     artist: {
-      type: String,
-      required: true,
+      type: Schema.Types.ObjectId,
+      ref: 'Artist',
     },
     venue: {
-      type: String,
-      required: true,
+      type: Schema.Types.ObjectId,
+      ref: 'Venue',
     },
     genre: {
       type: String,
