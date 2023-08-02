@@ -12,11 +12,9 @@ import Footer from './components/footer';
 import Header from './components/header';
 import Landing from './pages/Landing';
 import AddConcert from './pages/AddConcert';
-import Bands from './pages/Bands';
 import Concerts from './pages/Concerts';
 import Home from './pages/Home';
 import Profile from './pages/Profile';
-import Venues from './pages/Venues';
 import LoginSignUpModal from './components/LoginSignUpModal';
 
 //Construct our main GraphQL API endpoint
@@ -58,13 +56,6 @@ function App() {
               <Route
               path="/add-concert"
               element={<AddConcert />}
-              />
-              <Route 
-              path="/bands"
-              element={<Bands />}
-              />
-              <Route path="/venues"
-              element={<Venues />}
               />
               <Route path="/profile"
               element={<Profile />}
