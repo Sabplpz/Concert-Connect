@@ -1,32 +1,30 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
 
 function ConcertList({ onSelectConcert, onConcertDataChange }) {
   const [concertsData, setConcertsData] = useState([]);
   const [keyword, setKeyword] = useState('');
+  const [showDropdown, setShowDropdown] = useState(false);
 
-  useEffect(() => {
-    const fetchConcertNames = async () => {
-      try {
-        const response = await axios.get('https://app.ticketmaster.com/discovery/v2/events', {
-          params: {
-            apikey: 'KzV8OCOnhvpGtaoVP1AFZP5qCS4jvNgG',
-            keyword,
-            locale: '*',
-            size: 200,
-          },
-        });
+  const handleSearchConcerts = async () => {
+    try {
+      const response = await axios.get('https://app.ticketmaster.com/discovery/v2/events', {
+        params: {
+          apikey: '6sOPwHnIo993SJGpEOZxgkbNvGgHhQ9n',
+          keyword,
+          locale: '*',
+          size: 100,
+        },
+      });
 
-        const data = response.data?._embedded?.events || [];
-        setConcertsData(data);
-        onConcertDataChange(data);
-      } catch (error) {
-        console.error('Error fetching concert names:', error.message);
-      }
-    };
-
-    fetchConcertNames();
-  }, [keyword, onConcertDataChange]);
+      const data = response.data?._embedded?.events || [];
+      setConcertsData(data);
+      onConcertDataChange(data);
+      setShowDropdown(true);
+    } catch (error) {
+      console.error('Error fetching concert names:', error.message);
+    }
+  };
 
   return (
     <div>
@@ -36,17 +34,21 @@ function ConcertList({ onSelectConcert, onConcertDataChange }) {
         name="keyword"
         value={keyword}
         onChange={(e) => setKeyword(e.target.value)}
-        onBlur={() => onSelectConcert(keyword)}
+        onBlur={() => setShowDropdown(false)}
       />
 
-      <select onChange={(e) => onSelectConcert(e.target.value)}>
-        <option value="">Select Concert</option>
-        {concertsData.map((concert, index) => (
-          <option key={index} value={index}>
-            {concert.name} - {concert.dates?.start?.localDate} - {concert?._embedded?.venues[0]?.city?.name}
-          </option>
-        ))}
-      </select>
+      <button onClick={handleSearchConcerts}>Submit</button>
+
+      {showDropdown && (
+        <select onChange={(e) => onSelectConcert(e.target.value)}>
+          <option value="">Select Concert</option>
+          {concertsData.map((concert, index) => (
+            <option key={index} value={index}>
+              {concert.name} - {concert.dates?.start?.localDate} - {concert?._embedded?.venues[0]?.city?.name}
+            </option>
+          ))}
+        </select>
+      )}
     </div>
   );
 }
