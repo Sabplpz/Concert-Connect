@@ -2,7 +2,7 @@ const { gql } = require('apollo-server-express');
 
 const typeDefs = gql`
 type User {
-  _id: ID!
+  _id: ID
   firstName: String!
   lastName: String!
   username: String!
@@ -15,21 +15,31 @@ type User {
 }
 
 type Concert {
+  _id: ID
   concertName: String!
   city: String!
   date: String!
-  artist: [Artist]
-  venue: [Venue]
+  artist: Artist
+  venue: Venue
   genre: String
 }
 
 type Artist {
+  _id: ID
   artistName: String!
   concerts: [Concert]
   genre: String
 }
 
+type Venue {
+  _id: ID
+  venueName: String!
+  city: String!
+  concerts: [Concert]
+}
+
 type Review {
+  _id: ID
   type: String!
   name: String!
   starRating: Int!
@@ -44,11 +54,26 @@ type Auth {
 
 type Query {
   me: User
+  concert: Concert
+  concerts: [Concert]
+  artists: User
+  venues: User
+  review: Review
+  reviews: [Review]
 }
 
 type Mutation {
   login(email: String!, password: String!): Auth
   addUser(fisrtName: String!, lastName: String!, username: String!, email: String!, password: String!): Auth
+  addConcert(concertName: String!, city: String!, date: String!, genre: String!): Concert
+  deleteConcert(id: ID!): Concert
+  addArtist(artistName: String!, genre: String!): Artist
+  deleteArtist(id: ID!): Artist
+  addVenue(venueName: String!, city: String!): Venue
+  deleteVenue(id: ID!): Venue
+  addReview(type: String!, name: String!, starRating: Int!, text: String): Review
+  updateReview(id: ID!, starRating: Int!, text: String): Review
+  deleteReview(id: ID!): Review
 }
 `;
 
