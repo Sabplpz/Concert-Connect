@@ -163,7 +163,13 @@ export default function Home() {
             {/* end of top venues collapse table */}
           </div>
           <div className="basis 4/6">
-
+          <div className="flex items-center">
+            <img src={userIcon} style={{width: 50 + 'px',}}/>
+              <div>
+                <strong>Andrew Alfred</strong>
+                <span>Technical advisor</span>
+              </div>
+</div>
           </div>
 
         </div>
