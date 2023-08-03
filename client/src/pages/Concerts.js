@@ -7,6 +7,10 @@ function ConcertList({ concertsData }) {
     return new Date(dateString).toLocaleDateString(undefined, options);
   };
 
+  const handleImGoingClick = (concert) => {
+    console.log(`I'm going to: ${concert.name}`);
+  };
+
   return (
     <table>
       <thead>
@@ -16,16 +20,31 @@ function ConcertList({ concertsData }) {
           <th>Date</th>
           <th>Venue</th>
           <th>City</th>
+          <th></th>
+          <th></th> {/* New Column */}
         </tr>
       </thead>
       <tbody>
         {concertsData.map((concert, index) => (
           <tr key={index}>
             <td>{concert.name}</td>
-            <td>{concert?._embedded?.attractions[0]?.name}</td>
+            <td>
+              <a href={`https://open.spotify.com/artist/${concert?._embedded?.attractions[0]?.externalLinks?.spotify[0]?.url}`} target="_blank" rel="noopener noreferrer">
+                {concert?._embedded?.attractions[0]?.name}
+              </a>
+            </td>
             <td>{formatDate(concert.dates?.start?.localDate)}</td>
             <td>{concert?._embedded?.venues[0]?.name}</td>
             <td>{concert?._embedded?.venues[0]?.city?.name}</td>
+            <td>
+              <a href={concert.url} target="_blank" rel="noopener noreferrer">
+                <button>Get Tickets</button>
+              </a>
+            </td>
+            <td>
+              {/* New Column Data */}
+              <button onClick={() => handleImGoingClick(concert)}>I'm going!</button>
+            </td>
           </tr>
         ))}
       </tbody>
