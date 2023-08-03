@@ -8,141 +8,167 @@ import userIcon from '../assets/user.png';
 
 export default function Home() {
     return(
-      <div className="container mx-auto">
-        <div className="hero min-h-screen bg-base-200">
-            <div className="hero-content text-center">
-                <div className="max-w-md">
-                    <h1 className="text-5xl font-bold">Your Concert Connections</h1>
-                </div>
-            </div>
+      <div>
+      <div className="hero h-96 bg-base-200">
+        <div className="hero-content text-center">
+          <div className="max-w-md">
+            <h1 className="text-4xl font-bold">Your Concert Connections</h1>
+          </div>
         </div>
-        {/* Upcoming Concerts table */}
-        <div className="overflow-x-auto">
-            <h2>Upcoming Concerts</h2>
-  <table className="table">
-    {/* head */}
-    <thead>
-      <tr>
-        <th>Date</th>
-        <th>Concert</th>
-      </tr>
-    </thead>
-    <tbody>
-      {/* row 1 */}
-      <tr>
-        <td>09/30/2023</td>
-        <td>Broadside <br />
-        The Maine</td>
-      </tr>
-      {/* row 2 */}
-      <tr>
-        <td>10/01/2023</td>
-        <td>You Me At Six</td>
-      </tr>
-      {/* row 3 */}
-      <tr>
-        <td>10/13/2023</td>
-        <td>Jonas Brothers</td>
-      </tr>
-    </tbody>
-  </table>
-</div>
-{/* End of upcoming concerts table */}
-{/* Top Bands table */}
-<div className="overflow-x-auto">
-            <h2>Top Bands</h2>
-  <table className="table">
-    <tbody>
-      {/* row 1 */}
-      <tr>
-        <th>1</th>
-        <td>The Maine</td>
-      </tr>
-      {/* row 2 */}
-      <tr>
-        <th>2</th>
-        <td>Bright Eyes</td>
-      </tr>
-      {/* row 3 */}
-      <tr>
-        <th>3</th>
-        <td>Lights</td>
-      </tr>
-    </tbody>
-  </table>
-</div>
-{/* End of top bands table */}
-{/* Top Genres table */}
-<div className="overflow-x-auto">
-            <h2>Top Genres</h2>
-  <table className="table">
-    <tbody>
-      {/* row 1 */}
-      <tr>
-        <th>1</th>
-        <td>Pop Rock</td>
-      </tr>
-      {/* row 2 */}
-      <tr>
-        <th>2</th>
-        <td>Indie</td>
-      </tr>
-      {/* row 3 */}
-      <tr>
-        <th>3</th>
-        <td>Alternative</td>
-      </tr>
-    </tbody>
-  </table>
-</div>
-{/* End of top genres table */}
-{/* Top Genres table */}
-<div className="overflow-x-auto">
-            <h2>Top Genres</h2>
-  <table className="table">
-    <tbody>
-      {/* row 1 */}
-      <tr>
-        <th>1</th>
-        <td>Pop Rock</td>
-      </tr>
-      {/* row 2 */}
-      <tr>
-        <th>2</th>
-        <td>Indie</td>
-      </tr>
-      {/* row 3 */}
-      <tr>
-        <th>3</th>
-        <td>Alternative</td>
-      </tr>
-    </tbody>
-  </table>
-</div>
-{/* End of top genres table */}
-{/* Top Venues table */}
-<div className="overflow-x-auto">
-            <h2>Top Venues</h2>
-  <table className="table">
-    <tbody>
-      {/* row 1 */}
-      <tr>
-        <th>1</th>
-        <td>The Social</td>
-      </tr>
-      {/* row 2 */}
-      <tr>
-        <th>2</th>
-        <td>The Beacham</td>
-      </tr>
-      {/* row 3 */}
-      <tr>
-        <th>3</th>
-        <td>House of Blues</td>
-      </tr>
-    </tbody>
-  </table>
-</div>
+      </div>
+
+      <div className="container mx-auto">
+        <div class="flex flex-row">
+          {/* aside column with user stats */}
+          <div className="basis 2/6">
+            {/* upcoming concerts collapse table */}
+            <div className="collapse bg-base-200">
+              <input type="checkbox" /> 
+              <div className="collapse-title text-xl font-medium">
+                Upcoming Concerts
+              </div>
+              <div className="collapse-content"> 
+                {/* Upcoming Concerts table */}
+                <div className="overflow-x-auto">
+                  <table className="table">
+                    {/* head */}
+                    <thead>
+                      <tr>
+                        <th>Date</th>
+                        <th>Concert</th>
+                      </tr>
+                    </thead>
+                  <tbody>
+                    {/* row 1 */}
+                    <tr>
+                      <td>09/30/2023</td>
+                      <td>Broadside <br />
+                      The Maine</td>
+                    </tr>
+                    {/* row 2 */}
+                    <tr>
+                      <td>10/01/2023</td>
+                      <td>You Me At Six</td>
+                    </tr>
+                    {/* row 3 */}
+                    <tr>
+                      <td>10/13/2023</td>
+                      <td>Jonas Brothers</td>
+                    </tr>
+                  </tbody>
+                  </table>
+                </div>
+                {/* end of upcoming concerts table */}
+              </div>
+            </div>
+            {/* end of upcoming concerts collapse table */}
+            {/* top artists collapse table */}
+            <div className="collapse bg-base-200">
+              <input type="checkbox" /> 
+              <div className="collapse-title text-xl font-medium">
+                Your Top Artists
+              </div>
+              <div className="collapse-content"> 
+                {/* Top artists table */}
+                <div className="overflow-x-auto">
+                  <table className="table">
+                    <tbody>
+                      {/* row 1 */}
+                      <tr>
+                        <th>1</th>
+                        <td>The Maine</td>
+                      </tr>
+                      {/* row 2 */}
+                      <tr>
+                        <th>2</th>
+                        <td>Bright Eyes</td>
+                      </tr>
+                      {/* row 3 */}
+                      <tr>
+                        <th>3</th>
+                        <td>Lights</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                {/* end of top artists table */}
+              </div>
+            </div>
+            {/* end of top artists collapse table */}
+            {/* top genres collapse table */}
+            <div className="collapse bg-base-200">
+              <input type="checkbox" /> 
+              <div className="collapse-title text-xl font-medium">
+                Your Top Genres
+              </div>
+              <div className="collapse-content"> 
+                {/* Top genres table */}
+                <div className="overflow-x-auto">
+                  <table className="table">
+                    <tbody>
+                      {/* row 1 */}
+                      <tr>
+                        <th>1</th>
+                        <td>Pop Rock</td>
+                      </tr>
+                      {/* row 2 */}
+                      <tr>
+                        <th>2</th>
+                        <td>Indie</td>
+                      </tr>
+                      {/* row 3 */}
+                      <tr>
+                        <th>3</th>
+                        <td>Alternative</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                {/* end of top genres table */}
+              </div>
+            </div>
+            {/* end of top genres collapse table */}
+            {/* top venues collapse table */}
+            <div className="collapse bg-base-200">
+              <input type="checkbox" /> 
+              <div className="collapse-title text-xl font-medium">
+                Your Top Venues
+              </div>
+              <div className="collapse-content"> 
+                {/* Top venues table */}
+                <div className="overflow-x-auto">
+                  <table className="table">
+                    <tbody>
+                      {/* row 1 */}
+                      <tr>
+                        <th>1</th>
+                        <td>The Social</td>
+                      </tr>
+                      {/* row 2 */}
+                      <tr>
+                        <th>2</th>
+                        <td>The Beacham</td>
+                      </tr>
+                      {/* row 3 */}
+                      <tr>
+                        <th>3</th>
+                        <td>House of Blues</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                {/* end of top venues table */}
+              </div>
+            </div>
+            {/* end of top venues collapse table */}
+          </div>
+          <div className="basis 4/6">
+
+          </div>
+
+        </div>
+        
+
 {/* Logged in user post form */}
 <div className="container mx-auto">
   <div className="join">
@@ -188,6 +214,7 @@ export default function Home() {
 {/* End of friends post */}
 </div>
 {/* End of top venues table */}
+</div>
 </div>
     )
 }
