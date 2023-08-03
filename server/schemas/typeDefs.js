@@ -12,6 +12,7 @@ type User {
   artists: [Artist]
   venues: [Venue]
   reviews: [Review]
+  follow: [User]
 }
 
 type Concert {
@@ -54,6 +55,7 @@ type Auth {
 
 type Query {
   me: User
+  follow: User
   concert: Concert
   concerts: [Concert]
   artists: User
@@ -64,7 +66,7 @@ type Query {
 
 type Mutation {
   login(email: String!, password: String!): Auth
-  addUser(fisrtName: String!, lastName: String!, username: String!, email: String!, password: String!): Auth
+  addUser(firstName: String!, lastName: String!, username: String!, email: String!, password: String!): Auth
   addConcert(concertName: String!, city: String!, date: String!, genre: String!): Concert
   deleteConcert(id: ID!): Concert
   addArtist(artistName: String!, genre: String!): Artist
@@ -74,6 +76,8 @@ type Mutation {
   addReview(type: String!, name: String!, starRating: Int!, text: String): Review
   updateReview(id: ID!, starRating: Int!, text: String): Review
   deleteReview(id: ID!): Review
+  followUser(userName: String!): User
+  unfollowUser(userName: String!): User
 }
 `;
 
