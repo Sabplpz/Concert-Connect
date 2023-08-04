@@ -17,7 +17,7 @@ export default function Home() {
             <div className="collapse mb-5">
               <input type="checkbox"/> 
               <div className="collapse-title text-xl font-medium bg-base-200">
-                Upcoming Concerts
+              Upcoming Concerts
               </div>
               <div className="collapse-content"> 
                 {/* Upcoming Concerts table */}
