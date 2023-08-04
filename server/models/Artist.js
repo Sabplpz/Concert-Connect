@@ -10,11 +10,7 @@ const artistSchema = new Schema(
         type: Schema.Types.ObjectId,
         ref: 'Concert',
       },
-    ],
-    genre: {
-      type: String,
-      required: true,
-    }
+    ]
   },
 );
 

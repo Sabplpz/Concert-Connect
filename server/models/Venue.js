@@ -10,11 +10,6 @@ const venueSchema = new Schema(
       type: String,
       required: true,
     },
-    concerts: [{
-        type: Schema.Types.ObjectId,
-        ref: 'Concert',
-      },
-    ],
   },
 );
 

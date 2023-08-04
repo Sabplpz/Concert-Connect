@@ -1,6 +1,5 @@
 import React from "react";
-import { useState, useEffect } from "react";
-import Profile from "../assets/placeholder-image.png";
+import { useState } from "react";
 import "../assets/header.css";
 import Logo from "../assets/ConcertConnectLogo.png";
 import Auth from "../utils/auth";
