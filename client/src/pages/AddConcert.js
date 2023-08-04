@@ -6,6 +6,8 @@ function ConcertList({ onSelectConcert, onConcertDataChange }) {
   const [keyword, setKeyword] = useState('');
   const [showDropdown, setShowDropdown] = useState(false);
 
+
+
   const handleSearchConcerts = async () => {
     try {
       const response = await axios.get('https://app.ticketmaster.com/discovery/v2/events', {
@@ -56,14 +58,19 @@ function ConcertList({ onSelectConcert, onConcertDataChange }) {
 function AddConcert() {
   const [selectedConcert, setSelectedConcert] = useState(null);
   const [artist, setArtist] = useState('');
+  const [concert, setConcert] = useState('');
   const [date, setDate] = useState('');
   const [venue, setVenue] = useState('');
   const [city, setCity] = useState('');
+  const [genre, setGenre] = useState('');
   const [concertsData, setConcertsData] = useState([]);
 
   const handleConcertSelection = (concertIndex) => {
     const selectedConcertData = concertsData[concertIndex];
     setSelectedConcert(selectedConcertData);
+
+    const concertName = selectedConcertData.name || '';
+    setConcert(concertName);
 
     const attractionsData = selectedConcertData?._embedded?.attractions || [];
     const artistName = attractionsData[0]?.name || '';
@@ -77,6 +84,9 @@ function AddConcert() {
 
     const cityName = selectedConcertData?._embedded?.venues[0]?.city?.name || '';
     setCity(cityName);
+
+    const genre = selectedConcertData.classifications[0].genre.name || '';
+    setGenre(genre);
   };
 
   const handleConcertDataChange = (data) => {
@@ -88,15 +98,19 @@ function AddConcert() {
 
     console.log('Submitting concert data:', {
       artist,
+      concert,
       date,
       venue,
       city,
+      genre,
     });
 
     setArtist('');
+    setConcert('');
     setDate('');
     setVenue('');
     setCity('');
+    setGenre('');
     setSelectedConcert(null);
   };
 
@@ -115,6 +129,11 @@ function AddConcert() {
             </div>
 
             <div>
+              <label htmlFor="concert" className="label">Concert:</label>
+              <input type="text" className="input input-bordered input-primary w-full" name="concert" value={concert} onChange={(e) => setConcert(e.target.value)} />
+            </div>
+
+            <div>
               <label htmlFor="date" className="label">Date:</label>
               <input type="date" className="input input-bordered input-primary w-full" name="date" value={date} onChange={(e) => setDate(e.target.value)} />
             </div>
@@ -127,6 +146,11 @@ function AddConcert() {
             <div>
               <label htmlFor="city" className="label">City:</label>
               <input type="text" className="input input-bordered input-primary w-full" name="city" value={city} onChange={(e) => setCity(e.target.value)} />
+            </div>
+
+            <div>
+              <label htmlFor="genre" className="label">Genre:</label>
+              <input type="text" className="input input-bordered input-primary w-full" name="genre" value={genre} onChange={(e) => setGenre(e.target.value)} />
             </div>
           </div>
 

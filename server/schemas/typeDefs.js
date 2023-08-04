@@ -29,14 +29,12 @@ const typeDefs = gql`
     _id: ID
     artistName: String!
     concerts: [Concert]
-    genre: String
-  }
+    }
 
   type Venue {
     _id: ID
     venueName: String!
     city: String!
-    concerts: [Concert]
   }
 
   type Review {
@@ -74,13 +72,15 @@ const typeDefs = gql`
       password: String!
     ): Auth
     addConcert(
+      artistName: String!
       concertName: String!
+      venueName: String!
       city: String!
       date: String!
-      genre: String!
+      genre: String
     ): Concert
     deleteConcert(id: ID!): Concert
-    addArtist(artistName: String!, genre: String!): Artist
+    addArtist(artistName: String!): Artist
     deleteArtist(id: ID!): Artist
     addVenue(venueName: String!, city: String!): Venue
     deleteVenue(id: ID!): Venue
