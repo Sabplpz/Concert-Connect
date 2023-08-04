@@ -1,33 +1,44 @@
 const { AuthenticationError } = require("apollo-server-express");
-const { User } = require("../models");
+const { User, Artist, Concert, Venue, Review } = require("../models");
 const { signToken } = require("../utils/auth");
 
 const resolvers = {
   Query: {
     me: async (parent, args, context) => {
       if (context.user) {
-        const userData = await User.findOne({ _id: context.user._id }).select(
-          "-__v -password"
-        );
+        console.log(context.user._id);
+        // const userData = await User
+        //   .findOne({ _id: context.user._id })
+        //   .select("-__v -password");
+        const userData = await User
+          .findOne({ firstName: context.user.firstName })
+          .select("-__v -password");
         return userData;
       }
       throw new AuthenticationError("Not logged in");
     },
     follow: async ( parent, args, context ) => {
       if (context.user) {
-        return User.findOne({ _id: context.user._id }).populate('follow');
+        // return User.findOne({ _id: context.user._id }).populate('follow');
+        return User
+          .findOne({ firstName: context.user.firstName })
+          .populate('follow')
       }
       throw new AuthenticationError('You must log in');
     },
     concert: async (parent, args) => {
-      return Concert.findOne({ _id: args._id });
+      return Concert
+        .findOne({ _id: args._id });
     },
     concerts: async () => {
       return await Concert.find();
     },
     artists: async (parent, args, context) => {
       if (context.user) {
-        return User.findOne({ _id: context.user._id }).populate('artists');
+        console.log(context.user)
+        return User
+          .findOne({ _id: context.user._id })
+          .populate('artists');
       }
       throw new AuthenticationError('You must log in');
     },
@@ -46,10 +57,30 @@ const resolvers = {
   },
 
   Mutation: {
-    login: async (parent, { email, password }) => {
-      const user = await User.findOne({ email });
+    login: async (parent, { username, password }) => {
+      const user = await User.findOne({ username });
       if (!user) {
         throw new AuthenticationError("Incorrect credentials");
+      }
+      const correctPw = await user.isCorrectPassword(password);
+      if (!correctPw) {
+        throw new AuthenticationError("Incorrect credentials");
+      }
+      const token = signToken(user);
+      return { token, user };
+    },
+    addUser: async (parent, args) => {
+      const user = await User.create(args);
+      const token = signToken(user);
+      return {token, user};
+    },
+    addConcert: async (parent, { name, city, date, genre }, context) => {
+      if (context.user) {
+        let addedConcert = { concertName: name, city: city, date: date, genre: genre };
+        await User.findByIdAndUpdate(context.user.id, {
+          $push: { concerts: addedConcert },
+        });
+        return addedConcert;
       }
       const correctPw = await user.isCorrectPassword(password);
       if (!correctPw) {
@@ -65,8 +96,8 @@ const resolvers = {
     },
     addConcert: async (parent, { name, city, date, genre }, context) => {
       if (context.user) {
-        let addedConcert = { concerName: name, city: city, date: date, genre: genre };
-        await User.findByIdAndUpdate(context.user.id, {
+        let addedConcert = { concertName: name, city: city, date: date, genre: genre };
+        await User.findByIdAndUpdate(context.user._id, {
           $push: { concerts: addedConcert },
         });
         return addedConcert;

@@ -17,7 +17,7 @@ function LoginSignUpModal({ isOpen, onClose }) {
   });
 
   const [login, { error: loginError }] = useMutation(LOGIN_USER);
-  const [signup, { error: signupError }] = useMutation(ADD_USER);
+  const [addUser, { error: signupError }] = useMutation(ADD_USER);
 
   const handleFormChange = (event) => {
     const { name, value } = event.target;
@@ -29,7 +29,7 @@ function LoginSignUpModal({ isOpen, onClose }) {
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
-    const { email, password, verifyPassword } = formState;
+    const { username, password, verifyPassword } = formState;
 
     try {
       if (!isLogin) {
@@ -40,11 +40,11 @@ function LoginSignUpModal({ isOpen, onClose }) {
       }
 
       if (isLogin) {
-        const { data } = await login({ variables: { email, password } });
+        const { data } = await login({ variables: { username, password } });
         Auth.login(data.login.token);
       } else {
-        const { data } = await signup({ variables: { ...formState } });
-        Auth.login(data.signup.token);
+        const { data } = await addUser({ variables: { ...formState } });
+        Auth.login(data.addUser.token);
       }
       onClose();
     } catch (e) {
@@ -93,10 +93,10 @@ function LoginSignUpModal({ isOpen, onClose }) {
                 />
 
                 <input
-                  type="text"
-                  name="username"
-                  placeholder="Username"
-                  value={formState.username}
+                  type="email"
+                  name="email"
+                  placeholder="Email"
+                  value={formState.email}
                   onChange={handleFormChange}
                 />
 
@@ -111,10 +111,10 @@ function LoginSignUpModal({ isOpen, onClose }) {
             )}
 
             <input
-              type="email"
-              name="email"
-              placeholder="Email"
-              value={formState.email}
+              type="text"
+              name="username"
+              placeholder="Username"
+              value={formState.username}
               onChange={handleFormChange}
             />
 

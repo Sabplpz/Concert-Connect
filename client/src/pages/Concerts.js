@@ -89,7 +89,7 @@ function Concerts() {
               name="keyword"
               placeholder="Enter artist name"
             />
-            <button className="btn btn-outline btn" type="submit" >Search</button>
+            <button className="btn btn-outline" type="submit" >Search</button>
           </form>
           <ConcertList concertsData={concertsData} />
         </section>
