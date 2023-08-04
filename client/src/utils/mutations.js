@@ -67,3 +67,7 @@ export const ADD_CONCERT = gql`
     }
   }
 `;
+
+export const FOLLOW_USER = gql`
+
+`;

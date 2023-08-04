@@ -12,16 +12,12 @@ const resolvers = {
           .populate("concerts")
           .populate("artists")
           .populate("venues")
+          .populate("follow")
+          .populate("reviews")
           .select("-__v -password");
         return userData;
       }
       throw new AuthenticationError("Not logged in");
-    },
-    follow: async (parent, args, context) => {
-      if (context.user) {
-        return User.findOne({ _id: context.user._id }).populate("follow");
-      }
-      throw new AuthenticationError("You must log in");
     },
     concert: async (parent, args) => {
       return Concert.findOne({ _id: args._id });
@@ -195,64 +191,71 @@ const resolvers = {
     // },
     addReview: async (parent, args, context) => {
       if (context.user) {
-        let savedReview = await Review.findOne({
-          _id: args.id,
+        let savedReview = await Review.create({
+          type: args.type,
+          title: args.title,
+          starRating: args.starRating,
+          username: context.user.username,
         });
         await User.findByIdAndUpdate(context.user._id, {
-          $push: { reviews: savedReview },
+          $push: { reviews: savedReview._id },
         });
-        return;
+        return savedReview;
       }
       throw new AuthenticationError("You must log in");
     },
     updateReview: async (parent, args, context) => {
-      // TEST: I see some problems coming up with this one
       if (context.user) {
-        let savedReview = await Review.findOne({
-          _id: args.id,
-        });
-        await User.findByIdAndUpdate(context.user._id, {
-          $push: { reviews: savedReview },
-        });
-        return;
+        let updatedReview = await Review.findOneAndUpdate(
+          {
+            _id: args._id,
+            username: context.user.username,
+          },
+          { title: args.name, starRating: args.starRating, text: args.text },
+          {
+            new: true,
+          }
+        );
+        return updatedReview;
       }
       throw new AuthenticationError("You must log in");
     },
     deleteReview: async (parent, args, context) => {
       if (context.user) {
-        const venue = await Venue.findOne({
-          _id: args.id,
+         await Review.findOneAndDelete({
+          _id: args._id,
+          username: context.user.username,
         });
-        await User.findOneAndUpdate(
-          { _id: context.user._id },
-          { $pull: { venues: venue._id } }
-        );
-        return venue;
+        let updatedReviews = await User.findByIdAndUpdate(context.user._id, {
+          $pull: { reviews: args._id },
+        }).populate("reviews");
+        return updatedReviews;
       }
       throw new AuthenticationError("You must log in");
     },
     followUser: async (parent, args, context) => {
       if (context.user) {
         let newFriend = await User.findOne({
-          username: args.userName,
+          username: args.username,
         });
         await User.findByIdAndUpdate(context.user._id, {
-          $push: { follow: newFriend },
+          $push: { follow: newFriend._id },
         });
-        return;
+        return newFriend;
       }
       throw new AuthenticationError("You must log in");
     },
     unfollowUser: async (parent, args, context) => {
       if (context.user) {
-        const somebodyIUsedToKnow = await User.findOne({
-          username: args.userName,
-        });
         await User.findOneAndUpdate(
           { _id: context.user._id },
-          { $pull: { follow: somebodyIUsedToKnow.username } }
+          { $pull: { follow: args._id } }
         );
-        return somebodyIUsedToKnow;
+        const following = await User.findOne({
+          _id: context.user._id,
+        }).populate("follow");
+
+        return following;
       }
       throw new AuthenticationError("You must log in");
     },
