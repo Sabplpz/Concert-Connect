@@ -46,10 +46,30 @@ const resolvers = {
   },
 
   Mutation: {
-    login: async (parent, { email, password }) => {
-      const user = await User.findOne({ email });
+    login: async (parent, { username, password }) => {
+      const user = await User.findOne({ username });
       if (!user) {
         throw new AuthenticationError("Incorrect credentials");
+      }
+      const correctPw = await user.isCorrectPassword(password);
+      if (!correctPw) {
+        throw new AuthenticationError("Incorrect credentials");
+      }
+      const token = signToken(user);
+      return { token, user };
+    },
+    addUser: async (parent, args) => {
+      const user = await User.create(args);
+      const token = signToken(user);
+      return {token, user};
+    },
+    addConcert: async (parent, { name, city, date, genre }, context) => {
+      if (context.user) {
+        let addedConcert = { concertName: name, city: city, date: date, genre: genre };
+        await User.findByIdAndUpdate(context.user.id, {
+          $push: { concerts: addedConcert },
+        });
+        return addedConcert;
       }
       const correctPw = await user.isCorrectPassword(password);
       if (!correctPw) {
