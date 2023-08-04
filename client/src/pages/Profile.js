@@ -1,5 +1,4 @@
 import React from 'react';
-import ButtonPic from '../assets/Button.png'
 
 
 //I've hid all your names in here, find them or perish - Finn
