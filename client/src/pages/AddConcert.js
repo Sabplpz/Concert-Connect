@@ -101,31 +101,32 @@ function AddConcert() {
   };
 
   return (
-    <div className="container mx-auto">
+    <div className="mx-auto max-w-screen-xl px-4 py-16 sm:px-6 lg:px-8">
       <section>
-        <h2 className="mb-20 mt-20 text-2xl font-bold text-center">What concert are you going to next?</h2>
-        <form onSubmit={handleSubmit}>
+        <h2 className="mb-5 mt-20 text-2xl font-bold text-center">What concert are you going to next?</h2>
+        <p className="text-center">Search for an artist first</p>
+        <form onSubmit={handleSubmit} className="mb-0 rounded-lg shadow-lg sm:p-6 lg:p-8 text-center">
           <ConcertList onSelectConcert={handleConcertSelection} onConcertDataChange={handleConcertDataChange} />
 
-          <div className="mt-6 grid grid-cols-1 md:grid-cols-4 gap-4">
+          <div className="mt-6 grid grid-cols-1 md:grid-cols-1 gap-4">
             <div>
               <label htmlFor="artist" className="label">Artist:</label>
-              <input type="text" className="input input-bordered w-full" name="artist" value={artist} onChange={(e) => setArtist(e.target.value)} />
+              <input type="text" className="input input-bordered input-primary w-full" name="artist" value={artist} onChange={(e) => setArtist(e.target.value)} />
             </div>
 
             <div>
               <label htmlFor="date" className="label">Date:</label>
-              <input type="date" className="input input-bordered w-full" name="date" value={date} onChange={(e) => setDate(e.target.value)} />
+              <input type="date" className="input input-bordered input-primary w-full" name="date" value={date} onChange={(e) => setDate(e.target.value)} />
             </div>
 
             <div>
               <label htmlFor="venue" className="label">Venue:</label>
-              <input type="text" className="input input-bordered w-full" name="venue" value={venue} onChange={(e) => setVenue(e.target.value)} />
+              <input type="text" className="input input-bordered input-primary w-full" name="venue" value={venue} onChange={(e) => setVenue(e.target.value)} />
             </div>
 
             <div>
               <label htmlFor="city" className="label">City:</label>
-              <input type="text" className="input input-bordered w-full" name="city" value={city} onChange={(e) => setCity(e.target.value)} />
+              <input type="text" className="input input-bordered input-primary w-full" name="city" value={city} onChange={(e) => setCity(e.target.value)} />
             </div>
           </div>
 
@@ -133,7 +134,10 @@ function AddConcert() {
         </form>
       </section>
     </div>
+    
   );
 }
 
 export default AddConcert;
+
+
