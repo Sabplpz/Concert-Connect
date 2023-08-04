@@ -4,10 +4,10 @@ module.exports = {
   theme: { 
     extend: {
 
+      fontFamily: {
+        sans: ['Raleway', 'sans-serif'],
+      }
     },
-    fontFamily: {
-      
-    }
   },
   plugins: [require("daisyui")],
   daisyui: {
