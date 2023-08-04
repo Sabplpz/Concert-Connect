@@ -27,9 +27,9 @@ function ConcertList({ onSelectConcert, onConcertDataChange }) {
   };
 
   return (
-    <div>
-      <label htmlFor="keyword">Search Concerts:</label>
+    <div className="mb-10">
       <input
+        className="input input-bordered w-full md:w-1/2"
         type="text"
         name="keyword"
         value={keyword}
@@ -37,10 +37,10 @@ function ConcertList({ onSelectConcert, onConcertDataChange }) {
         onBlur={() => setShowDropdown(false)}
       />
 
-      <button onClick={handleSearchConcerts}>Submit</button>
+      <button className="btn btn-outline mt-4 w-full md:w-auto" onClick={handleSearchConcerts}>Submit</button>
 
       {showDropdown && (
-        <select onChange={(e) => onSelectConcert(e.target.value)}>
+        <select className="select select-bordered mt-4 w-full" onChange={(e) => onSelectConcert(e.target.value)}>
           <option value="">Select Concert</option>
           {concertsData.map((concert, index) => (
             <option key={index} value={index}>
@@ -101,30 +101,35 @@ function AddConcert() {
   };
 
   return (
-    <div>
+    <div className="container mx-auto">
       <section>
-        <h2>The best way to remember incredible concert experiences</h2>
-      </section>
-
-      <section>
-        <h2>What was the last concert you went to?</h2>
+        <h2 className="mb-20 mt-20 text-2xl font-bold text-center">What concert are you going to next?</h2>
         <form onSubmit={handleSubmit}>
-          <label htmlFor="concert">Select Concert:</label>
           <ConcertList onSelectConcert={handleConcertSelection} onConcertDataChange={handleConcertDataChange} />
 
-          <label htmlFor="artist">Artist:</label>
-          <input type="text" name="artist" value={artist} onChange={(e) => setArtist(e.target.value)} />
+          <div className="mt-6 grid grid-cols-1 md:grid-cols-4 gap-4">
+            <div>
+              <label htmlFor="artist" className="label">Artist:</label>
+              <input type="text" className="input input-bordered w-full" name="artist" value={artist} onChange={(e) => setArtist(e.target.value)} />
+            </div>
 
-          <label htmlFor="date">Date:</label>
-          <input type="date" name="date" value={date} onChange={(e) => setDate(e.target.value)} />
+            <div>
+              <label htmlFor="date" className="label">Date:</label>
+              <input type="date" className="input input-bordered w-full" name="date" value={date} onChange={(e) => setDate(e.target.value)} />
+            </div>
 
-          <label htmlFor="venue">Venue:</label>
-          <input type="text" name="venue" value={venue} onChange={(e) => setVenue(e.target.value)} />
+            <div>
+              <label htmlFor="venue" className="label">Venue:</label>
+              <input type="text" className="input input-bordered w-full" name="venue" value={venue} onChange={(e) => setVenue(e.target.value)} />
+            </div>
 
-          <label htmlFor="city">City:</label>
-          <input type="text" name="city" value={city} onChange={(e) => setCity(e.target.value)} />
+            <div>
+              <label htmlFor="city" className="label">City:</label>
+              <input type="text" className="input input-bordered w-full" name="city" value={city} onChange={(e) => setCity(e.target.value)} />
+            </div>
+          </div>
 
-          <button type="submit">Add Concert</button>
+          <button className="btn btn-outline btn-secondary mt-6 w-full md:w-auto" type="submit">Add Concert</button>
         </form>
       </section>
     </div>
