@@ -11,7 +11,38 @@ const app = express();
 const server = new ApolloServer({
   typeDefs,
   resolvers,
-  context: authMiddleware,
+  // context: authMiddleware,
+  context: () => (  // --------------- For testing purposes --------------------------
+    { user: 
+      { 
+        _id: 5000,
+        firstName: 'Firsty',
+        lastName: 'Lasty',
+        username: 'Testmon',
+        email: 'a@a.a',
+        password: 'test123',
+        concerts: [{
+          "concertName": "Nitro",
+          "city": "Fuan",
+          "date": "2/26/2023",
+          "genre": "Toughjoyfax"
+        }],
+        artists: [{
+          "artistName": "Rafael Rusbridge",
+          "genre": "Flexidy"
+        }],
+        venues: [{
+          "venueName": "Sarcophilus harrisii",
+          "city": "Iksan"
+        }],
+        reviews: [{
+          "type": "Artist",
+          "name": "Gallagher",
+          "starRating": 2
+        }],
+      } 
+    }
+  ) // --------------- For testing purposes --------------------------
 });
 
 app.use(express.urlencoded({ extended: false }));

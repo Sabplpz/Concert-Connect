@@ -1,14 +1,18 @@
 const { AuthenticationError } = require("apollo-server-express");
-const { User } = require("../models");
+const { User, Artist, Concert, Venue, Review } = require("../models");
 const { signToken } = require("../utils/auth");
 
 const resolvers = {
   Query: {
     me: async (parent, args, context) => {
       if (context.user) {
-        const userData = await User.findOne({ _id: context.user._id }).select(
-          "-__v -password"
-        );
+        console.log(context.user._id);
+        // const userData = await User
+        //   .findOne({ _id: context.user._id })
+        //   .select("-__v -password");
+        const userData = await User
+          .findOne({ firstName: context.user.firstName })
+          .select("-__v -password");
         return userData;
       }
       throw new AuthenticationError("Not logged in");
@@ -85,8 +89,8 @@ const resolvers = {
     },
     addConcert: async (parent, { name, city, date, genre }, context) => {
       if (context.user) {
-        let addedConcert = { concerName: name, city: city, date: date, genre: genre };
-        await User.findByIdAndUpdate(context.user.id, {
+        let addedConcert = { concertName: name, city: city, date: date, genre: genre };
+        await User.findByIdAndUpdate(context.user._id, {
           $push: { concerts: addedConcert },
         });
         return addedConcert;
