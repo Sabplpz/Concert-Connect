@@ -1,6 +1,7 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import Profile from "../assets/placeholder-image.png";
+import "../assets/header.css";
 import Logo from "../assets/ConcertConnectLogo.png";
 import Auth from "../utils/auth";
 import LoginSingUpModal from "./LoginSignUpModal";
@@ -16,11 +17,11 @@ const Header = () => {
 
   const loggedInMenu = (
 
-    <div className="flex flex-row justify-stretch">
-    <a href="/add-concert"><button className="btn btn-outline btn-secondary mr-6">Add Concert</button></a>
+    <div className="md:flex md:justify-stretch">
+    <a href="/add-concert"><button className="hidden md:btn md:btn-outline btn-secondary md:mr-6 md:shrink">Add Concert</button></a>
     <div className="dropdown dropdown-end">
       <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
-        <div className="w-10 rounded-full">
+        <div className="w-10 rounded-full shrink-0">
           <img src={userIcon} />
         </div>
       </label>
@@ -28,6 +29,11 @@ const Header = () => {
         <li>
           <a href="/profile" className="justify-between">
             Profile
+          </a>
+        </li>
+        <li>
+          <a href="/add-concert" className="justify-between md:hidden">
+            Add Concert
           </a>
         </li>
         <li><a onClick={logout}>Logout</a></li>
@@ -39,7 +45,7 @@ const Header = () => {
   const preLoginMenu = (
     <div>
       <button
-        className="btn btn-outline btn-primary"
+        className="btn btn-outline btn-primary mt-5 md:mt-0"
         onClick={() => setShowModal(true)}
       >
         LogIn
@@ -60,11 +66,11 @@ const Header = () => {
   };
 
   return (
-    <div className="navbar bg-base-100 flex flex-wrap flex-row justify-stretch">
+    <div className="navbar bg-base-100 flex md:flex-wrap flex-row justify-stretch">
       <div className="basis-1/4 justify-start">
         <div>
         <a href="/">
-          <img src={Logo} alt="Concert-Connect logo" className="w-32 btn-ghost" />
+          <img src={Logo} alt="Concert-Connect logo" className="w-20 md:w-32 btn-ghost" />
         </a>
         </div>
       </div>
@@ -73,7 +79,7 @@ const Header = () => {
           <input
             type="text"
             placeholder="Search Concerts"
-            className="input input-bordered input-primary w-96"
+            className="input input-bordered input-primary w-64 md:w-96"
           />
         </div>
       </div>
