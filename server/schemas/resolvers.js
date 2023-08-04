@@ -19,19 +19,26 @@ const resolvers = {
     },
     follow: async ( parent, args, context ) => {
       if (context.user) {
-        return User.findOne({ _id: context.user._id }).populate('follow');
+        // return User.findOne({ _id: context.user._id }).populate('follow');
+        return User
+          .findOne({ firstName: context.user.firstName })
+          .populate('follow')
       }
       throw new AuthenticationError('You must log in');
     },
     concert: async (parent, args) => {
-      return Concert.findOne({ _id: args._id });
+      return Concert
+        .findOne({ _id: args._id });
     },
     concerts: async () => {
       return await Concert.find();
     },
     artists: async (parent, args, context) => {
       if (context.user) {
-        return User.findOne({ _id: context.user._id }).populate('artists');
+        console.log(context.user)
+        return User
+          .findOne({ _id: context.user._id })
+          .populate('artists');
       }
       throw new AuthenticationError('You must log in');
     },
