@@ -15,8 +15,8 @@ const Header = () => {
 
   const loggedInMenu = (
     <div>
-      <button className="btn btn-outline btn-secondary">Add Concert</button>
-      <button className="btn btn-outline btn-primary m-2">Profile</button>
+      <a href="/add-concert"><button className="btn btn-outline btn-secondary">Add Concert</button></a>
+      <a href="/profile"><button className="btn btn-outline btn-primary m-2">Profile</button></a>
       <button className="btn btn-outline btn-terciary" onClick={logout}>
         Log Out
       </button>
