@@ -12,43 +12,44 @@ function ConcertList({ concertsData }) {
   };
 
   return (
-    <table>
-      <thead>
-        <tr>
-          <th>Concert Name</th>
-          <th>Artist</th>
-          <th>Date</th>
-          <th>Venue</th>
-          <th>City</th>
-          <th></th>
-          <th></th> {/* New Column */}
-        </tr>
-      </thead>
-      <tbody>
-        {concertsData.map((concert, index) => (
-          <tr key={index}>
-            <td>{concert.name}</td>
-            <td>
-              <a href={`https://open.spotify.com/artist/${concert?._embedded?.attractions[0]?.externalLinks?.spotify[0]?.url}`} target="_blank" rel="noopener noreferrer">
-                {concert?._embedded?.attractions[0]?.name}
-              </a>
-            </td>
-            <td>{formatDate(concert.dates?.start?.localDate)}</td>
-            <td>{concert?._embedded?.venues[0]?.name}</td>
-            <td>{concert?._embedded?.venues[0]?.city?.name}</td>
-            <td>
-              <a href={concert.url} target="_blank" rel="noopener noreferrer">
-                <button>Get Tickets</button>
-              </a>
-            </td>
-            <td>
-              {/* New Column Data */}
-              <button onClick={() => handleImGoingClick(concert)}>I'm going!</button>
-            </td>
+    <div className="overflow-x-auto mb-20">
+      <table className="table">
+        <thead>
+          <tr>
+            <th>Concert Name</th>
+            <th>Artist</th>
+            <th>Date</th>
+            <th>Venue</th>
+            <th>City</th>
+            <th></th>
+            <th></th>
           </tr>
-        ))}
-      </tbody>
-    </table>
+        </thead>
+        <tbody>
+          {concertsData.map((concert, index) => (
+            <tr key={index}>
+              <td>{concert.name}</td>
+              <td>
+                <a href={`https://open.spotify.com/artist/${concert._embedded?.attractions?.length > 0 ? concert._embedded.attractions[0]?.externalLinks?.spotify?.[0]?.url : ""}`} target="_blank" rel="noopener noreferrer">
+                  {concert?._embedded?.attractions[0]?.name}
+                </a>
+              </td>
+              <td>{formatDate(concert.dates?.start?.localDate)}</td>
+              <td>{concert?._embedded?.venues[0]?.name}</td>
+              <td>{concert?._embedded?.venues[0]?.city?.name}</td>
+              <td>
+                <a href={concert.url} target="_blank" rel="noopener noreferrer">
+                  <button className="btn btn-outline btn-secondary">Get Tickets</button>
+                </a>
+              </td>
+              <td>
+                <button className="btn btn-outline btn-primary" onClick={() => handleImGoingClick(concert)}>I'm going!</button>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
   );
 }
 
@@ -62,7 +63,7 @@ function Concerts() {
     try {
       const response = await axios.get('https://app.ticketmaster.com/discovery/v2/events', {
         params: {
-          apikey: '6sOPwHnIo993SJGpEOZxgkbNvGgHhQ9n',
+          apikey: 'KzV8OCOnhvpGtaoVP1AFZP5qCS4jvNgG',
           keyword: searchKeyword,
           locale: '*',
           size: 200,
@@ -79,23 +80,20 @@ function Concerts() {
 
   return (
     <div>
-      <section>
-        <h2>Browse Band Concert Histories</h2>
-      </section>
-
-      <section>
-        <h2>Search Concerts:</h2>
-        <form onSubmit={handleSearch}>
-          <input
-            type="text"
-            name="keyword"
-            placeholder="Enter artist name"
-          />
-          <button type="submit">Search</button>
-        </form>
-
-        <ConcertList concertsData={concertsData} />
-      </section>
+      <div className="container mx-auto">
+        <section>
+          <h2 className="mb-20 mt-20 text-2xl font-bold text-center">Search Concerts:</h2>
+          <form onSubmit={handleSearch}>
+            <input className="input input-bordered w-24 md:w-auto"
+              type="text"
+              name="keyword"
+              placeholder="Enter artist name"
+            />
+            <button className="btn btn-outline btn" type="submit" >Search</button>
+          </form>
+          <ConcertList concertsData={concertsData} />
+        </section>
+      </div>
     </div>
   );
 }
