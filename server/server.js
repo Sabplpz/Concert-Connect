@@ -40,6 +40,12 @@ const server = new ApolloServer({
           "name": "Gallagher",
           "starRating": 2
         }],
+        follow: [{
+          "firstName": "Troy",
+          "lastName": "Field",
+          "username": "tfield0",
+          "email": "tfield0@dropbox.com"
+        }],
       } 
     }
   ) // --------------- For testing purposes --------------------------
