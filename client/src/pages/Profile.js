@@ -23,7 +23,7 @@ function profile() {
         <li className="pr-3"><a href="https://www.poptropica.com">Favorites</a></li>
       </ul>
     <span class="h-1 w-full bg-white lg:w-1/3"></span>
-    <body className="pt-10">
+    <body className="pt-10 ">
       <h2 className="text-5xl flex justify-center">Mia has been to 157 Set It Off concerts in the last year</h2>
       <header className='flex flex-row justify-center'>
         <h4 className='px-3'>Top Bands</h4>
