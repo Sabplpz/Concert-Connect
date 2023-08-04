@@ -63,47 +63,51 @@ function LoginSignUpModal({ isOpen, onClose }) {
       className="fixed inset-0 bg-black bg-opacity-25 backdrop-blur-sm flex justify-center items-center z-50"
       onClick={handleClose}
     >
-      <div className="w-96 bg-white flex flex-col rounded text-black justify-items-center">
+      <div className="bg-white flex flex-col rounded text-neutral shadow-lg justify-items-center mx-auto mt-4 max-w-md">
         <button
           className="text-grey-300 text-xl place-self-end p-2"
           onClick={() => onClose()}
         >
           <img src={close} alt="X to close modal" className="h-4"></img>
         </button>
-        <div className="place-self-center p-2">
-          <h3>{isLogin ? "Login" : "Sign Up"}</h3>
-
-          <form onSubmit={handleFormSubmit}>
+        {/* <div className="place-self-center p-2"> */}
+          <h3 className="text=xl text-center">{isLogin ? "Sign in to your account" : "Sign Up"}</h3>
+        <div>
+          <form className="mb-0 mt-4 space-y-4 rounded-lg p-4 sm:p-6 lg:p-8" onSubmit={handleFormSubmit}>
             {!isLogin && (
               <>
                 <input
                   type="text"
+                  className="w-full bg-neutral-content rounded-lg border-base-100 p-4 pe-12 text-sm shadow-sm"
                   name="firstName"
-                  placeholder="First Name"
+                  placeholder="Enter first name"
                   value={formState.firstName}
                   onChange={handleFormChange}
                 />
 
                 <input
                   type="text"
+                  className="w-full bg-neutral-content rounded-lg border-base-100 p-4 pe-12 text-sm shadow-sm"
                   name="lastName"
-                  placeholder="Last Name"
+                  placeholder="Enter last name"
                   value={formState.lastName}
                   onChange={handleFormChange}
                 />
 
                 <input
                   type="email"
+                  className="w-full bg-neutral-content rounded-lg border-base-100 p-4 pe-12 text-sm shadow-sm"
                   name="email"
-                  placeholder="Email"
+                  placeholder="Enter email"
                   value={formState.email}
                   onChange={handleFormChange}
                 />
 
                 <input
                   type="password"
+                  className="w-full bg-neutral-content rounded-lg border-base-100 p-4 pe-12 text-sm shadow-sm"
                   name="verifyPassword"
-                  placeholder="Verify Password"
+                  placeholder="Verify password"
                   value={formState.verifyPassword}
                   onChange={handleFormChange}
                 />
@@ -112,6 +116,7 @@ function LoginSignUpModal({ isOpen, onClose }) {
 
             <input
               type="text"
+              className="w-full bg-neutral-content rounded-lg border-base-100 p-4 pe-12 text-sm shadow-sm"
               name="username"
               placeholder="Username"
               value={formState.username}
@@ -120,13 +125,14 @@ function LoginSignUpModal({ isOpen, onClose }) {
 
             <input
               type="password"
+              className="w-full bg-neutral-content rounded-lg border-base-100 p-4 pe-12 text-sm shadow-sm"
               name="password"
               placeholder="Password"
               value={formState.password}
               onChange={handleFormChange}
             />
 
-            <button type="submit">{isLogin ? "Log In" : "Sign Up"}</button>
+            <button className="block w-full rounded-lg btn btn-neutral" type="submit">{isLogin ? "Log In" : "Sign Up"}</button>
 
             {(loginError || signupError) && (
               <p>{loginError?.message || signupError?.message}</p>
@@ -134,8 +140,8 @@ function LoginSignUpModal({ isOpen, onClose }) {
           </form>
         </div>
 
-        <button type="button" onClick={() => setIsLogin(!isLogin)}>
-          Switch to {isLogin ? "Sign Up" : "Login"}
+        <button className="mb-3"type="button" onClick={() => setIsLogin(!isLogin)}>
+          No account? <span className="underline decoration-neutral">{isLogin ? "Sign Up" : "Login"}</span>
         </button>
       </div>
     </div>
