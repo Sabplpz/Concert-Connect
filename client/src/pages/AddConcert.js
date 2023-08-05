@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { useMutation } from '@apollo/client';
+import { ADD_CONCERT } from '../utils/mutations';
 
 function ConcertList({ onSelectConcert, onConcertDataChange }) {
   const [concertsData, setConcertsData] = useState([]);
   const [keyword, setKeyword] = useState('');
   const [showDropdown, setShowDropdown] = useState(false);
-
-
 
   const handleSearchConcerts = async () => {
     try {
@@ -65,6 +65,8 @@ function AddConcert() {
   const [genre, setGenre] = useState('');
   const [concertsData, setConcertsData] = useState([]);
 
+  const [addConcert, { data }] = useMutation(ADD_CONCERT);
+
   const handleConcertSelection = (concertIndex) => {
     const selectedConcertData = concertsData[concertIndex];
     setSelectedConcert(selectedConcertData);
@@ -96,13 +98,18 @@ function AddConcert() {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    console.log('Submitting concert data:', {
-      artist,
-      concert,
-      date,
-      venue,
+    let selectedConcert = { 
+      artistName: artist, 
+      concertName: concert, 
+      date, 
+      venueName: venue,
       city,
-      genre,
+      genre
+    };
+    console.log('Submitting concert data:', selectedConcert);
+
+    addConcert({
+      variables: { ...selectedConcert },
     });
 
     setArtist('');
