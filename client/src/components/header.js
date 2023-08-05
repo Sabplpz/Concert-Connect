@@ -38,6 +38,11 @@ const Header = () => {
             </a>
           </li>
           <li>
+            <a href="/feed" className="justify-between">
+              Feed
+            </a>
+          </li>
+          <li>
             <a href="/add-concert" className="justify-between md:hidden">
               Add Concert
             </a>
