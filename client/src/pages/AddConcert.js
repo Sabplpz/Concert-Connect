@@ -118,19 +118,20 @@ function AddConcert() {
     <div className="mx-auto max-w-screen-xl px-4 py-16 sm:px-6 lg:px-8">
       <section>
         <h2 className="mb-5 mt-20 text-2xl font-bold text-center">What concert are you going to next?</h2>
-        <p className="text-center">Search for an artist first</p>
+
         <form onSubmit={handleSubmit} className="mb-0 rounded-lg shadow-lg sm:p-6 lg:p-8 text-center">
+        <p className="text-center mb-3">Search for an artist first</p>
           <ConcertList onSelectConcert={handleConcertSelection} onConcertDataChange={handleConcertDataChange} />
 
-          <div className="mt-6 grid grid-cols-1 md:grid-cols-1 gap-4">
+          <div className="mt-6 shadow shadow-lg grid grid-cols-2 md:grid-cols-2 gap-4">
             <div>
               <label htmlFor="artist" className="label">Artist:</label>
               <input type="text" className="input input-bordered input-primary w-full" name="artist" value={artist} onChange={(e) => setArtist(e.target.value)} />
             </div>
 
             <div>
-              <label htmlFor="concert" className="label">Concert:</label>
-              <input type="text" className="input input-bordered input-primary w-full" name="concert" value={concert} onChange={(e) => setConcert(e.target.value)} />
+              <label htmlFor="city" className="label">City:</label>
+              <input type="text" className="input input-bordered input-primary w-full" name="city" value={city} onChange={(e) => setCity(e.target.value)} />
             </div>
 
             <div>
@@ -144,8 +145,8 @@ function AddConcert() {
             </div>
 
             <div>
-              <label htmlFor="city" className="label">City:</label>
-              <input type="text" className="input input-bordered input-primary w-full" name="city" value={city} onChange={(e) => setCity(e.target.value)} />
+              <label htmlFor="concert" className="label">Concert:</label>
+              <input type="text" className="input input-bordered input-primary w-full" name="concert" value={concert} onChange={(e) => setConcert(e.target.value)} />
             </div>
 
             <div>
