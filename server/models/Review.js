@@ -6,7 +6,7 @@ const reviewSchema = new Schema(
         type: String,
         required: true,
     },
-    name: {
+    title: {
       type: String,
       required: true,
     },
@@ -17,11 +17,9 @@ const reviewSchema = new Schema(
     text: {
       type: String,
     },
-    userId: [{
-        type: Schema.Types.ObjectId,
-        ref: 'User',
-      },
-    ],
+    username: {
+      type: String,
+    },
   },
 );
 

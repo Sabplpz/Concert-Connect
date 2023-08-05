@@ -40,10 +40,10 @@ const typeDefs = gql`
   type Review {
     _id: ID
     type: String!
-    name: String!
+    title: String!
     starRating: Int!
     text: String
-    userId: User
+    username: String
   }
 
   type Auth {
@@ -53,12 +53,11 @@ const typeDefs = gql`
 
   type Query {
     me: User
-    follow: User
-    concert: Concert
+    concert(_id: String!): Concert
     concerts: [Concert]
     artists: User
     venues: User
-    review: Review
+    review(_id: String!): Review
     reviews: [Review]
   }
 
@@ -79,22 +78,24 @@ const typeDefs = gql`
       date: String!
       genre: String
     ): Concert
-    deleteConcert(id: ID!): Concert
-    addArtist(artistName: String!): Artist
-    deleteArtist(id: ID!): Artist
-    addVenue(venueName: String!, city: String!): Venue
-    deleteVenue(id: ID!): Venue
+    deleteConcert(_id: ID!): User
     addReview(
       type: String!
-      name: String!
+      title: String!
       starRating: Int!
       text: String
+      username: String
     ): Review
-    updateReview(id: ID!, starRating: Int!, text: String): Review
-    deleteReview(id: ID!): Review
+    updateReview(_id: ID!, starRating: Int!, text: String): Review
+    deleteReview(_id: ID!): User
     followUser(username: String!): User
-    unfollowUser(username: String!): User
+    unfollowUser(_id: String!): User
   }
 `;
+
+// addArtist(artistName: String!): Artist
+//     deleteArtist(_id: ID!): Artist
+//     addVenue(venueName: String!, city: String!): Venue
+//     deleteVenue(_id: ID!): Venue
 
 module.exports = typeDefs;
