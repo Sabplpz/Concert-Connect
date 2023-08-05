@@ -141,7 +141,7 @@ function LoginSignUpModal({ isOpen, onClose }) {
         </div>
 
         <button className="mb-3"type="button" onClick={() => setIsLogin(!isLogin)}>
-          No account? <span className="underline decoration-neutral">{isLogin ? "Sign Up" : "Login"}</span>
+           <span className="underline decoration-neutral">{isLogin ? "No account? Sign Up" : "Already have an account? Login"}</span>
         </button>
       </div>
     </div>
