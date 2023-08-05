@@ -33,7 +33,7 @@ const Header = () => {
           className="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-52"
         >
           <li>
-            <a href="/profile" className="justify-between">
+            <a href="/profile/:username" className="justify-between">
               Profile
             </a>
           </li>
@@ -58,7 +58,7 @@ const Header = () => {
   const preLoginMenu = (
     <div>
       <button
-        className="btn btn-outline btn-primary mt-5 md:mt-0"
+        className="btn btn-outline btn-primary md:mt-0"
         onClick={() => setShowModal(true)}
       >
         LogIn
