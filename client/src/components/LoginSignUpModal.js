@@ -71,7 +71,7 @@ function LoginSignUpModal({ isOpen, onClose }) {
           <img src={close} alt="X to close modal" className="h-4"></img>
         </button>
         {/* <div className="place-self-center p-2"> */}
-          <h3 className="text=xl text-center">{isLogin ? "Sign in to your account" : "Sign Up"}</h3>
+          <h3 className="text-xl text-center">{isLogin ? "Sign in to your account" : "Sign Up"}</h3>
         <div>
           <form className="mb-0 mt-4 space-y-4 rounded-lg p-4 sm:p-6 lg:p-8" onSubmit={handleFormSubmit}>
             {!isLogin && (

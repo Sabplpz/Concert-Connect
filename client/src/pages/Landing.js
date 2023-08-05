@@ -112,13 +112,13 @@ export default function Landing() {
           </div>
         </section>
 
-        <h2 className="mt-20 text-2xl font-bold text-center">
+        {/* <h2 className="mt-20 text-2xl font-bold text-center">
           Recently Added Concerts
         </h2>
-        <div className="overflow-x-auto p-20">
-          <table className="table">
+        <div className="overflow-x-auto p-10">
+          <table className="table"> */}
             {/* head */}
-            <thead>
+            {/* <thead>
               <tr className="border-accent text-base text-neutral-content">
                 <th>Date</th>
                 <th>Concert</th>
@@ -126,23 +126,23 @@ export default function Landing() {
                 <th>Location</th>
               </tr>
             </thead>
-            <tbody>
+            <tbody> */}
               {/* row 1 */}
-              <tr className="hover">
+              {/* <tr className="hover">
                 <th>1</th>
                 <td>Cy Ganderton</td>
                 <td>Quality Control Specialist</td>
                 <td>Blue</td>
-              </tr>
+              </tr> */}
               {/* row 2 */}
-              <tr className="hover">
+              {/* <tr className="hover">
                 <th>2</th>
                 <td>Hart Hagerty</td>
                 <td>Desktop Support Technician</td>
                 <td>Purple</td>
-              </tr>
+              </tr> */}
               {/* row 3 */}
-              <tr className="hover">
+              {/* <tr className="hover">
                 <th>3</th>
                 <td>Brice Swyre</td>
                 <td>Tax Accountant</td>
@@ -151,13 +151,12 @@ export default function Landing() {
             </tbody>
           </table>
         </div>
-        <div className="grid grid-cols-2 gap-2 mb-20">
-          <button className="btn btn-outline btn-primary">Sign Up</button>
+      </div>
+      <div className="content-center text-center mb-20">
           <button className="btn btn-outline btn-secondary">
             View More Concerts
-          </button>
-        </div>
-      </div>
+          </button> */}
+        </div> 
     </div>
   );
 
