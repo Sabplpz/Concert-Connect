@@ -52,7 +52,7 @@ const typeDefs = gql`
   }
 
   type Query {
-    me(_id: String!): User
+    me: User
     concert(_id: String!): Concert
     concerts: [Concert]
     artists: User
