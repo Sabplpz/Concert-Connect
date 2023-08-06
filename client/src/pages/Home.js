@@ -5,8 +5,15 @@ import React from "react";
 import calendarIcon from "../assets/icons/calendar.png";
 import musicIcon from "../assets/icons/music.png";
 import userIcon from "../assets/icons/user.png";
+import { useQuery } from '@apollo/client';
+import { QUERY_ME, QUERY_VENUE, QUERY_CONCERT } from '../utils/queries';
+import { formatDate } from "../utils/helpers";
 
 export default function Home() {
+  const { loading, data } = useQuery(QUERY_ME);
+  const userData = data?.me.concerts || []; 
+  console.log(userData);
+
   return (
     // full body
     <div class="p-20 grid grid-cols-1 gap-4 lg:grid-cols-3 lg:gap-8">
@@ -31,13 +38,14 @@ export default function Home() {
                 </thead>
                 <tbody>
                   {/* row 1 */}
+                  {loading ? (
+                    <tr>Loading, please wait</tr>
+                  ) : (
                   <tr className="hover">
-                    <td>09/30/2023</td>
-                    <td>
-                      Broadside <br />
-                      The Maine
-                    </td>
+                    <td>{formatDate((userData[0].date))}</td>
+                    <td>{userData[0].concertName}</td>
                   </tr>
+                  )}
                   {/* row 2 */}
                   <tr className="hover">
                     <td>10/01/2023</td>
