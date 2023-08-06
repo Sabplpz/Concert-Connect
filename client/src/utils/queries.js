@@ -9,6 +9,14 @@ export const QUERY_ME = gql`
         city
         date
       }
+      artists {
+        _id
+        artistName
+      }
+      venues {
+        _id
+        venueName
+      }
     }
   }
 `;
