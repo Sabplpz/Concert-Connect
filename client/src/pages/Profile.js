@@ -186,13 +186,13 @@ function Profile() {
               </tr>
             </thead>
             <tbody>
-              {/* row 1 */}
-              <tr className="hover">
-                <th>{formatDate(userData.concerts[0].date)}</th>
-                <td>{userData.concerts[0].concertName}</td>
-                <td>VENUE</td>
-                <td>{userData.concerts[0].city}</td>
-                <th>
+    {userData.concerts && userData.concerts.length > 0 && (
+        <tr className="hover">
+            <th>{formatDate(userData.concerts[0].date)}</th>
+            <td>{userData.concerts[0].concertName}</td>
+            <td>VENUE</td>
+            <td>{userData.concerts[0].city}</td>
+            <th>
                   <button className="btn btn-ghost btn-xs">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -212,20 +212,24 @@ function Profile() {
                   </button>
                 </th>
               </tr>
+    )}
               {/* row 2 */}
-              <tr className="hover">
-              <th>{formatDate(userData.concerts[1].date)}</th>
-                <td>{userData.concerts[1].concertName}</td>
-                <td>VENUE</td>
-                <td>{userData.concerts[1].city}</td>
-              </tr>
-              {/* row 3 */}
-              <tr className="hover">
-              <th>{formatDate(userData.concerts[2].date)}</th>
-                <td>{userData.concerts[2].concertName}</td>
-                <td>VENUE</td>
-                <td>{userData.concerts[2].city}</td>
-                <th>
+              {userData.concerts && userData.concerts.length > 1 && (
+        <tr className="hover">
+            <th>{formatDate(userData.concerts[1].date)}</th>
+            <td>{userData.concerts[1].concertName}</td>
+            <td>VENUE</td>
+            <td>{userData.concerts[1].city}</td>
+        </tr>
+    )}
+
+    {userData.concerts && userData.concerts.length > 2 && (
+        <tr className="hover">
+            <th>{formatDate(userData.concerts[2].date)}</th>
+            <td>{userData.concerts[2].concertName}</td>
+            <td>VENUE</td>
+            <td>{userData.concerts[2].city}</td>
+            <th>
                   <button className="btn btn-ghost btn-xs">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -245,6 +249,7 @@ function Profile() {
                   </button>
                 </th>
               </tr>
+    )}
             </tbody>
           </table>
         </div>
