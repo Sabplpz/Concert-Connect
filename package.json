@@ -1,5 +1,5 @@
 {
-  "name": "conecert-connect",
+  "name": "concert-connect",
   "version": "1.0.0",
   "description": "",
   "main": "server/server.js",
@@ -14,8 +14,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "axios": "^1.4.0",
-    "moment": "^2.29.4"
+    "axios": "^1.4.0"
   },
   "devDependencies": {
     "@tailwindcss/forms": "^0.5.4",
