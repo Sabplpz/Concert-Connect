@@ -1,8 +1,10 @@
 import React from "react";
-import { useState, useEffect } from "react";
-import Profile from "../assets/placeholder-image.png";
-import Logo from "../assets/ConcertConnectLogo.png";
+import { useState } from "react";
+import { Link } from "react-router-dom";
+import "../assets/header.css";
+import Logo from "../assets/logo/ConcertConnectLogo.png";
 import Auth from "../utils/auth";
+import Avatar from "../utils/avatar";
 import LoginSingUpModal from "./LoginSignUpModal";
 
 const Header = () => {
@@ -14,19 +16,49 @@ const Header = () => {
   };
 
   const loggedInMenu = (
-    <div>
-      <a href="/add-concert"><button className="btn btn-outline btn-secondary">Add Concert</button></a>
-      <a href="/profile"><button className="btn btn-outline btn-primary m-2">Profile</button></a>
-      <button className="btn btn-outline btn-terciary" onClick={logout}>
-        Log Out
-      </button>
+    <div className="md:flex md:justify-stretch">
+      <a href="/add-concert">
+        <button className="hidden md:btn md:btn-outline btn-secondary md:mr-6 md:shrink">
+          Add Concert
+        </button>
+      </a>
+      <div className="dropdown dropdown-end">
+        <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
+          <div className="w-12 rounded-full shrink-0">
+            <img src={Avatar.handleAvatar()} alt="user icon" />
+          </div>
+        </label>
+        <ul
+          tabIndex={0}
+          className="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-52"
+        >
+          <li>
+            <a href="/profile/:username" className="justify-between">
+              Profile
+            </a>
+          </li>
+          <li>
+            <a href="/feed" className="justify-between">
+              Feed
+            </a>
+          </li>
+          <li>
+            <a href="/add-concert" className="justify-between md:hidden">
+              Add Concert
+            </a>
+          </li>
+          <li onClick={logout}>
+            <Link to="/">Logout</Link>
+          </li>
+        </ul>
+      </div>
     </div>
   );
 
   const preLoginMenu = (
     <div>
       <button
-        className="btn btn-outline btn-primary"
+        className="btn btn-outline btn-primary md:mt-0"
         onClick={() => setShowModal(true)}
       >
         LogIn
@@ -47,22 +79,28 @@ const Header = () => {
   };
 
   return (
-    <div className="navbar bg-base-100">
-      <div className="flex-1 w-32">
-        <a href="/">
-          <img src={Logo} alt="Concert-Connect logo" className="w-32" />
-        </a>
+    <div className="navbar bg-base-100 flex md:flex-wrap flex-row justify-stretch">
+      <div className="basis-1/4 justify-start">
+        <div>
+          <a href="/">
+            <img
+              src={Logo}
+              alt="Concert-Connect logo"
+              className="w-20 md:w-32 btn-ghost"
+            />
+          </a>
+        </div>
       </div>
-      <div className="flex-none gap-2">
+      <div className="basis-1/2 justify-center">
         <div className="form-control">
           <input
             type="text"
-            placeholder="Search"
-            className="input input-bordered w-56 md:w-auto"
+            placeholder="Search Concerts"
+            className="input input-bordered input-primary w-64 md:w-96"
           />
         </div>
-        <div>{handleLogin()}</div>
       </div>
+      <div className="basis-1/4 justify-end">{handleLogin()}</div>
     </div>
   );
 };

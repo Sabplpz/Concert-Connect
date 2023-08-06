@@ -3,9 +3,8 @@ import {
     SAVE_CONCERT,
     REMOVE_CONCERT,
     LIKE_ARTIST,
-    REVIEW_ARTIST,
+    ADD_REVIEW,
     LIKE_VENUE,
-    REVIEW_VENUE,
     ADD_FRIEND,
 } from './actions';
 
@@ -13,54 +12,51 @@ import {
 export const reducer = (state, action) => {
     switch (action.type) {
         case SAVE_CONCERT:
-        return {
-            ...state,
-            concerts: [...action.concerts]
-        };
+            return {
+                ...state,
+                concerts: [...action.concerts]
+            };
 
         case REMOVE_CONCERT:
-        return {
-            ...state,
-            // TODO:
-        };
+            let newState = state.concerts.filter((concert) => {
+                return concert._id !== action._id;
+            });
+            return {
+                ...state,
+                concerts: newState,
+            };
 
         case LIKE_ARTIST:
-        return {
-            ...state,
-            // TODO:
-        };
+            return {
+                ...state,
+                artists: [...action.artists],
+            };
 
-        case REVIEW_ARTIST:
-        return {
-            ...state,
-            // TODO:
-        };
+        case ADD_REVIEW:
+            return {
+                ...state,
+                reviews: [...action.reviews],
+            };
 
         case LIKE_VENUE:
-        return {
-            ...state,
-            // TODO:
-        };
-
-        case REVIEW_VENUE:
-        return {
-            ...state,
-            // TODO:
-        };
+            return {
+                ...state,
+                venues: [...action.venues],
+            };
 
         case ADD_FRIEND:
-        return {
-            ...state,
-            // TODO:
-        };
+            return {
+                ...state,
+                follow: [...action.follow],
+            };
 
         // Return the state as is in the event that the `action.type` passed to our reducer was not accounted for by the developers
         // This saves us from a crash.
         default:
-        return state;
+            return state;
     }
 };
 
-export function useProductReducer(initialState) {
+export function useUserInfoReducer(initialState) {
     return useReducer(reducer, initialState);
 }

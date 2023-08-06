@@ -8,6 +8,7 @@ const typeDefs = gql`
     username: String!
     email: String!
     password: String!
+    avatar: String!
     concerts: [Concert]
     artists: [Artist]
     venues: [Venue]
@@ -29,23 +30,36 @@ const typeDefs = gql`
     _id: ID
     artistName: String!
     concerts: [Concert]
-    genre: String
-  }
+    }
 
   type Venue {
     _id: ID
     venueName: String!
     city: String!
-    concerts: [Concert]
   }
 
   type Review {
     _id: ID
     type: String!
-    name: String!
+    title: String!
     starRating: Int!
     text: String
-    userId: User
+    username: String
+    comments: [Comments]
+    likes: String
+  }
+
+  type Comments {
+    _id: ID
+    text: String
+    username: String
+  }
+
+  type Likes {
+    _id: ID
+    reviewId: Review
+    likes_count: Int
+    users: [String]
   }
 
   type Auth {
@@ -55,13 +69,14 @@ const typeDefs = gql`
 
   type Query {
     me: User
-    follow: User
-    concert: Concert
+    concert(_id: String!): Concert
     concerts: [Concert]
     artists: User
     venues: User
-    review: Review
+    review(_id: String!): Review
     reviews: [Review]
+    comments: [Comments]
+    likes(_id: String!): Likes
   }
 
   type Mutation {
@@ -72,28 +87,32 @@ const typeDefs = gql`
       username: String!
       email: String!
       password: String!
+      avatar: String!
     ): Auth
     addConcert(
+      artistName: String!
       concertName: String!
+      venueName: String!
       city: String!
       date: String!
-      genre: String!
+      genre: String
     ): Concert
-    deleteConcert(id: ID!): Concert
-    addArtist(artistName: String!, genre: String!): Artist
-    deleteArtist(id: ID!): Artist
-    addVenue(venueName: String!, city: String!): Venue
-    deleteVenue(id: ID!): Venue
+    deleteConcert(_id: ID!): User
     addReview(
       type: String!
-      name: String!
+      title: String!
       starRating: Int!
       text: String
+      username: String
     ): Review
-    updateReview(id: ID!, starRating: Int!, text: String): Review
-    deleteReview(id: ID!): Review
+    updateReview(_id: ID!, starRating: Int!, text: String): Review
+    deleteReview(_id: ID!): User
     followUser(username: String!): User
-    unfollowUser(username: String!): User
+    unfollowUser(_id: String!): User
+    addComment(_id: String!, text: String): Review
+    deleteComment(_id: String!, reviewId: String!): Review
+    like(reviewId: ID!): Likes
+    unlike(_id: ID!): Likes
   }
 `;
 

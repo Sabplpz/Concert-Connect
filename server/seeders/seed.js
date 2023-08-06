@@ -15,14 +15,12 @@ db.once('open', async () => {
     await Venue.deleteMany({});
 
     await User.create(userSeeds);
-    await Artist.create(artistSeeds);
     await Concert.create(concertSeeds);
-    await Venue.create(venueSeeds);
 
     for (let i = 0; i < reviewSeeds.length; i++) {
-      const { _id, userId } = await Review.create(reviewSeeds[i]);
+      const { _id, username } = await Review.create(reviewSeeds[i]);
       const user = await User.findOneAndUpdate(
-        { _id: userId },
+        { username: username },
         {
           $addToSet: {
             reviews: _id,
@@ -30,6 +28,31 @@ db.once('open', async () => {
         }
       );
     }
+
+    // for (let i = 0; i < venueSeeds.length; i++) {
+    //   const { _id, venueName } = await Venue.create(venueSeeds[i]);
+    //   const concert = await Concert.findOneAndUpdate(
+    //     { venue: venueName },
+    //     {
+    //       $addToSet: {
+    //         reviews: _id,
+    //       },
+    //     }
+    //   );
+    // }
+
+    // for (let i = 0; i < reviewSeeds.length; i++) {
+    //   const { _id, username } = await Review.create(reviewSeeds[i]);
+    //   const user = await User.findOneAndUpdate(
+    //     { username: username },
+    //     {
+    //       $addToSet: {
+    //         reviews: _id,
+    //       },
+    //     }
+    //   );
+    // }
+
   } catch (err) {
     console.error(err);
     process.exit(1);

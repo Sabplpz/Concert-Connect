@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { useMutation } from '@apollo/client';
+import { ADD_CONCERT } from '../utils/mutations';
 
 function ConcertList({ onSelectConcert, onConcertDataChange }) {
   const [concertsData, setConcertsData] = useState([]);
@@ -56,14 +58,21 @@ function ConcertList({ onSelectConcert, onConcertDataChange }) {
 function AddConcert() {
   const [selectedConcert, setSelectedConcert] = useState(null);
   const [artist, setArtist] = useState('');
+  const [concert, setConcert] = useState('');
   const [date, setDate] = useState('');
   const [venue, setVenue] = useState('');
   const [city, setCity] = useState('');
+  const [genre, setGenre] = useState('');
   const [concertsData, setConcertsData] = useState([]);
+
+  const [addConcert, { data }] = useMutation(ADD_CONCERT);
 
   const handleConcertSelection = (concertIndex) => {
     const selectedConcertData = concertsData[concertIndex];
     setSelectedConcert(selectedConcertData);
+
+    const concertName = selectedConcertData.name || '';
+    setConcert(concertName);
 
     const attractionsData = selectedConcertData?._embedded?.attractions || [];
     const artistName = attractionsData[0]?.name || '';
@@ -77,6 +86,9 @@ function AddConcert() {
 
     const cityName = selectedConcertData?._embedded?.venues[0]?.city?.name || '';
     setCity(cityName);
+
+    const genre = selectedConcertData.classifications[0].genre.name || '';
+    setGenre(genre);
   };
 
   const handleConcertDataChange = (data) => {
@@ -86,17 +98,26 @@ function AddConcert() {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    console.log('Submitting concert data:', {
-      artist,
-      date,
-      venue,
+    let selectedConcert = { 
+      artistName: artist, 
+      concertName: concert, 
+      date, 
+      venueName: venue,
       city,
+      genre
+    };
+    console.log('Submitting concert data:', selectedConcert);
+
+    addConcert({
+      variables: { ...selectedConcert },
     });
 
     setArtist('');
+    setConcert('');
     setDate('');
     setVenue('');
     setCity('');
+    setGenre('');
     setSelectedConcert(null);
   };
 
@@ -104,14 +125,20 @@ function AddConcert() {
     <div className="mx-auto max-w-screen-xl px-4 py-16 sm:px-6 lg:px-8">
       <section>
         <h2 className="mb-5 mt-20 text-2xl font-bold text-center">What concert are you going to next?</h2>
-        <p className="text-center">Search for an artist first</p>
+
         <form onSubmit={handleSubmit} className="mb-0 rounded-lg shadow-lg sm:p-6 lg:p-8 text-center">
+        <p className="text-center mb-3">Search for an artist first</p>
           <ConcertList onSelectConcert={handleConcertSelection} onConcertDataChange={handleConcertDataChange} />
 
-          <div className="mt-6 grid grid-cols-1 md:grid-cols-1 gap-4">
+          <div className="mt-6 shadow-lg grid grid-cols-2 md:grid-cols-2 gap-4">
             <div>
               <label htmlFor="artist" className="label">Artist:</label>
               <input type="text" className="input input-bordered input-primary w-full" name="artist" value={artist} onChange={(e) => setArtist(e.target.value)} />
+            </div>
+
+            <div>
+              <label htmlFor="city" className="label">City:</label>
+              <input type="text" className="input input-bordered input-primary w-full" name="city" value={city} onChange={(e) => setCity(e.target.value)} />
             </div>
 
             <div>
@@ -125,8 +152,13 @@ function AddConcert() {
             </div>
 
             <div>
-              <label htmlFor="city" className="label">City:</label>
-              <input type="text" className="input input-bordered input-primary w-full" name="city" value={city} onChange={(e) => setCity(e.target.value)} />
+              <label htmlFor="concert" className="label">Concert:</label>
+              <input type="text" className="input input-bordered input-primary w-full" name="concert" value={concert} onChange={(e) => setConcert(e.target.value)} />
+            </div>
+
+            <div>
+              <label htmlFor="genre" className="label">Genre:</label>
+              <input type="text" className="input input-bordered input-primary w-full" name="genre" value={genre} onChange={(e) => setGenre(e.target.value)} />
             </div>
           </div>
 

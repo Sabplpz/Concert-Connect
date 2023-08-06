@@ -15,7 +15,6 @@ import AddConcert from './pages/AddConcert';
 import Concerts from './pages/Concerts';
 import Home from './pages/Home';
 import Profile from './pages/Profile';
-import LoginSignUpModal from './components/LoginSignUpModal';
 
 //Construct our main GraphQL API endpoint
 const httpLink = createHttpLink({
@@ -57,7 +56,7 @@ function App() {
               path="/add-concert"
               element={<AddConcert />}
               />
-              <Route path="/profile"
+              <Route path="/profile/:username"
               element={<Profile />}
               />
               <Route path="/concerts"
