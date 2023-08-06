@@ -14,42 +14,37 @@ import ShowReview from "../components/showReview"
 import ReviewModal from "../components/reviewModal";
 
 export default function Home() {
-
-  const { loadingReview, reviewsData, error } = useQuery(QUERY_ALL_REVIEWS);
-  const { loading, data } = useQuery(QUERY_ME);
-  
-
-
-  const reviews = reviewsData?.reviews || [];
-  console.log(loadingReview, error, reviewsData)
+  // ----------------------------------------------- QUERY_ME START ----------------------------------------------------------------
+  const { loading: loadingMe, data: meData } = useQuery(QUERY_ME);
 
   let userConcertData;
-  if (data?.me.concerts[0]) {
-    userConcertData = data?.me.concerts;
+  if (meData?.me.concerts[0]) {
+    userConcertData = meData?.me.concerts;
   } else {
     userConcertData = [{date: "Null", concertName: "No upcoming concerts saved"}, {date: "Null"}, {date: "Null"}];
   };
 
   let userArtistData;
-  if (data?.me.artists[0]) {
-    userArtistData = data?.me.artists;
+  if (meData?.me.artists[0]) {
+    userArtistData = meData?.me.artists;
   } else {
     userArtistData = [{artistName: "No saved artists"}, {artistName: ""}, {artistName: ""}];
   };
 
   let userGenreData;
-  if (data?.me.genre) {
-    userGenreData = data?.me.genre;
+  if (meData?.me.genre) {
+    userGenreData = meData?.me.genre;
   } else {
     userGenreData = [{genre: "No favorite genres saved"}, {genre: ""}, {genre: ""}];
   };
 
   let userVenueData;
-  if (data?.me.venue) {
-    userVenueData = data?.me.venue;
+  if (meData?.me.venue) {
+    userVenueData = meData?.me.venue;
   } else {
     userVenueData = [{venueName: "No favorite venues saved"}, {venueName: ""}, {venueName: ""}];
   };
+  // ------------------------------------------------- QUERY_ME END ----------------------------------------------------------------
 
   return (
     // full body
@@ -73,7 +68,7 @@ export default function Home() {
                     <th>Concert</th>
                   </tr>
                 </thead>
-                {loading ? (
+                {loadingMe ? (
                   <tbody><tr>Loading, please wait</tr></tbody>
                 ) : (
                   <tbody>
@@ -110,7 +105,7 @@ export default function Home() {
             {/* Top artists table */}
             <div className="overflow-x-auto">
               <table className="table">
-                {loading ? (
+                {loadingMe ? (
                   <tbody><tr>Loading, please wait</tr></tbody>
                 ) : (
                   <tbody>
@@ -147,7 +142,7 @@ export default function Home() {
             {/* Top genres table */}
             <div className="overflow-x-auto">
               <table className="table">
-              {loading ? (
+              {loadingMe ? (
                 <tbody><tr>Loading, please wait</tr></tbody>
               ) : (
                 <tbody>
@@ -184,7 +179,7 @@ export default function Home() {
             {/* Top venues table */}
             <div className="overflow-x-auto">
               <table className="table">
-              {loading ? (
+              {loadingMe ? (
                 <tbody><tr>Loading, please wait</tr></tbody>
               ) : (
                 <tbody>

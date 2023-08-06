@@ -43,7 +43,7 @@ const typeDefs = gql`
     type: String!
     title: String!
     starRating: Int!
-    text: String!
+    text: String
     username: String
     comments: [Comments]
     likes: Likes
