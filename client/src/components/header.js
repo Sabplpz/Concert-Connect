@@ -10,6 +10,8 @@ import LoginSingUpModal from "./LoginSignUpModal";
 const Header = () => {
   const [showModal, setShowModal] = useState(false);
 
+  const avatar = Avatar.getAvatar()
+
   const logout = (event) => {
     event.preventDefault();
     Auth.logout();
@@ -25,7 +27,7 @@ const Header = () => {
       <div className="dropdown dropdown-end">
         <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
           <div className="w-12 rounded-full shrink-0">
-            <img src={Avatar.handleAvatar()} alt="user icon" />
+            <img src={Avatar.handleAvatar(avatar)} alt="user icon" />
           </div>
         </label>
         <ul

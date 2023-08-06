@@ -26,7 +26,8 @@ const reviewSchema = new Schema({
     },
   ],
   likes: {
-    type: String,
+    type: Schema.Types.ObjectId,
+    ref: "Likes",
   },
 });
 
