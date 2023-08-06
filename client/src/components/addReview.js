@@ -53,76 +53,101 @@ function AddReview() {
   };
 
   return (
+    
+    // <div>
+    //   <h3>Add a Review</h3>
+    //   <form onSubmit={handleFormSubmit}>
+    //     <h1>What are you doing a review of?</h1>
+    //     <ul>
+    //       <li>
+    //         <input
+    //           type="radio"
+    //           id="concert"
+    //           name="type"
+    //           value="Concert"
+    //           onClick={handleFormChange}
+    //           required
+    //         />
+    //         <label for="concert">
+    //           <p>concert</p>
+    //         </label>
+    //       </li>
+    //       <li>
+    //         <input
+    //           type="radio"
+    //           id="artist"
+    //           name="type"
+    //           value="Artist"
+    //           onClick={handleFormChange}
+    //           required
+    //         />
+    //         <label for="artist">
+    //           <p>Artist</p>
+    //         </label>
+    //       </li>
+    //       <li>
+    //         <input
+    //           type="radio"
+    //           id="venue"
+    //           name="type"
+    //           value="Venue"
+    //           onClick={handleFormChange}
+    //           required
+    //         />
+    //         <label for="venue">
+    //           <p>Venue</p>
+    //         </label>
+    //       </li>
+    //     </ul>
+    //     <input
+    //       type="text"
+    //       name="title"
+    //       placeholder="Enter title"
+    //       value={formState.title}
+    //       onChange={handleFormChange}
+    //     />
+    //     <input
+    //       type="number"
+    //       name="starRating"
+    //       placeholder="How many stars would you give it?"
+    //       value={formState.starRating}
+    //       onChange={handleFormChange}
+    //     />
+    //     <input
+    //       type="text"
+    //       name="text"
+    //       placeholder="Want to add any text?"
+    //       value={formState.text}
+    //       onChange={handleFormChange}
+    //     />
     <div>
-      <h3>Add a Review</h3>
       <form onSubmit={handleFormSubmit}>
-        <h1>What are you doing a review of?</h1>
-        <ul>
-          <li>
-            <input
-              type="radio"
-              id="concert"
-              name="type"
-              value="Concert"
-              onClick={handleFormChange}
-              required
-            />
-            <label for="concert">
-              <p>concert</p>
-            </label>
-          </li>
-          <li>
-            <input
-              type="radio"
-              id="artist"
-              name="type"
-              value="Artist"
-              onClick={handleFormChange}
-              required
-            />
-            <label for="artist">
-              <p>Artist</p>
-            </label>
-          </li>
-          <li>
-            <input
-              type="radio"
-              id="venue"
-              name="type"
-              value="Venue"
-              onClick={handleFormChange}
-              required
-            />
-            <label for="venue">
-              <p>Venue</p>
-            </label>
-          </li>
-        </ul>
-        <input
-          type="text"
-          name="title"
-          placeholder="Enter title"
-          value={formState.title}
-          onChange={handleFormChange}
-        />
-        <input
-          type="number"
-          name="starRating"
-          placeholder="How many stars would you give it?"
-          value={formState.starRating}
-          onChange={handleFormChange}
-        />
-        <input
-          type="text"
-          name="text"
-          placeholder="Want to add any text?"
-          value={formState.text}
-          onChange={handleFormChange}
-        />
-        <button type="submit">Post Review</button>
+        <div>
+        <div className="join mb-8 w-full">
+          <input value={formState.title} onChange={handleFormChange} type="text" name="title" className="input input-bordered w-full join-item" placeholder="Add a Review"/>
+
+          <select className="select select-bordered join-item">
+            <option disabled selected>Type</option>
+            <option id="concert" value="Concert" name="type" onClick={handleFormChange}>Concert</option>
+            <option id="artist" value="artist" name="type" onClick={handleFormChange}>Artist</option>
+            <option id="venue" value="venue" name="type" onClick={handleFormChange}>Venue</option>
+          </select>
+        </div>
+        <textarea type="text" name="text" value={formState.text} onChange={handleFormChange} className="textarea textarea-bordered w-full mb-3" placeholder="Start typing..."></textarea>
+          <div name="starRating" className="rating rating-md block mb-8 ">
+            Rating:
+            <input type="radio" name="rating-9" className="rating-hidden" />
+            <input type="radio" name="rating-9" className="mask mask-star-2" />
+            <input type="radio" name="rating-9" className="mask mask-star-2" checked />
+            <input type="radio" name="rating-9" className="mask mask-star-2" />
+            <input type="radio" name="rating-9" className="mask mask-star-2" />
+            <input type="radio" name="rating-9" className="mask mask-star-2" />
+            <button type="submit" className="btn btn-primary btn-outline ml-6">Post Review</button>
+          </div>
         {addReviewError && <p>{addReviewError.message}</p>}
+      </div>
       </form>
-    </div>
+</div>
   );
 }
 
