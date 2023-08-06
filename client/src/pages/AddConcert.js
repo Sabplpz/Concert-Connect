@@ -2,7 +2,7 @@ import React, { useState, useRef } from 'react';
 import axios from 'axios';
 import { useMutation } from '@apollo/client';
 import { ADD_CONCERT } from '../utils/mutations';
-import addConHero from '../assets/logo/addHero.jpeg'
+import addConHero from '../assets/logo/Concert-H.jpeg'
 
 function ConcertList({ onSelectConcert, onConcertDataChange }) {
   const [concertsData, setConcertsData] = useState([]);
@@ -141,7 +141,7 @@ function AddConcert() {
 
   return (
     <>
-    <div className="hero min-h-screen" style={{backgroundImage: `url(${addConHero})`}}>
+    <div className="hero min-h-[80vh]" style={{backgroundImage: `url(${addConHero})`}}>
   <div className="hero-overlay bg-opacity-60"></div>
   <div className="hero-content text-center text-neutral-content">
     <div className="max-w-md">
