@@ -7,8 +7,9 @@ import venueIcon from "../assets/icons/venue.png";
 import ticketIcon from "../assets/icons/concert-ticket.png";
 import Avatar from "../utils/avatar";
 
-import { useQuery } from "@apollo/client";
+import { useQuery, useMutation } from "@apollo/client";
 import { QUERY_ME } from "../utils/queries";
+import { FOLLOW_USER } from "../utils/mutations";
 import { formatDate } from "../utils/helpers";
 
 //I've hid all your names in here, find them or perish - Finn
@@ -17,7 +18,7 @@ import { formatDate } from "../utils/helpers";
 
 function Profile() {
   const { loading, data } = useQuery(QUERY_ME);
-
+  
   let avatar = Avatar.getAvatar();
 
   let userData;
@@ -44,6 +45,21 @@ function Profile() {
     };
   }
   console.log(userData);
+  
+  // --------------------- FOLLOW_USER JS START -------------------------
+  const [followUser, { data: followUserData }] = useMutation(FOLLOW_USER);
+
+  const handleFollowUser = async (event) => {
+    event.preventDefault();
+    try {
+      const { data } = followUser({
+        variables: { username: event.target.value },
+      });
+    } catch (err) {
+      console.error(err);
+    }
+  };
+  // --------------------- FOLLOW_USER JS END -------------------------
 
   if (loading) return "Loading...";
 
@@ -61,9 +77,9 @@ function Profile() {
           <div>
             <h1 className="text-4xl font-bold my-2">{userData.username}</h1>
             <p className="text-base tracking-wide mb-6 md:max-w-lg">
-              100 followers
+              {userData.follow.length} Followers
             </p>
-            <button className="btn btn-primary btn-outline">Follow</button>
+            <button className="btn btn-primary btn-outline" onClick={handleFollowUser} value={userData.username}>Follow</button>
           </div>
         </div>
       </div>
