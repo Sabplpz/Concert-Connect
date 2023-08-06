@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import axios from 'axios';
 import { useMutation } from '@apollo/client';
 import { ADD_CONCERT } from '../utils/mutations';
@@ -7,12 +7,13 @@ function ConcertList({ onSelectConcert, onConcertDataChange }) {
   const [concertsData, setConcertsData] = useState([]);
   const [keyword, setKeyword] = useState('');
   const [showDropdown, setShowDropdown] = useState(false);
+  const selectRef = useRef(null);
 
   const handleSearchConcerts = async () => {
     try {
       const response = await axios.get('https://app.ticketmaster.com/discovery/v2/events', {
         params: {
-          apikey: '6sOPwHnIo993SJGpEOZxgkbNvGgHhQ9n',
+          apikey: 'KzV8OCOnhvpGtaoVP1AFZP5qCS4jvNgG',
           keyword,
           locale: '*',
           size: 100,
@@ -36,18 +37,33 @@ function ConcertList({ onSelectConcert, onConcertDataChange }) {
         name="keyword"
         value={keyword}
         onChange={(e) => setKeyword(e.target.value)}
-        onBlur={() => setShowDropdown(false)}
+        onBlur={() => {
+            setTimeout(() => {
+                if (document.activeElement !== selectRef.current) {
+                    setShowDropdown(false);
+                }
+            }, 200);  // Delay for 200 milliseconds
+        }}
+        onKeyDown={(e) => {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                handleSearchConcerts();
+            }
+        }}
       />
-
-      <button className="btn btn-outline mt-4 w-full md:w-auto" onClick={handleSearchConcerts}>Submit</button>
+      <button type="button" className="btn btn-outline mt-4 w-full md:w-auto" onClick={handleSearchConcerts}>Submit</button>
 
       {showDropdown && (
-        <select className="select select-bordered mt-4 w-full" onChange={(e) => onSelectConcert(e.target.value)}>
+        <select 
+          ref={selectRef}
+          className="select select-bordered mt-4 w-full" 
+          onChange={(e) => onSelectConcert(e.target.value)}
+        >
           <option value="">Select Concert</option>
           {concertsData.map((concert, index) => (
-            <option key={index} value={index}>
-              {concert.name} - {concert.dates?.start?.localDate} - {concert?._embedded?.venues[0]?.city?.name}
-            </option>
+              <option key={index} value={index}>
+                  {concert.name} - {concert.dates?.start?.localDate} - {concert?._embedded?.venues[0]?.city?.name}
+              </option>
           ))}
         </select>
       )}
@@ -123,7 +139,7 @@ function AddConcert() {
 
   return (
     <div className="mx-auto max-w-screen-xl px-4 py-16 sm:px-6 lg:px-8">
-      <section>
+    <section>
         <h2 className="mb-5 mt-20 text-2xl font-bold text-center">What concert are you going to next?</h2>
 
         <form onSubmit={handleSubmit} className="mb-0 rounded-lg shadow-lg sm:p-6 lg:p-8 text-center">
