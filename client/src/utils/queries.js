@@ -1,5 +1,16 @@
 import { gql } from "@apollo/client";
 
+export const QUERY_ALL_REVIEWS = gql`
+  query AllReviews {
+    reviews {
+      type
+      title
+      starRating
+      username
+    }
+  }
+`;
+
 export const QUERY_ME = gql`
   query Me {
     me {
@@ -41,10 +52,3 @@ export const QUERY_CONCERT = gql`
   }
 `;
 
-export const QUERY_ALL_REVIEWS = gql`
-  query Reviews {
-    reviews {
-      _id
-    }
-  }
-`;

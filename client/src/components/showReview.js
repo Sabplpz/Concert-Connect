@@ -1,7 +1,15 @@
 import React from "react";
 import Avatar from "../utils/avatar";
+import { useQuery } from "@apollo/client";
+import { QUERY_ALL_REVIEWS } from "../utils/queries";
+
 
 function ShowReview() {
+  const { loading: loadingReview, data: reviewsData } = useQuery(QUERY_ALL_REVIEWS);
+    
+  const allReviewData = reviewsData?.reviews;
+  console.log(reviewsData)
+
   return (
     <div className="p-5 mb-4 bg-base-100 rounded-lg shadow-lg shadow-base-200/50 dark:bg-base-100 dark:border-base-200 hover:bg-neutral-focus dark:hover:bg-neutral-focus">
       <ol className="mt-3 divide-y divide-bg-primary dark:divide-bg-primary">
@@ -15,11 +23,11 @@ function ShowReview() {
             <div className="text-bg-neutral-content dark:text-bg-neutral-content">
               <div className="text-neutral-content text-base">
                 <span className="text-lg text-secondary dark:text-secondary">
-                  Jese Leos
+                  {allReviewData[0].username}
                 </span>{" "}
-                is going to see Beyonce at The Amway Arena on 8/30/2023
+                {allReviewData[0].type} review: {allReviewData[0].title} = {allReviewData[0].starRating} stars baby!
               </div>
-              <div className="text-sm font-normal">"I can't wait!!!!"</div>
+              <div className="text-sm font-normal">{allReviewData[0].text}</div>
 
               <div className="block items-center mt-3">
                 <button className="btn btn-outline btn-primary btn-sm mr-3">
