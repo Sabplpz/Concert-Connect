@@ -53,6 +53,9 @@ export const QUERY_ME = gql`
         _id
         venueName
       }
+      follow {
+        _id
+      }
     }
   }
 `;

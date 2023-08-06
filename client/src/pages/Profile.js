@@ -7,9 +7,12 @@ import venueIcon from "../assets/icons/venue.png";
 import ticketIcon from "../assets/icons/concert-ticket.png";
 import Avatar from "../utils/avatar";
 
-import { useQuery } from "@apollo/client";
+import { useQuery, useMutation } from "@apollo/client";
 import { QUERY_ME } from "../utils/queries";
+import { FOLLOW_USER } from "../utils/mutations";
 import { formatDate } from "../utils/helpers";
+import ShowReview from "../components/showReview"
+
 
 //I've hid all your names in here, find them or perish - Finn
 
@@ -17,7 +20,7 @@ import { formatDate } from "../utils/helpers";
 
 function Profile() {
   const { loading, data } = useQuery(QUERY_ME);
-
+  
   let avatar = Avatar.getAvatar();
 
   let userData;
@@ -44,6 +47,21 @@ function Profile() {
     };
   }
   console.log(userData);
+  
+  // --------------------- FOLLOW_USER JS START -------------------------
+  const [followUser, { data: followUserData }] = useMutation(FOLLOW_USER);
+
+  const handleFollowUser = async (event) => {
+    event.preventDefault();
+    try {
+      const { data } = followUser({
+        variables: { username: event.target.value },
+      });
+    } catch (err) {
+      console.error(err);
+    }
+  };
+  // --------------------- FOLLOW_USER JS END -------------------------
 
   if (loading) return "Loading...";
 
@@ -61,13 +79,13 @@ function Profile() {
           <div>
             <h1 className="text-4xl font-bold my-2">{userData.username}</h1>
             <p className="text-base tracking-wide mb-6 md:max-w-lg">
-              100 followers
+              {userData.follow.length} Followers
             </p>
-            <button className="btn btn-primary btn-outline">Follow</button>
+            <button className="btn btn-primary btn-outline" onClick={handleFollowUser} value={userData.username}>Follow</button>
           </div>
         </div>
       </div>
-      <div className="sm:grid lg:grif-cols-4 grid-cols-2 sm:gap-x-4">
+      <div className="sm:grid lg:grif-cols-3 grid-cols-3 sm:gap-x-4">
         <div className="flex justify-between items-center p-6 mb-4 bg-base-100 rounded-lg shadow-lg shadow-base-200/50 hover:bg-neutral-focus">
           <div>
             <span className="text-md text-slate-400">Concerts</span>
@@ -101,45 +119,9 @@ function Profile() {
             <img src={venueIcon} alt="Venue Icon" className="h-12 w-12" />
           </div>
         </div>
-        <div className="flex justify-between items-center p-6 mb-4 bg-base-100 rounded-lg shadow-lg shadow-base-200/50 hover:bg-neutral-focus">
-          <div>
-            <span className="text-md text-slate-400">Locations</span>
-            <h3 className="text-3xl font-bold text-slate-100">
-              {userData.city}
-            </h3>
-          </div>
-          <div>
-            <img src={locationIcon} alt="Location Icon" className="h-12 w-12" />
-          </div>
-        </div>
       </div>
       <div className="grid grid-cols-1 gap-4 lg:grid-cols-3 lg:gap-8 mt-10">
-        <div>
-          {/* Top artists table */}
-          <div className="collapse-title bg-base-200 text-xl">Top Artists</div>
-          <div className="overflow-x-auto">
-            <table className="table">
-              <tbody>
-                {/* row 1 */}
-                <tr className="hover">
-                  <th className="text-accent">1</th>
-                  <td>{userData.artistName}</td>
-                </tr>
-                {/* row 2 */}
-                <tr className="hover">
-                  <th className="text-accent">2</th>
-                  <td>{userData.artistName}</td>
-                </tr>
-                {/* row 3 */}
-                <tr className="hover">
-                  <th className="text-accent">3</th>
-                  <td>{userData.artistName}</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-          {/* end of top artists table */}
-        </div>
+        
         <div>
           <div className="collapse-title bg-base-200 text-xl">Top Genres</div>
           {/* Top genres table */}
@@ -165,6 +147,32 @@ function Profile() {
             </table>
           </div>
           {/* end of top genres table */}
+        </div>
+        <div>
+          {/* Top artists table */}
+          <div className="collapse-title bg-base-200 text-xl">Top Artists</div>
+          <div className="overflow-x-auto">
+            <table className="table">
+              <tbody>
+                {/* row 1 */}
+                <tr className="hover">
+                  <th className="text-accent">1</th>
+                  <td>{userData.artistName}</td>
+                </tr>
+                {/* row 2 */}
+                <tr className="hover">
+                  <th className="text-accent">2</th>
+                  <td>{userData.artistName}</td>
+                </tr>
+                {/* row 3 */}
+                <tr className="hover">
+                  <th className="text-accent">3</th>
+                  <td>{userData.artistName}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          {/* end of top artists table */}
         </div>
         <div>
           <div className="collapse-title bg-base-200 text-xl">Top Venues</div>
@@ -384,6 +392,10 @@ function Profile() {
             <button className="join-item btn">4</button>
           </div>
         </div>
+        <h2 className="mt-20 text-2xl font-bold text-center">
+          User Reviews
+        </h2>
+        <ShowReview />
       </div>
     </div>
   );
