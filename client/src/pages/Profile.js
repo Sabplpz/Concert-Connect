@@ -263,7 +263,7 @@ function profile() {
         </div>
       </div>
       <div className="sm:grid lg:grif-cols-4 grid-cols-2 sm:gap-x-4">
-        <div className="flex justify-between items-center p-6 rounded-md mb-4 bg-base-100 rounded-lg shadow-lg shadow-base-200/50 hover:bg-neutral-focus">
+        <div className="flex justify-between items-center p-6 mb-4 bg-base-100 rounded-lg shadow-lg shadow-base-200/50 hover:bg-neutral-focus">
           <div>
             <span className="text-md text-slate-400">Concerts</span>
             <h3 className="text-3xl font-bold text-slate-100">234</h3>
@@ -272,7 +272,7 @@ function profile() {
             <img src={ticketIcon} alt="Ticket Icon" className="h-12 w-12" />
           </div>
         </div>
-        <div className="flex justify-between items-center p-6 rounded-md mb-4  bg-base-100 rounded-lg shadow-lg shadow-base-200/50 hover:bg-neutral-focus">
+        <div className="flex justify-between items-center p-6 mb-4  bg-base-100 rounded-lg shadow-lg shadow-base-200/50 hover:bg-neutral-focus">
           <div>
             <span className="text-md text-slate-400">Artists</span>
             <h3 className="text-3xl font-bold text-slate-100">234</h3>
@@ -281,7 +281,7 @@ function profile() {
             <img src={artistIcon} alt="Artist Icon" className="h-12 w-12" />
           </div>
         </div>
-        <div className="flex justify-between items-center p-6 rounded-md mb-4 bg-base-100 rounded-lg shadow-lg shadow-base-200/50 hover:bg-neutral-focus">
+        <div className="flex justify-between items-center p-6 mb-4 bg-base-100 rounded-lg shadow-lg shadow-base-200/50 hover:bg-neutral-focus">
           <div>
             <span className="text-md text-slate-400">Venues</span>
             <h3 className="text-3xl font-bold text-slate-100">234</h3>
@@ -290,7 +290,7 @@ function profile() {
             <img src={venueIcon} alt="Venue Icon" className="h-12 w-12" />
           </div>
         </div>
-        <div className="flex justify-between items-center p-6 rounded-md mb-4 bg-base-100 rounded-lg shadow-lg shadow-base-200/50 hover:bg-neutral-focus">
+        <div className="flex justify-between items-center p-6 mb-4 bg-base-100 rounded-lg shadow-lg shadow-base-200/50 hover:bg-neutral-focus">
           <div>
             <span className="text-md text-slate-400">Locations</span>
             <h3 className="text-3xl font-bold text-slate-100">234</h3>
