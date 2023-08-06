@@ -2,10 +2,10 @@ import React from "react";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import "../assets/header.css";
-import Logo from "../assets/ConcertConnectLogo.png";
+import Logo from "../assets/logo/ConcertConnectLogo.png";
 import Auth from "../utils/auth";
+import Avatar from "../utils/avatar";
 import LoginSingUpModal from "./LoginSignUpModal";
-import userIcon from "../assets/user.png";
 
 const Header = () => {
   const [showModal, setShowModal] = useState(false);
@@ -24,8 +24,8 @@ const Header = () => {
       </a>
       <div className="dropdown dropdown-end">
         <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
-          <div className="w-10 rounded-full shrink-0">
-            <img src={userIcon} alt='user icon' />
+          <div className="w-12 rounded-full shrink-0">
+            <img src={Avatar.handleAvatar()} alt="user icon" />
           </div>
         </label>
         <ul

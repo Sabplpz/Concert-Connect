@@ -8,6 +8,7 @@ export const LOGIN_USER = gql`
       user {
         _id
         username
+        avatar
       }
     }
   }
@@ -21,6 +22,7 @@ export const ADD_USER = gql`
     $username: String!
     $email: String!
     $password: String!
+    $avatar: String!
   ) {
     addUser(
       firstName: $firstName
@@ -28,11 +30,13 @@ export const ADD_USER = gql`
       username: $username
       email: $email
       password: $password
+      avatar: $avatar
     ) {
       token
       user {
         _id
         username
+        avatar
       }
     }
   }
