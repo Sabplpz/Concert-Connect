@@ -8,6 +8,7 @@ const typeDefs = gql`
     username: String!
     email: String!
     password: String!
+    avatar: String!
     concerts: [Concert]
     artists: [Artist]
     venues: [Venue]
@@ -86,6 +87,7 @@ const typeDefs = gql`
       username: String!
       email: String!
       password: String!
+      avatar: String!
     ): Auth
     addConcert(
       artistName: String!

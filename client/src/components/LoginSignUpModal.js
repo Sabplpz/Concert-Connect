@@ -3,8 +3,9 @@ import { useState } from "react";
 import { useMutation } from "@apollo/client";
 import { LOGIN_USER, ADD_USER } from "../utils/mutations";
 import Auth from "../utils/auth";
+import Avatar from "../utils/avatar";
 import close from "../assets/icons/close.png";
-
+// AVATAR ICONS
 import bowie from "../assets/avatars/bowie.png";
 import cassette from "../assets/avatars/cassette.png";
 import elvis from "../assets/avatars/elvis.png";
@@ -28,6 +29,7 @@ function LoginSignUpModal({ isOpen, onClose }) {
     lastName: "",
     username: "",
     email: "",
+    avatar: "",
     password: "",
     verifyPassword: "",
   });
@@ -58,9 +60,11 @@ function LoginSignUpModal({ isOpen, onClose }) {
       if (isLogin) {
         const { data } = await login({ variables: { username, password } });
         Auth.login(data.login.token);
+        Avatar.saveAvatar(data.login.user.avatar);
       } else {
         const { data } = await addUser({ variables: { ...formState } });
         Auth.login(data.addUser.token);
+        Avatar.saveAvatar(data.addUser.user.avatar);
       }
       onClose();
     } catch (e) {
@@ -153,7 +157,9 @@ function LoginSignUpModal({ isOpen, onClose }) {
                   />
                 </div>
                 <div className="w-full">
-                  <h4 className="text-lg text-neutral text-center">Choose an avatar</h4>
+                  <h4 className="text-lg text-neutral text-center">
+                    Choose an avatar
+                  </h4>
                   <ul className="grid w-full gap-2 grid-cols-3 md:grid-cols-5">
                     <li>
                       <input
@@ -161,6 +167,8 @@ function LoginSignUpModal({ isOpen, onClose }) {
                         id="icon-1"
                         name="avatar"
                         className="hidden peer"
+                        value="bowie"
+                        onClick={handleFormChange}
                         required
                       />
                       <label
@@ -168,7 +176,7 @@ function LoginSignUpModal({ isOpen, onClose }) {
                         className="inline-flex items-center justify-between w-12 md:w-16 p-3 border border-neutral rounded-lg cursor-pointer peer-checked:border-primary hover:bg-gray-100"
                       >
                         <div className="w-full">
-                          <img src={bowie} alt="Bowie"/>
+                          <img src={bowie} alt="Bowie" />
                         </div>
                       </label>
                     </li>
@@ -178,6 +186,8 @@ function LoginSignUpModal({ isOpen, onClose }) {
                         id="icon-2"
                         name="avatar"
                         className="hidden peer"
+                        value="elvis"
+                        onClick={handleFormChange}
                         required
                       />
                       <label
@@ -185,7 +195,7 @@ function LoginSignUpModal({ isOpen, onClose }) {
                         className="inline-flex items-center justify-between w-12 md:w-16 p-3 border border-neutral rounded-lg cursor-pointer peer-checked:border-primary hover:bg-gray-100"
                       >
                         <div className="w-full">
-                          <img src={elvis} alt="Elvis"/>
+                          <img src={elvis} alt="Elvis" />
                         </div>
                       </label>
                     </li>
@@ -194,6 +204,8 @@ function LoginSignUpModal({ isOpen, onClose }) {
                         type="radio"
                         id="icon-3"
                         name="avatar"
+                        value="hendrix"
+                        onClick={handleFormChange}
                         className="hidden peer"
                         required
                       />
@@ -211,6 +223,8 @@ function LoginSignUpModal({ isOpen, onClose }) {
                         type="radio"
                         id="icon-4"
                         name="avatar"
+                        value="lennon"
+                        onClick={handleFormChange}
                         className="hidden peer"
                         required
                       />
@@ -228,6 +242,8 @@ function LoginSignUpModal({ isOpen, onClose }) {
                         type="radio"
                         id="icon-5"
                         name="avatar"
+                        value="simmons"
+                        onClick={handleFormChange}
                         className="hidden peer"
                         required
                       />
@@ -246,6 +262,8 @@ function LoginSignUpModal({ isOpen, onClose }) {
                         type="radio"
                         id="icon-6"
                         name="avatar"
+                        value="star"
+                        onClick={handleFormChange}
                         className="hidden peer"
                         required
                       />
@@ -263,6 +281,8 @@ function LoginSignUpModal({ isOpen, onClose }) {
                         type="radio"
                         id="icon-7"
                         name="avatar"
+                        value="ticket"
+                        onClick={handleFormChange}
                         className="hidden peer"
                         required
                       />
@@ -280,6 +300,8 @@ function LoginSignUpModal({ isOpen, onClose }) {
                         type="radio"
                         id="icon-8"
                         name="avatar"
+                        value="rose"
+                        onClick={handleFormChange}
                         className="hidden peer"
                         required
                       />
@@ -297,6 +319,8 @@ function LoginSignUpModal({ isOpen, onClose }) {
                         type="radio"
                         id="icon-9"
                         name="avatar"
+                        value="quaver"
+                        onClick={handleFormChange}
                         className="hidden peer"
                         required
                       />
@@ -314,6 +338,8 @@ function LoginSignUpModal({ isOpen, onClose }) {
                         type="radio"
                         id="icon-10"
                         name="avatar"
+                        value="equalizer"
+                        onClick={handleFormChange}
                         className="hidden peer"
                         required
                       />
@@ -331,6 +357,8 @@ function LoginSignUpModal({ isOpen, onClose }) {
                         type="radio"
                         id="icon-11"
                         name="avatar"
+                        value="guitar-pick"
+                        onClick={handleFormChange}
                         className="hidden peer"
                         required
                       />
@@ -348,6 +376,8 @@ function LoginSignUpModal({ isOpen, onClose }) {
                         type="radio"
                         id="icon-12"
                         name="avatar"
+                        value="guitar-pedal"
+                        onClick={handleFormChange}
                         className="hidden peer"
                         required
                       />
@@ -365,6 +395,8 @@ function LoginSignUpModal({ isOpen, onClose }) {
                         type="radio"
                         id="icon-13"
                         name="avatar"
+                        value="headphones"
+                        onClick={handleFormChange}
                         className="hidden peer"
                         required
                       />
@@ -382,6 +414,8 @@ function LoginSignUpModal({ isOpen, onClose }) {
                         type="radio"
                         id="icon-14"
                         name="avatar"
+                        value="cassette"
+                        onClick={handleFormChange}
                         className="hidden peer"
                         required
                       />
@@ -399,6 +433,8 @@ function LoginSignUpModal({ isOpen, onClose }) {
                         type="radio"
                         id="icon-15"
                         name="avatar"
+                        value="mirror-ball"
+                        onClick={handleFormChange}
                         className="hidden peer"
                         required
                       />
