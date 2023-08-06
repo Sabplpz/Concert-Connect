@@ -79,9 +79,9 @@ function Profile() {
           <div>
             <h1 className="text-4xl font-bold my-2">{userData.username}</h1>
             <p className="text-base tracking-wide mb-6 md:max-w-lg">
-              100 followers
+              {userData.follow.length} Followers
             </p>
-            <button className="btn btn-primary btn-outline">Follow</button>
+            <button className="btn btn-primary btn-outline" onClick={handleFollowUser} value={userData.username}>Follow</button>
           </div>
         </div>
       </div>
