@@ -2,6 +2,7 @@ import React, { useState, useRef } from 'react';
 import axios from 'axios';
 import { useMutation } from '@apollo/client';
 import { ADD_CONCERT } from '../utils/mutations';
+import addConHero from '../assets/logo/addHero.jpeg'
 
 function ConcertList({ onSelectConcert, onConcertDataChange }) {
   const [concertsData, setConcertsData] = useState([]);
@@ -35,6 +36,7 @@ function ConcertList({ onSelectConcert, onConcertDataChange }) {
         className="input input-bordered w-full md:w-1/2"
         type="text"
         name="keyword"
+        placeholder='Search for an Artist'
         value={keyword}
         onChange={(e) => setKeyword(e.target.value)}
         onBlur={() => {
@@ -138,12 +140,20 @@ function AddConcert() {
   };
 
   return (
+    <>
+    <div className="hero min-h-screen" style={{backgroundImage: `url(${addConHero})`}}>
+  <div className="hero-overlay bg-opacity-60"></div>
+  <div className="hero-content text-center text-neutral-content">
+    <div className="max-w-md">
+      <h1 className="mb-5 text-4xl font-bold">Let The Show Begin!</h1>
+      <p className="mb-5">A Nighttime Full of Lifelong Memories Awaits!<br></br> Search for an Artist and start planning today! </p>
+    </div>
+  </div>
+</div>
     <div className="mx-auto max-w-screen-xl px-4 py-16 sm:px-6 lg:px-8">
     <section>
-        <h2 className="mb-5 mt-20 text-2xl font-bold text-center">What concert are you going to next?</h2>
 
         <form onSubmit={handleSubmit} className="mb-0 rounded-lg shadow-lg sm:p-6 lg:p-8 text-center">
-        <p className="text-center mb-3">Search for an artist first</p>
           <ConcertList onSelectConcert={handleConcertSelection} onConcertDataChange={handleConcertDataChange} />
 
           <div className="mt-6 shadow-lg grid grid-cols-2 md:grid-cols-2 gap-4">
@@ -182,7 +192,7 @@ function AddConcert() {
         </form>
       </section>
     </div>
-    
+    </>
   );
 }
 
