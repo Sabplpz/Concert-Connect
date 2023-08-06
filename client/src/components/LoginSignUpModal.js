@@ -5,6 +5,22 @@ import { LOGIN_USER, ADD_USER } from "../utils/mutations";
 import Auth from "../utils/auth";
 import close from "../assets/close.png";
 
+import bowie from "../assets/bowie.png";
+import cassette from "../assets/cassette.png";
+import elvis from "../assets/elvis.png";
+import equalizer from "../assets/equalizer.png";
+import pick from "../assets/guitar-pick.png";
+import pedal from "../assets/guitar-pedal.png";
+import headphones from "../assets/headphones.png";
+import hendrix from "../assets/hendrix.png";
+import lennon from "../assets/lennon.png";
+import quaver from "../assets/quaver.png";
+import rose from "../assets/rose.png";
+import simmons from "../assets/simmons.png";
+import star from "../assets/star.png";
+import ticket from "../assets/ticket.png";
+import mirrorball from "../assets/mirror-ball.png";
+
 function LoginSignUpModal({ isOpen, onClose }) {
   const [isLogin, setIsLogin] = useState(true);
   const [formState, setFormState] = useState({
@@ -104,6 +120,15 @@ function LoginSignUpModal({ isOpen, onClose }) {
                 />
 
                 <input
+                type="password"
+                className="w-full bg-neutral-content rounded-lg border-base-100 p-4 pe-12 text-sm shadow-sm"
+                name="password"
+                placeholder="Password"
+                value={formState.password}
+                onChange={handleFormChange}
+              />
+
+                <input
                   type="password"
                   className="w-full bg-neutral-content rounded-lg border-base-100 p-4 pe-12 text-sm shadow-sm"
                   name="verifyPassword"
@@ -111,9 +136,111 @@ function LoginSignUpModal({ isOpen, onClose }) {
                   value={formState.verifyPassword}
                   onChange={handleFormChange}
                 />
+
+
+                <h4 className="text-lg text-neutral">Choose an avatar</h4>
+                <ul className="grid w-full gap-4 grid-cols-5">
+                    <li>
+                        <input type="radio" id="icon-1" name="avatar" className="hidden peer" required/>
+                        <label for="icon-1" className="inline-flex items-center justify-between w-full p-3 border border-neutral rounded-lg cursor-pointer peer-checked:border-primary hover:bg-gray-100">                           
+                            <div className="w-full"><img src={bowie}/></div>
+                        </label>
+                    </li>
+                    <li>
+                        <input type="radio" id="icon-2" name="avatar" className="hidden peer" required/>
+                        <label for="icon-2" className="inline-flex items-center justify-between w-full p-3 border border-neutral rounded-lg cursor-pointer peer-checked:border-primary hover:bg-gray-100">                           
+                            <div className="w-full"><img src={elvis}/></div>
+                        </label>
+                    </li>
+                    <li>
+                        <input type="radio" id="icon-3" name="avatar" className="hidden peer" required/>
+                        <label for="icon-3" className="inline-flex items-center justify-between w-full p-3 border border-neutral rounded-lg cursor-pointer peer-checked:border-primary hover:bg-gray-100">                           
+                            <div className="w-full"><img src={hendrix}/></div>
+                            </label>
+                    </li>    
+                            <li>
+                        <input type="radio" id="icon-4" name="avatar" className="hidden peer" required/>
+                        <label for="icon-4" className="inline-flex items-center justify-between w-full p-3 border border-neutral rounded-lg cursor-pointer peer-checked:border-primary hover:bg-gray-100">                           
+                            <div className="w-full"><img src={lennon}/></div>
+                            </label>
+                    </li>
+                            <li>
+                        <input type="radio" id="icon-5" name="avatar" className="hidden peer" required/>
+                        <label for="icon-5" className="inline-flex items-center justify-between w-full p-3 border border-neutral rounded-lg cursor-pointer peer-checked:border-primary hover:bg-gray-100">                           
+                            <div className="w-full"><img src={simmons}/></div>
+                            </label>
+                    </li>
+                             
+                        <li>
+                        <input type="radio" id="icon-6" name="avatar" className="hidden peer" required/>
+                        <label for="icon-6" className="inline-flex items-center justify-between w-full p-3 border border-neutral rounded-lg cursor-pointer peer-checked:border-primary hover:bg-gray-100">                           
+                            <div className="w-full"><img src={star}/></div>
+                            </label>
+                    </li>
+                            <li>
+                        <input type="radio" id="icon-7" name="avatar" className="hidden peer" required/>
+                        <label for="icon-7" className="inline-flex items-center justify-between w-full p-3 border border-neutral rounded-lg cursor-pointer peer-checked:border-primary hover:bg-gray-100">                           
+                            <div className="w-full"><img src={ticket}/></div>
+                            </label>
+                    </li>
+                            <li>
+                        <input type="radio" id="icon-8" name="avatar" className="hidden peer" required/>
+                        <label for="icon-8" className="inline-flex items-center justify-between w-full p-3 border border-neutral rounded-lg cursor-pointer peer-checked:border-primary hover:bg-gray-100">                           
+                            <div className="w-full"><img src={rose}/></div>
+                            </label>
+                    </li>
+                            <li>
+                        <input type="radio" id="icon-9" name="avatar" className="hidden peer" required/>
+                        <label for="icon-9" className="inline-flex items-center justify-between w-full p-3 border border-neutral rounded-lg cursor-pointer peer-checked:border-primary hover:bg-gray-100">                           
+                            <div className="w-full"><img src={quaver}/></div>
+                            </label>
+                    </li>
+                            <li>
+                        <input type="radio" id="icon-10" name="avatar" className="hidden peer" required/>
+                        <label for="icon-10" className="inline-flex items-center justify-between w-full p-3 border border-neutral rounded-lg cursor-pointer peer-checked:border-primary hover:bg-gray-100">                           
+                            <div className="w-full"><img src={equalizer}/></div>
+                            </label>
+                    </li>
+                            <li>
+                        <input type="radio" id="icon-11" name="avatar" className="hidden peer" required/>
+                        <label for="icon-11" className="inline-flex items-center justify-between w-full p-3 border border-neutral rounded-lg cursor-pointer peer-checked:border-primary hover:bg-gray-100">                           
+                            <div className="w-full"><img src={pick}/></div>
+                            </label>
+                    </li>
+                            <li>
+                        <input type="radio" id="icon-12" name="avatar" className="hidden peer" required/>
+                        <label for="icon-12" className="inline-flex items-center justify-between w-full p-3 border border-neutral rounded-lg cursor-pointer peer-checked:border-primary hover:bg-gray-100">                           
+                            <div className="w-full"><img src={pedal}/></div>
+                            </label>
+                    </li>
+                            <li>
+                        <input type="radio" id="icon-13" name="avatar" className="hidden peer" required/>
+                        <label for="icon-13" className="inline-flex items-center justify-between w-full p-3 border border-neutral rounded-lg cursor-pointer peer-checked:border-primary hover:bg-gray-100">                           
+                            <div className="w-full"><img src={headphones}/></div>
+                            </label>
+                    </li>
+                            <li>
+                        <input type="radio" id="icon-14" name="avatar" className="hidden peer" required/>
+                        <label for="icon-14" className="inline-flex items-center justify-between w-full p-3 border border-neutral rounded-lg cursor-pointer peer-checked:border-primary hover:bg-gray-100">                           
+                            <div className="w-full"><img src={cassette}/></div>
+                        </label>
+                    </li>
+                    <li>
+                        <input type="radio" id="icon-15" name="avatar" className="hidden peer" required/>
+                        <label for="icon-15" className="inline-flex items-center justify-between w-full p-3 border border-neutral rounded-lg cursor-pointer peer-checked:border-primary hover:bg-gray-100">                           
+                            <div className="w-full"><img src={mirrorball}/></div>
+                        </label>
+                    </li>
+                </ul>
+
+
+
+
               </>
             )}
 
+            {isLogin && (
+              <>
             <input
               type="text"
               className="w-full bg-neutral-content rounded-lg border-base-100 p-4 pe-12 text-sm shadow-sm"
@@ -131,7 +258,9 @@ function LoginSignUpModal({ isOpen, onClose }) {
               value={formState.password}
               onChange={handleFormChange}
             />
+            </>
 
+            )}
             <button className="block w-full rounded-lg btn btn-neutral" type="submit">{isLogin ? "Log In" : "Sign Up"}</button>
 
             {(loginError || signupError) && (
