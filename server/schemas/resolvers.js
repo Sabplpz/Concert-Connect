@@ -49,7 +49,7 @@ const resolvers = {
       return Review.findOne({ _id: args._id });
     },
     reviews: async () => {
-      return await Review.find();
+      return await Review.find().populate("likes").populate("comments");
     },
   },
 

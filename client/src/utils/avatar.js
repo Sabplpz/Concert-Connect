@@ -26,8 +26,7 @@ class Avatar {
     return localStorage.getItem("avatar");
   }
 
-  handleAvatar() {
-    const avatar = localStorage.getItem("avatar");
+  handleAvatar(avatar) {
     if (avatar === "bowie") {
       return bowie;
     } else if (avatar === "cassette") {

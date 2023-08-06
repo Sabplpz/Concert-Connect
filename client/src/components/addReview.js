@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useMutation } from "@apollo/client";
 import { ADD_REVIEW } from "../utils/mutations";
 
-function Review() {
+function AddReview() {
   const [formState, setFormState] = useState({
     type: "",
     title: "",
@@ -126,4 +126,4 @@ function Review() {
   );
 }
 
-export default Review;
+export default AddReview;
