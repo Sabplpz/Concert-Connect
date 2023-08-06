@@ -5,12 +5,12 @@ import React from "react";
 import calendarIcon from "../assets/icons/calendar.png";
 import musicIcon from "../assets/icons/music.png";
 import userIcon from "../assets/icons/user.png";
-import Avatar from "../utils/avatar"
+import Avatar from "../utils/avatar";
 import { useQuery } from "@apollo/client";
-import { QUERY_ME, QUERY_ALL_REVIEWS } from "../utils/queries";
+import { QUERY_ME } from "../utils/queries";
 import { formatDate } from "../utils/helpers";
-import AddReview from "../components/addReview"
-import ShowReview from "../components/showReview"
+import AddReview from "../components/addReview";
+import ShowReview from "../components/showReview";
 import ReviewModal from "../components/reviewModal";
 
 export default function Home() {
@@ -21,29 +21,45 @@ export default function Home() {
   if (meData?.me.concerts[0]) {
     userConcertData = meData?.me.concerts;
   } else {
-    userConcertData = [{date: "Null", concertName: "No upcoming concerts saved"}, {date: "Null"}, {date: "Null"}];
-  };
+    userConcertData = [
+      { date: "Null", concertName: "No upcoming concerts saved" },
+      { date: "Null" },
+      { date: "Null" },
+    ];
+  }
 
   let userArtistData;
   if (meData?.me.artists[0]) {
     userArtistData = meData?.me.artists;
   } else {
-    userArtistData = [{artistName: "No saved artists"}, {artistName: ""}, {artistName: ""}];
-  };
+    userArtistData = [
+      { artistName: "No saved artists" },
+      { artistName: "" },
+      { artistName: "" },
+    ];
+  }
 
   let userGenreData;
   if (meData?.me.genre) {
     userGenreData = meData?.me.genre;
   } else {
-    userGenreData = [{genre: "No favorite genres saved"}, {genre: ""}, {genre: ""}];
-  };
+    userGenreData = [
+      { genre: "No favorite genres saved" },
+      { genre: "" },
+      { genre: "" },
+    ];
+  }
 
   let userVenueData;
   if (meData?.me.venue) {
     userVenueData = meData?.me.venue;
   } else {
-    userVenueData = [{venueName: "No favorite venues saved"}, {venueName: ""}, {venueName: ""}];
-  };
+    userVenueData = [
+      { venueName: "No favorite venues saved" },
+      { venueName: "" },
+      { venueName: "" },
+    ];
+  }
   // ------------------------------------------------- QUERY_ME END ----------------------------------------------------------------
 
   return (
@@ -69,24 +85,32 @@ export default function Home() {
                   </tr>
                 </thead>
                 {loadingMe ? (
-                  <tbody><tr>Loading, please wait</tr></tbody>
+                  <tbody>
+                    <tr>Loading, please wait</tr>
+                  </tbody>
                 ) : (
                   <tbody>
                     {/* row 1 */}
+                    {/* {userConcertData && userConcertData.length > 0 && ( */}
                     <tr className="hover">
-                      <td>{formatDate((userConcertData[0].date))}</td>
+                      <td>{formatDate(userConcertData[0].date)}</td>
                       <td>{userConcertData[0].concertName}</td>
                     </tr>
+                    {/* )} */}
                     {/* row 2 */}
+                    {/* {userConcertData && userConcertData.length > 1 && ( */}
                     <tr className="hover">
-                      <td>{formatDate((userConcertData[1].date))}</td>
+                      <td>{formatDate(userConcertData[1].date)}</td>
                       <td>{userConcertData[1].concertName}</td>
                     </tr>
+                    {/* )} */}
                     {/* row 3 */}
+                    {/* {userConcertData && userConcertData.length > 2 && ( */}
                     <tr className="hover">
-                      <td>{formatDate((userConcertData[2].date))}</td>
+                      <td>{formatDate(userConcertData[2].date)}</td>
                       <td>{userConcertData[2].concertName}</td>
                     </tr>
+                    {/* )} */}
                   </tbody>
                 )}
               </table>
@@ -106,7 +130,9 @@ export default function Home() {
             <div className="overflow-x-auto">
               <table className="table">
                 {loadingMe ? (
-                  <tbody><tr>Loading, please wait</tr></tbody>
+                  <tbody>
+                    <tr>Loading, please wait</tr>
+                  </tbody>
                 ) : (
                   <tbody>
                     {/* row 1 */}
@@ -142,27 +168,29 @@ export default function Home() {
             {/* Top genres table */}
             <div className="overflow-x-auto">
               <table className="table">
-              {loadingMe ? (
-                <tbody><tr>Loading, please wait</tr></tbody>
-              ) : (
-                <tbody>
-                  {/* row 1 */}
-                  <tr className="hover">
-                    <th className="text-accent">1</th>
-                    <td>{userGenreData[0].genre}</td>
-                  </tr>
-                  {/* row 2 */}
-                  <tr className="hover">
-                    <th className="text-accent">2</th>
-                    <td>{userGenreData[1].genre}</td>
-                  </tr>
-                  {/* row 3 */}
-                  <tr className="hover">
-                    <th className="text-accent">3</th>
-                    <td>{userGenreData[2].genre}</td>
-                  </tr>
-                </tbody>
-              )}
+                {loadingMe ? (
+                  <tbody>
+                    <tr>Loading, please wait</tr>
+                  </tbody>
+                ) : (
+                  <tbody>
+                    {/* row 1 */}
+                    <tr className="hover">
+                      <th className="text-accent">1</th>
+                      <td>{userGenreData[0].genre}</td>
+                    </tr>
+                    {/* row 2 */}
+                    <tr className="hover">
+                      <th className="text-accent">2</th>
+                      <td>{userGenreData[1].genre}</td>
+                    </tr>
+                    {/* row 3 */}
+                    <tr className="hover">
+                      <th className="text-accent">3</th>
+                      <td>{userGenreData[2].genre}</td>
+                    </tr>
+                  </tbody>
+                )}
               </table>
             </div>
             {/* end of top genres table */}
@@ -179,27 +207,29 @@ export default function Home() {
             {/* Top venues table */}
             <div className="overflow-x-auto">
               <table className="table">
-              {loadingMe ? (
-                <tbody><tr>Loading, please wait</tr></tbody>
-              ) : (
-                <tbody>
-                  {/* row 1 */}
-                  <tr className="hover">
-                    <th className="text-accent">1</th>
-                    <td>{userVenueData[0].venueName}</td>
-                  </tr>
-                  {/* row 2 */}
-                  <tr className="hover">
-                    <th className="text-accent">2</th>
-                    <td>{userVenueData[1].venueName}</td>
-                  </tr>
-                  {/* row 3 */}
-                  <tr className="hover">
-                    <th className="text-accent">3</th>
-                    <td>{userVenueData[2].venueName}</td>
-                  </tr>
-                </tbody>
-              )}
+                {loadingMe ? (
+                  <tbody>
+                    <tr>Loading, please wait</tr>
+                  </tbody>
+                ) : (
+                  <tbody>
+                    {/* row 1 */}
+                    <tr className="hover">
+                      <th className="text-accent">1</th>
+                      <td>{userVenueData[0].venueName}</td>
+                    </tr>
+                    {/* row 2 */}
+                    <tr className="hover">
+                      <th className="text-accent">2</th>
+                      <td>{userVenueData[1].venueName}</td>
+                    </tr>
+                    {/* row 3 */}
+                    <tr className="hover">
+                      <th className="text-accent">3</th>
+                      <td>{userVenueData[2].venueName}</td>
+                    </tr>
+                  </tbody>
+                )}
               </table>
             </div>
             {/* end of top venues table */}
@@ -210,19 +240,11 @@ export default function Home() {
 
       {/* feed area */}
 
-      
-
       <div className="lg:col-span-2">
-
-      <AddReview />
-      
-        {/* <!-- user post --> */}
-
+        <AddReview />
+        {/* <!-- user reviews --> */}
         <ShowReview />
-
-                    {/* modal pop-up */}
-                    <ReviewModal />
-        </div>
+      </div>
     </div>
   );
 }

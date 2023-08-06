@@ -46,7 +46,9 @@ const resolvers = {
       throw new AuthenticationError("You must log in");
     },
     review: async (parent, args) => {
-      return Review.findOne({ _id: args._id });
+      return Review.findOne({ _id: args._id })
+        .populate("comments")
+        .populate("likes");
     },
     reviews: async () => {
       return await Review.find().populate("likes").populate("comments");
@@ -147,56 +149,6 @@ const resolvers = {
       }
       throw new AuthenticationError("You must log in");
     },
-    // addArtist: async (parent, args, context) => {
-    //   if (context.user) {
-    //     let savedArtist = await Artist.findOne({
-    //       _id: args.id,
-    //     });
-    //     await User.findByIdAndUpdate(context.user._id, {
-    //       $push: { artists: savedArtist },
-    //     });
-    //     return;
-    //   }
-    //   throw new AuthenticationError("You must log in");
-    // },
-    // deleteArtist: async (parent, args, context) => {
-    //   if (context.user) {
-    //     const artist = await Artist.findOne({
-    //       _id: args.id,
-    //     });
-    //     await User.findOneAndUpdate(
-    //       { _id: context.user._id },
-    //       { $pull: { artists: artist._id } }
-    //     );
-    //     return artist;
-    //   }
-    //   throw new AuthenticationError("You must log in");
-    // },
-    // addVenue: async (parent, args, context) => {
-    //   if (context.user) {
-    //     let savedVenue = await Venue.findOne({
-    //       _id: args.id,
-    //     });
-    //     await User.findByIdAndUpdate(context.user._id, {
-    //       $push: { venues: savedVenue },
-    //     });
-    //     return;
-    //   }
-    //   throw new AuthenticationError("You must log in");
-    // },
-    // deleteVenue: async (parent, args, context) => {
-    //   if (context.user) {
-    //     const venue = await Venue.findOne({
-    //       _id: args.id,
-    //     });
-    //     await User.findOneAndUpdate(
-    //       { _id: context.user._id },
-    //       { $pull: { venues: venue._id } }
-    //     );
-    //     return venue;
-    //   }
-    //   throw new AuthenticationError("You must log in");
-    // },
     addReview: async (parent, args, context) => {
       if (context.user) {
         console.log(args);
@@ -207,9 +159,24 @@ const resolvers = {
           text: args.text,
           username: context.user.username,
         });
+
+        let likeData = await Likes.create({
+          reviewId: savedReview._id,
+          likes_count: 0,
+        });
+
+        await Review.findByIdAndUpdate(
+          { _id: savedReview._id },
+          {
+            $push: { likes: likeData._id },
+          },
+          { new: true }
+        );
+
         await User.findByIdAndUpdate(context.user._id, {
           $push: { reviews: savedReview._id },
         });
+
         return savedReview;
       }
       throw new AuthenticationError("You must log in");
