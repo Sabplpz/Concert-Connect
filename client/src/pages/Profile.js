@@ -1,6 +1,10 @@
 import React from 'react';
 
 import userIcon from '../assets/user.png';
+import artistIcon from '../assets/album.png';
+import locationIcon from '../assets/location.png';
+import venueIcon from '../assets/venue.png';
+import ticketIcon from '../assets/concert-ticket.png';
 
 //I've hid all your names in here, find them or perish - Finn
 
@@ -264,7 +268,7 @@ function profile() {
             <h3 className="text-3xl font-bold text-slate-100">234</h3>
           </div>
           <div>
-            <img src={userIcon} className="h-12 w-12"/>
+            <img src={ticketIcon} className="h-12 w-12"/>
           </div>
         </div>
         <div className="flex justify-between items-center p-6 rounded-md mb-4  bg-base-100 rounded-lg shadow-lg shadow-base-200/50 hover:bg-neutral-focus">
@@ -273,7 +277,7 @@ function profile() {
             <h3 className="text-3xl font-bold text-slate-100">234</h3>
           </div>
           <div>
-            <img src={userIcon} className="h-12 w-12"/>
+            <img src={artistIcon} className="h-12 w-12"/>
           </div>
         </div>
         <div className="flex justify-between items-center p-6 rounded-md mb-4 bg-base-100 rounded-lg shadow-lg shadow-base-200/50 hover:bg-neutral-focus">
@@ -282,7 +286,7 @@ function profile() {
             <h3 className="text-3xl font-bold text-slate-100">234</h3>
           </div>
           <div>
-            <img src={userIcon} className="h-12 w-12"/>
+            <img src={venueIcon} className="h-12 w-12"/>
           </div>
         </div>
         <div className="flex justify-between items-center p-6 rounded-md mb-4 bg-base-100 rounded-lg shadow-lg shadow-base-200/50 hover:bg-neutral-focus">
@@ -291,7 +295,7 @@ function profile() {
             <h3 className="text-3xl font-bold text-slate-100">234</h3>
           </div>
           <div>
-            <img src={userIcon} className="h-12 w-12"/>
+            <img src={locationIcon} className="h-12 w-12"/>
           </div>
         </div>
       </div>
@@ -378,6 +382,7 @@ function profile() {
                 {/* end of top venues table */}
         </div>
       </div>
+      <div className="text-center">
       <h2 className="mt-20 text-2xl font-bold text-center">Recent Concerts</h2>
       <div className="overflow-x-auto">
         <table className="table">
@@ -421,7 +426,12 @@ Favorite</button></th>
     </tbody>
   </table>
 </div>
-
+<div className="join">
+  <button className="join-item btn">1</button>
+  <button className="join-item btn btn-active">2</button>
+  <button className="join-item btn">3</button>
+  <button className="join-item btn">4</button>
+</div>
 <h2 className="mt-20 text-2xl font-bold text-center">Favorite Concerts</h2>
       <div className="overflow-x-auto">
         <table className="table">
@@ -467,6 +477,13 @@ Favorite</button></th>
             </tr>
     </tbody>
   </table>
+  <div className="join">
+  <button className="join-item btn">1</button>
+  <button className="join-item btn btn-active">2</button>
+  <button className="join-item btn">3</button>
+  <button className="join-item btn">4</button>
+</div>
+</div>
 </div>
 </div>
     )
