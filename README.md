@@ -8,12 +8,12 @@
   Users are able to use the application to view upcoming concerts, ratings & reviews, and information about artists and venues all without having to sign in. If users choose to create an account, they can begin saving concerts to their own personal history, as well as adding friends to follow, and saving a list of their favorite artists and venues. Users can use our search feature to help them find the exact event they want! Keeping up with your own personal musicians has never been easier than with Concert:Connect!
 
   Screenshot of landing page:  
-  ![screenshot or gif](./ADDDDDD MEEEEE!)
+  ![screenshot of landing page](./client/src/assets/screenshots/landing-page.PNG)
 
   ## Table of Contents
   * [Dependencies](#dependencies)
   * [Installation](#installation)
-  * [Executing Program](#execution)
+  * [Executing Program](#executing-program)
   * [Authors](#authors)
   * [Questions](#questions)
   * [License](#license)
@@ -36,10 +36,13 @@
   ## Usage
 
   ### Executing Program
-  Click the following link to visit the application page: (DEPLOYED URL). (STEPS TO BE ADDED IN ONCE APP SCREENSHOTS ARE TAKEN)
+  Click the following link to visit the application page: (DEPLOYED URL).  
+    
+  Begin by clicking the "LOGIN" button on the top right corner of the landing page. If you don't already have an account, click "No account? Sign Up". Fill out the required information as for the form, as seen below:  
+  ![screenshot of signup modal](./client/src/assets/screenshots/signup-modal.png)  
+    
+  Next, click on the ..... (FILL OUT SOON)
   
-  Link to the deployed application:  
-  (ADD IN LATER)
 
   ## Additional Information
 
