@@ -130,7 +130,7 @@ function AddConcert() {
         <p className="text-center mb-3">Search for an artist first</p>
           <ConcertList onSelectConcert={handleConcertSelection} onConcertDataChange={handleConcertDataChange} />
 
-          <div className="mt-6 shadow shadow-lg grid grid-cols-2 md:grid-cols-2 gap-4">
+          <div className="mt-6 shadow-lg grid grid-cols-2 md:grid-cols-2 gap-4">
             <div>
               <label htmlFor="artist" className="label">Artist:</label>
               <input type="text" className="input input-bordered input-primary w-full" name="artist" value={artist} onChange={(e) => setArtist(e.target.value)} />

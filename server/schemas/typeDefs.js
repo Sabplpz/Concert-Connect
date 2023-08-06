@@ -44,6 +44,21 @@ const typeDefs = gql`
     starRating: Int!
     text: String
     username: String
+    comments: [Comments]
+    likes: String
+  }
+
+  type Comments {
+    _id: ID
+    text: String
+    username: String
+  }
+
+  type Likes {
+    _id: ID
+    reviewId: Review
+    likes_count: Int
+    users: [String]
   }
 
   type Auth {
@@ -59,6 +74,8 @@ const typeDefs = gql`
     venues: User
     review(_id: String!): Review
     reviews: [Review]
+    comments: [Comments]
+    likes(_id: String!): Likes
   }
 
   type Mutation {
@@ -90,12 +107,11 @@ const typeDefs = gql`
     deleteReview(_id: ID!): User
     followUser(username: String!): User
     unfollowUser(_id: String!): User
+    addComment(_id: String!, text: String): Review
+    deleteComment(_id: String!, reviewId: String!): Review
+    like(reviewId: ID!): Likes
+    unlike(_id: ID!): Likes
   }
 `;
-
-// addArtist(artistName: String!): Artist
-//     deleteArtist(_id: ID!): Artist
-//     addVenue(venueName: String!, city: String!): Venue
-//     deleteVenue(_id: ID!): Venue
 
 module.exports = typeDefs;
