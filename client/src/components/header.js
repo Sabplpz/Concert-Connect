@@ -25,7 +25,7 @@ const Header = () => {
       <div className="dropdown dropdown-end">
         <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
           <div className="w-10 rounded-full shrink-0">
-            <img src={userIcon} />
+            <img src={userIcon} alt='user icon' />
           </div>
         </label>
         <ul

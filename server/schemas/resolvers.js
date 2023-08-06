@@ -1,5 +1,13 @@
 const { AuthenticationError } = require("apollo-server-express");
-const { User, Artist, Concert, Venue, Review } = require("../models");
+const {
+  User,
+  Artist,
+  Concert,
+  Venue,
+  Review,
+  Likes,
+  Comments,
+} = require("../models");
 const { signToken } = require("../utils/auth");
 
 const resolvers = {
@@ -191,7 +199,7 @@ const resolvers = {
     // },
     addReview: async (parent, args, context) => {
       if (context.user) {
-        let savedReview = await Review.create({
+        const savedReview = await Review.create({
           type: args.type,
           title: args.title,
           starRating: args.starRating,
@@ -206,7 +214,7 @@ const resolvers = {
     },
     updateReview: async (parent, args, context) => {
       if (context.user) {
-        let updatedReview = await Review.findOneAndUpdate(
+        const updatedReview = await Review.findOneAndUpdate(
           {
             _id: args._id,
             username: context.user.username,
@@ -222,11 +230,11 @@ const resolvers = {
     },
     deleteReview: async (parent, args, context) => {
       if (context.user) {
-         await Review.findOneAndDelete({
+        await Review.findOneAndDelete({
           _id: args._id,
           username: context.user.username,
         });
-        let updatedReviews = await User.findByIdAndUpdate(context.user._id, {
+        const updatedReviews = await User.findByIdAndUpdate(context.user._id, {
           $pull: { reviews: args._id },
         }).populate("reviews");
         return updatedReviews;
@@ -235,7 +243,7 @@ const resolvers = {
     },
     followUser: async (parent, args, context) => {
       if (context.user) {
-        let newFriend = await User.findOne({
+        const newFriend = await User.findOne({
           username: args.username,
         });
         await User.findByIdAndUpdate(context.user._id, {
@@ -254,8 +262,114 @@ const resolvers = {
         const following = await User.findOne({
           _id: context.user._id,
         }).populate("follow");
-
         return following;
+      }
+      throw new AuthenticationError("You must log in");
+    },
+    addComment: async (parent, args, context) => {
+      if (context.user) {
+        const newComment = await Comments.create({
+          text: args.text,
+          username: context.user.username,
+        });
+
+        const commentedReview = await Review.findByIdAndUpdate(
+          {
+            _id: args._id,
+          },
+          {
+            $push: { comments: newComment._id },
+          },
+          {
+            new: true,
+          }
+        ).populate("comments");
+
+        return commentedReview;
+      }
+      throw new AuthenticationError("You must log in");
+    },
+    deleteComment: async (parent, args, context) => {
+      if (context.user) {
+        const deletedComment = await Comments.findOneAndDelete({
+          _id: args._id,
+          username: context.user.username,
+        });
+
+        const commentedReview = await Review.findByIdAndUpdate(
+          {
+            _id: args.reviewId,
+          },
+          {
+            $pull: { comments: deletedComment._id },
+          }
+        ).populate("comments");
+
+        return commentedReview;
+      }
+    },
+    like: async (parent, args, context) => {
+      if (context.user) {
+        const likeLookUp = async () => {
+          let checkLike = await Likes.findOne({
+            reviewId: args.reviewId,
+          });
+          if (checkLike === null) {
+            let likeData = await Likes.create({
+              reviewId: args.reviewId,
+              likes_count: 1,
+              users: context.user.username,
+            });
+            await Review.findByIdAndUpdate(
+              { _id: args.reviewId },
+              {
+                $push: { likes: likeData._id },
+              },
+              { new: true }
+            );
+            return likeData;
+          } else {
+            let newLikesCount = checkLike.likes_count + 1;
+            let usersArray = checkLike.users;
+            let usersLength = usersArray.length;
+            usersArray[usersLength] = context.user.username;
+            const updatedLikes = await Likes.findByIdAndUpdate(
+              checkLike._id,
+              {
+                likes_count: newLikesCount,
+                users: usersArray,
+              },
+              {
+                new: true,
+              }
+            );
+            return updatedLikes;
+          }
+        };
+        const likes = await likeLookUp();
+        return likes;
+      }
+      throw new AuthenticationError("You must log in");
+    },
+    unlike: async (parent, args, context) => {
+      if (context.user) {
+        const likeLookUp = async () => {
+          const checkLike = await Likes.findOne({
+            _id: args._id,
+          });
+          let currentUsers = checkLike.users;
+          const newUsers = currentUsers.filter(function (user) {
+            return user !== context.user.username;
+          });
+          let newLikesCount = checkLike.likes_count - 1;
+          const updatedLikes = await Likes.findByIdAndUpdate(checkLike._id, {
+            likes_count: newLikesCount,
+            users: newUsers,
+          });
+          return updatedLikes;
+        };
+        const likes = await likeLookUp();
+        return likes;
       }
       throw new AuthenticationError("You must log in");
     },

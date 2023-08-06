@@ -15,7 +15,6 @@ import AddConcert from './pages/AddConcert';
 import Concerts from './pages/Concerts';
 import Home from './pages/Home';
 import Profile from './pages/Profile';
-import LoginSignUpModal from './components/LoginSignUpModal';
 
 //Construct our main GraphQL API endpoint
 const httpLink = createHttpLink({
