@@ -141,7 +141,7 @@ function AddConcert() {
 
   return (
     <>
-    <div className="hero min-h-[80vh]" style={{backgroundImage: `url(${addConHero})`}}>
+    <div className="hero min-h-[50vh]" style={{backgroundImage: `url(${addConHero})`}}>
   <div className="hero-overlay bg-opacity-60"></div>
   <div className="hero-content text-center text-neutral-content">
     <div className="max-w-md">
