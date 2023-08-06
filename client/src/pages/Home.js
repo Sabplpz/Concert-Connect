@@ -5,9 +5,10 @@ import React from "react";
 import calendarIcon from "../assets/icons/calendar.png";
 import musicIcon from "../assets/icons/music.png";
 import userIcon from "../assets/icons/user.png";
-import { useQuery } from '@apollo/client';
-import { QUERY_ME, QUERY_VENUE, QUERY_CONCERT } from '../utils/queries';
+import { useQuery } from "@apollo/client";
+import { QUERY_ME, QUERY_VENUE, QUERY_CONCERT } from "../utils/queries";
 import { formatDate } from "../utils/helpers";
+import Review from "../components/review"
 
 export default function Home() {
   const { loading, data } = useQuery(QUERY_ME);
@@ -203,6 +204,9 @@ export default function Home() {
       </div>
 
       {/* feed area */}
+
+      <Review />
+
       <div className="lg:col-span-2">
         {/* <!-- user post --> */}
 

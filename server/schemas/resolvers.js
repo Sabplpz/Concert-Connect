@@ -199,10 +199,12 @@ const resolvers = {
     // },
     addReview: async (parent, args, context) => {
       if (context.user) {
+        console.log(args);
         const savedReview = await Review.create({
           type: args.type,
           title: args.title,
           starRating: args.starRating,
+          text: args.text,
           username: context.user.username,
         });
         await User.findByIdAndUpdate(context.user._id, {
