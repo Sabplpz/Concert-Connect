@@ -65,47 +65,42 @@ function AddReview() {
               placeholder="Add a Review"
             />
 
-            <ul>
-              <li>
+            <label className="label" for="concert">
+                <p className="label-text">Concert</p>   
                 <input
                   type="radio"
                   id="concert"
+                  className="radio radio-primary"
                   name="type"
                   value="Concert"
                   onClick={handleFormChange}
                   required
                 />
-                <label for="concert">
-                  <p>concert</p>
                 </label>
-              </li>
-              <li>
+                <label className="label" for="artist">
+                <p className="label-text">Artist</p>
                 <input
                   type="radio"
                   id="artist"
+                  className="radio radio-primary"
                   name="type"
                   value="Artist"
                   onClick={handleFormChange}
                   required
                 />
-                <label for="artist">
-                  <p>Artist</p>
                 </label>
-              </li>
-              <li>
+                <label className="label" for="venue">
+                <p className="label-text">Venue</p>
                 <input
                   type="radio"
                   id="venue"
+                  className="radio radio-primary"
                   name="type"
                   value="Venue"
                   onClick={handleFormChange}
                   required
                 />
-                <label for="venue">
-                  <p>Venue</p>
                 </label>
-              </li>
-            </ul>
           </div>
           <textarea
             type="text"
@@ -166,7 +161,9 @@ function AddReview() {
           {addReviewError && <p>{addReviewError.message}</p>}
         </div>
       </form>
+      <div className="divider"></div>
     </div>
+    
   );
 }
 
