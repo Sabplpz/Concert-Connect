@@ -1,35 +1,61 @@
 import React from "react";
 import userIcon from "../assets/icons/user.png";
-import { useQuery } from "@apollo/client";
-import { useContext } from "react";
+import { useQuery, useMutation } from "@apollo/client";
+import { useContext, useState } from "react";
 import { idContext } from "./showReview";
 import { QUERY_REVIEW } from "../utils/queries";
+import { ADD_COMMENT } from "../utils/mutations";
 
 function ReviewModal({ isOpen, onClose }) {
   const reviewId = useContext(idContext);
+  const [formState, setFormState] = useState({
+    text: "",
+    id: "",
+  });
 
-  const { loading: loadingReview, data: reviewData } = useQuery(QUERY_REVIEW, {
+  // MUTATION FOR ADD COMMENT
+  const [addComment, { error: addCommentError }] = useMutation(ADD_COMMENT);
+
+  // QUERY FOR REVIEW
+  const { loading: loadingReview, error, data: reviewData } = useQuery(QUERY_REVIEW, {
     variables: { id: reviewId },
   });
 
   if (loadingReview) return <p>Loading reviews...</p>;
-  // if (error) return <p>Error: {error.message}</p>;
+  if (error) return <p>Error: {error.message}</p>;
 
   const review = reviewData?.review || [];
+  const comments = review.comments;
 
-  console.log(review)
+  const handleFormChange = (event) => {
+    const { name, value } = event.target;
+    setFormState({
+      ...formState,
+      [name]: value,
+    });
+  };
+
+  const handleFormSubmit = async (event) => {
+    event.preventDefault();
+    try {
+      setFormState({
+        id: reviewId,
+      });
+      await addComment({ variables: { ...formState } });
+    } catch (e) {
+      console.error(e);
+    }
+  };
 
   const handleClose = (e) => {
     if (e.target.id === "wrapper") onClose();
   };
 
-  const comments = review.comments;
-
   const handleLikes = () => {
     if (review.likes == null) {
       return 0;
     } else {
-      return review.likes;
+      return review.likes.likes_count;
     }
   };
 
@@ -54,7 +80,7 @@ function ReviewModal({ isOpen, onClose }) {
               <img
                 className="mr-6 mb-3 w-12 h-12 rounded-full sm:mb-0"
                 src={userIcon}
-                alt="Jese Leos image"
+                alt="User Avatar"
               />
               <div className="text-bg-neutral-content dark:text-bg-neutral-content">
                 <div className="text-neutral-content text-base">
@@ -121,14 +147,17 @@ function ReviewModal({ isOpen, onClose }) {
 
         {/* add comment form */}
         <div className="join w-full">
-          <input
-            className="input input-primary w-full rounded-lg shadow-sm text-sm join-item"
-            type="text"
-            name="comment"
-            placeholder="Add Comment"
-          />
-          <form>
-            <button className="join-item btn">
+          <form onSubmit={handleFormSubmit}>
+            <input
+              className="input input-primary w-full rounded-lg shadow-sm text-sm join-item"
+              type="text"
+              name="text"
+              value={formState.text}
+              onChange={handleFormChange}
+              placeholder="Add Comment"
+            />
+
+            <button type="submit" className="join-item btn">
               <span className="end-0 inset-y-0 grid place-content-center px-4">
                 <svg
                   fill="none"
@@ -147,6 +176,7 @@ function ReviewModal({ isOpen, onClose }) {
                 </svg>
               </span>
             </button>
+            {addCommentError && <p>{addCommentError.message}</p>}
           </form>
         </div>
       </div>
