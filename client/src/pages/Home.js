@@ -210,9 +210,12 @@ export default function Home() {
 
       {/* feed area */}
 
-      <AddReview />
+      
 
       <div className="lg:col-span-2">
+
+      <AddReview />
+      
         {/* <!-- user post --> */}
 
         <ShowReview />
