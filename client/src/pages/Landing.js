@@ -4,10 +4,13 @@ import Auth from "../utils/auth";
 import React from "react";
 import placeholder from "../assets/placeholder/placeholder-image.png";
 import hero from "../assets/logo/landing-hero.jpg";
+import cloudImg from "../assets/icons/cloud.png";
+import paperPlaneImg from "../assets/icons/paper-plane.png";
+import speakerImg from "../assets/icons/3d-speaker.png";
 
 export default function Landing() {
   const feedPage = <Navigate redirect to="/feed"></Navigate>;
-
+  
   const landingPage = (
     <div>
       {/* hero section */}
@@ -35,9 +38,9 @@ export default function Landing() {
             <div className="grid grid-cols-1 gap-8 lg:grid-cols-2 lg:gap-16 shadow-lg shadow-base-200/50">
               <div className="relative h-64 overflow-hidden rounded-lg sm:h-80 lg:order-last lg:h-full">
                 <img
-                  src={placeholder}
+                  src={cloudImg}
                   alt="Placeholder"
-                  className="absolute inset-0 h-full w-full object-cover"
+                  className="absolute inset-0 object-contain w-5/6 h-5/6"
                 />
               </div>
 
@@ -49,9 +52,6 @@ export default function Landing() {
                   Easily add concerts, search for your favorite artists, and
                   view your selected favorites.
                 </p>
-                <button className="mt-4 btn btn-outline btn-secondary btn-med">
-                  Search Concerts
-                </button>
               </div>
             </div>
           </div>
@@ -71,16 +71,13 @@ export default function Landing() {
                   concert will be, and when. You can also view their favorite
                   artists and top genres.
                 </p>
-                <button className="mt-4 btn btn-outline btn-primary btn-med">
-                  Sign Up
-                </button>
               </div>
 
               <div className="relative h-64 overflow-hidden rounded-lg sm:h-80 sm:order-first lg:h-full">
                 <img
-                  src={placeholder}
+                  src={paperPlaneImg}
                   alt="Placeholder"
-                  className="absolute inset-0 h-full w-full object-cover"
+                  className="absolute inset-0 object-contain w-5/6 h-5/6"
                 />
               </div>
             </div>
@@ -94,9 +91,9 @@ export default function Landing() {
             <div className="grid grid-cols-1 gap-8 lg:grid-cols-2 lg:gap-16 shadow-lg shadow-base-200/50">
               <div className="relative h-64 overflow-hidden rounded-lg sm:h-80 lg:order-last lg:h-full">
                 <img
-                  src={placeholder}
+                  src={speakerImg}
                   alt="Placeholder"
-                  className="absolute inset-0 h-full w-full object-cover"
+                  className="absolute inset-0 object-contain w-5/6 h-5/6"
                 />
               </div>
 
@@ -107,9 +104,6 @@ export default function Landing() {
                 <p className="mt-4 text-neutral-content">
                   Get more information on the concert venue before the show.
                 </p>
-                <button className="mt-4 btn btn-outline btn-secondary btn-med">
-                  Search Concerts
-                </button>
               </div>
             </div>
           </div>

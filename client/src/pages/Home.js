@@ -11,6 +11,36 @@ import { formatDate } from "../utils/helpers";
 import Review from "../components/review"
 
 export default function Home() {
+  const { loading, data } = useQuery(QUERY_ME);
+
+  let userConcertData;
+  if (data?.me.concerts[0]) {
+    userConcertData = data?.me.concerts;
+  } else {
+    userConcertData = [{date: "Null", concertName: "No upcoming concerts saved"}, {date: "Null"}, {date: "Null"}];
+  };
+
+  let userArtistData;
+  if (data?.me.artists[0]) {
+    userArtistData = data?.me.artists;
+  } else {
+    userArtistData = [{artistName: "No saved artists"}, {artistName: ""}, {artistName: ""}];
+  };
+
+  let userGenreData;
+  if (data?.me.genre) {
+    userGenreData = data?.me.genre;
+  } else {
+    userGenreData = [{genre: "No favorite genres saved"}, {genre: ""}, {genre: ""}];
+  };
+
+  let userVenueData;
+  if (data?.me.venue) {
+    userVenueData = data?.me.venue;
+  } else {
+    userVenueData = [{venueName: "No favorite venues saved"}, {venueName: ""}, {venueName: ""}];
+  };
+
   return (
     // full body
     <div class="p-20 grid grid-cols-1 gap-4 lg:grid-cols-3 lg:gap-8">
@@ -33,26 +63,27 @@ export default function Home() {
                     <th>Concert</th>
                   </tr>
                 </thead>
-                <tbody>
-                  {/* row 1 */}
-                  <tr className="hover">
-                    <td>09/30/2023</td>
-                    <td>
-                      Broadside <br />
-                      The Maine
-                    </td>
-                  </tr>
-                  {/* row 2 */}
-                  <tr className="hover">
-                    <td>10/01/2023</td>
-                    <td>You Me At Six</td>
-                  </tr>
-                  {/* row 3 */}
-                  <tr className="hover">
-                    <td>10/13/2023</td>
-                    <td>Jonas Brothers</td>
-                  </tr>
-                </tbody>
+                {loading ? (
+                  <tbody><tr>Loading, please wait</tr></tbody>
+                ) : (
+                  <tbody>
+                    {/* row 1 */}
+                    <tr className="hover">
+                      <td>{formatDate((userConcertData[0].date))}</td>
+                      <td>{userConcertData[0].concertName}</td>
+                    </tr>
+                    {/* row 2 */}
+                    <tr className="hover">
+                      <td>{formatDate((userConcertData[1].date))}</td>
+                      <td>{userConcertData[1].concertName}</td>
+                    </tr>
+                    {/* row 3 */}
+                    <tr className="hover">
+                      <td>{formatDate((userConcertData[2].date))}</td>
+                      <td>{userConcertData[2].concertName}</td>
+                    </tr>
+                  </tbody>
+                )}
               </table>
             </div>
             {/* end of upcoming concerts table */}
@@ -69,23 +100,27 @@ export default function Home() {
             {/* Top artists table */}
             <div className="overflow-x-auto">
               <table className="table">
-                <tbody>
-                  {/* row 1 */}
-                  <tr className="hover">
-                    <th className="text-accent">1</th>
-                    <td>The Maine</td>
-                  </tr>
-                  {/* row 2 */}
-                  <tr className="hover">
-                    <th className="text-accent">2</th>
-                    <td>Bright Eyes</td>
-                  </tr>
-                  {/* row 3 */}
-                  <tr className="hover">
-                    <th className="text-accent">3</th>
-                    <td>Lights</td>
-                  </tr>
-                </tbody>
+                {loading ? (
+                  <tbody><tr>Loading, please wait</tr></tbody>
+                ) : (
+                  <tbody>
+                    {/* row 1 */}
+                    <tr className="hover">
+                      <th className="text-accent">1</th>
+                      <td>{userArtistData[0].artistName}</td>
+                    </tr>
+                    {/* row 2 */}
+                    <tr className="hover">
+                      <th className="text-accent">2</th>
+                      <td>{userArtistData[1].artistName}</td>
+                    </tr>
+                    {/* row 3 */}
+                    <tr className="hover">
+                      <th className="text-accent">3</th>
+                      <td>{userArtistData[2].artistName}</td>
+                    </tr>
+                  </tbody>
+                )}
               </table>
             </div>
             {/* end of top artists table */}
@@ -102,23 +137,27 @@ export default function Home() {
             {/* Top genres table */}
             <div className="overflow-x-auto">
               <table className="table">
+              {loading ? (
+                <tbody><tr>Loading, please wait</tr></tbody>
+              ) : (
                 <tbody>
                   {/* row 1 */}
                   <tr className="hover">
                     <th className="text-accent">1</th>
-                    <td>Pop Rock</td>
+                    <td>{userGenreData[0].genre}</td>
                   </tr>
                   {/* row 2 */}
                   <tr className="hover">
                     <th className="text-accent">2</th>
-                    <td>Indie</td>
+                    <td>{userGenreData[1].genre}</td>
                   </tr>
                   {/* row 3 */}
                   <tr className="hover">
                     <th className="text-accent">3</th>
-                    <td>Alternative</td>
+                    <td>{userGenreData[2].genre}</td>
                   </tr>
                 </tbody>
+              )}
               </table>
             </div>
             {/* end of top genres table */}
@@ -135,23 +174,27 @@ export default function Home() {
             {/* Top venues table */}
             <div className="overflow-x-auto">
               <table className="table">
+              {loading ? (
+                <tbody><tr>Loading, please wait</tr></tbody>
+              ) : (
                 <tbody>
                   {/* row 1 */}
                   <tr className="hover">
                     <th className="text-accent">1</th>
-                    <td>The Social</td>
+                    <td>{userVenueData[0].venueName}</td>
                   </tr>
                   {/* row 2 */}
                   <tr className="hover">
                     <th className="text-accent">2</th>
-                    <td>The Beacham</td>
+                    <td>{userVenueData[1].venueName}</td>
                   </tr>
                   {/* row 3 */}
                   <tr className="hover">
                     <th className="text-accent">3</th>
-                    <td>House of Blues</td>
+                    <td>{userVenueData[2].venueName}</td>
                   </tr>
                 </tbody>
+              )}
               </table>
             </div>
             {/* end of top venues table */}

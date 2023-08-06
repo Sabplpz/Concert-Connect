@@ -1,5 +1,5 @@
 {
-  "name": "conecert-connect",
+  "name": "concert-connect",
   "version": "1.0.0",
   "description": "",
   "main": "server/server.js",
