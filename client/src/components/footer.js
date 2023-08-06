@@ -1,5 +1,5 @@
 import React from 'react';
-import Logo from '../assets/ConcertConnectLogo.png'
+import Logo from '../assets/logo/ConcertConnectLogo.png'
 
 
 function Footer() {

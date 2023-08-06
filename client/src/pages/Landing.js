@@ -2,8 +2,8 @@
 import { Navigate } from "react-router";
 import Auth from "../utils/auth";
 import React from "react";
-import placeholder from "../assets/placeholder-image.png";
-import hero from "../assets/landing-hero.jpg";
+import placeholder from "../assets/placeholder/placeholder-image.png";
+import hero from "../assets/logo/landing-hero.jpg";
 
 export default function Landing() {
   const feedPage = <Navigate redirect to="/feed"></Navigate>;
@@ -36,6 +36,7 @@ export default function Landing() {
               <div className="relative h-64 overflow-hidden rounded-lg sm:h-80 lg:order-last lg:h-full">
                 <img
                   src={placeholder}
+                  alt="Placeholder"
                   className="absolute inset-0 h-full w-full object-cover"
                 />
               </div>
@@ -78,6 +79,7 @@ export default function Landing() {
               <div className="relative h-64 overflow-hidden rounded-lg sm:h-80 sm:order-first lg:h-full">
                 <img
                   src={placeholder}
+                  alt="Placeholder"
                   className="absolute inset-0 h-full w-full object-cover"
                 />
               </div>
@@ -93,6 +95,7 @@ export default function Landing() {
               <div className="relative h-64 overflow-hidden rounded-lg sm:h-80 lg:order-last lg:h-full">
                 <img
                   src={placeholder}
+                  alt="Placeholder"
                   className="absolute inset-0 h-full w-full object-cover"
                 />
               </div>

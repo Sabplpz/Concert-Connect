@@ -2,10 +2,10 @@ import React from "react";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import "../assets/header.css";
-import Logo from "../assets/ConcertConnectLogo.png";
+import Logo from "../assets/logo/ConcertConnectLogo.png";
 import Auth from "../utils/auth";
 import LoginSingUpModal from "./LoginSignUpModal";
-import userIcon from "../assets/user.png";
+import userIcon from "../assets/icons/user.png";
 
 const Header = () => {
   const [showModal, setShowModal] = useState(false);

@@ -2,9 +2,9 @@
 // news feed
 
 import React from "react";
-import calendarIcon from "../assets/calendar.png";
-import musicIcon from "../assets/music.png";
-import userIcon from "../assets/user.png";
+import calendarIcon from "../assets/icons/calendar.png";
+import musicIcon from "../assets/icons/music.png";
+import userIcon from "../assets/icons/user.png";
 
 export default function Home() {
   return (
