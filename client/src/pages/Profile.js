@@ -11,41 +11,58 @@ import { useQuery } from "@apollo/client";
 import { QUERY_ME } from "../utils/queries";
 import { formatDate } from "../utils/helpers";
 
-//I've hid all your names in here, find them or perish - Finn
+function getTopArtists(artists) {
+  const artistCounts = artists.reduce((acc, artist) => {
+    const artistName = artist.artistName;
+    if (acc[artistName]) {
+      acc[artistName]++;
+    } else {
+      acc[artistName] = 1;
+    }
+    return acc;
+  }, {});
 
-// <button className="btn btn-primary">Like</button>
+  const sortedArtists = Object.keys(artistCounts)
+    .map((artistName) => ({ artistName, count: artistCounts[artistName] }))
+    .sort((a, b) => b.count - a.count);
+
+  return sortedArtists.slice(0, 3);
+}
+
+function getTopVenues(venues) {
+  const venueCounts = venues.reduce((acc, venue) => {
+    const venueName = venue.venueName;
+    if (acc[venueName]) {
+      acc[venueName]++;
+    } else {
+      acc[venueName] = 1;
+    }
+    return acc;
+  }, {});
+
+  const sortedVenues = Object.keys(venueCounts)
+    .map((venueName) => ({ venueName, count: venueCounts[venueName] }))
+    .sort((a, b) => b.count - a.count);
+
+  return sortedVenues.slice(0, 3);
+}
 
 function Profile() {
   const { loading, data } = useQuery(QUERY_ME);
 
   let avatar = Avatar.getAvatar();
 
-  let userData;
-  if (data?.me) {
-    userData = data?.me;
-  } else {
-    userData = {
-      username: "Loading",
-      concerts: [
-        { date: "Null", concertName: "No upcoming concerts saved" },
-        { date: "Null", concertName: "" },
-        { date: "Null", concertName: "" },
-      ],
-      artists: [
-        { artistName: "No saved artists" },
-        { artistName: "" },
-        { artistName: "" },
-      ],
-      venues: [
-        { venueName: "No favorite venues saved" },
-        { venueName: "" },
-        { venueName: "" },
-      ],
-    };
-  }
-  console.log(userData);
-
   if (loading) return "Loading...";
+
+  const userData = data?.me || {
+    username: "Loading",
+    concerts: [],
+    artists: [],
+    venues: []
+  };
+
+  const topArtists = getTopArtists(userData.artists);
+  const topVenues = getTopVenues(userData.venues);
 
   return (
     <div className="w-full py-10 px-10">
@@ -120,21 +137,17 @@ function Profile() {
           <div className="overflow-x-auto">
             <table className="table">
               <tbody>
-                {/* row 1 */}
-                <tr className="hover">
-                  <th className="text-accent">1</th>
-                  <td>{userData.artistName}</td>
-                </tr>
-                {/* row 2 */}
-                <tr className="hover">
-                  <th className="text-accent">2</th>
-                  <td>{userData.artistName}</td>
-                </tr>
-                {/* row 3 */}
-                <tr className="hover">
-                  <th className="text-accent">3</th>
-                  <td>{userData.artistName}</td>
-                </tr>
+                {topArtists.map((artist, index) => (
+                  <tr className="hover" key={index}>
+                    <th className="text-accent">{index + 1}</th>
+                    <td>{artist.artistName}</td>
+                  </tr>
+                ))}
+                {topArtists.length === 0 && (
+                  <tr>
+                    <td colSpan="2">No concerts attended yet.</td>
+                  </tr>
+                )}
               </tbody>
             </table>
           </div>
@@ -168,29 +181,25 @@ function Profile() {
         </div>
         <div>
           <div className="collapse-title bg-base-200 text-xl">Top Venues</div>
-          {/* Top venues table */}
-          <div className="overflow-x-auto">
-            <table className="table">
-              <tbody>
-                {/* row 1 */}
-                <tr className="hover">
-                  <th className="text-accent">1</th>
-                  <td>{userData.venueName}</td>
-                </tr>
-                {/* row 2 */}
-                <tr className="hover">
-                  <th className="text-accent">2</th>
-                  <td>{userData.venueName}</td>
-                </tr>
-                {/* row 3 */}
-                <tr className="hover">
-                  <th className="text-accent">3</th>
-                  <td>{userData.venueName}</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-          {/* end of top venues table */}
+            {/* Top venues table */}
+            <div className="overflow-x-auto">
+              <table className="table">
+                <tbody>
+                  {topVenues.map((venue, index) => (
+                    <tr className="hover" key={index}>
+                      <th className="text-accent">{index + 1}</th>
+                      <td>{venue.venueName}</td>
+                    </tr>
+                  ))}
+                  {topVenues.length === 0 && (
+                    <tr>
+                      <td colSpan="2">No concerts attended yet.</td>
+                    </tr>
+                  )}
+                </tbody>
+              </table>
+            </div>
+            {/* end of top venues table */}
         </div>
       </div>
       <div className="text-center">
