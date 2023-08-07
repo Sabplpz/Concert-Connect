@@ -15,52 +15,80 @@ import ReviewModal from "../components/reviewModal";
 
 export default function Home() {
   // ----------------------------------------------- QUERY_ME START ----------------------------------------------------------------
-  const { loading: loadingMe, data: meData } = useQuery(QUERY_ME);
+  const { loading, data } = useQuery(QUERY_ME);
 
-  let userConcertData;
-  if (meData?.me.concerts[0]) {
-    userConcertData = meData?.me.concerts;
+  let userData;
+  if (data?.me) {
+    userData = data?.me;
   } else {
-    userConcertData = [
-      { date: "Null", concertName: "No upcoming concerts saved" },
-      { date: "Null" },
-      { date: "Null" },
-    ];
-  }
-
-  let userArtistData;
-  if (meData?.me.artists[0]) {
-    userArtistData = meData?.me.artists;
-  } else {
-    userArtistData = [
-      { artistName: "No saved artists" },
-      { artistName: "" },
-      { artistName: "" },
-    ];
-  }
-
-  let userGenreData;
-  if (meData?.me.genre) {
-    userGenreData = meData?.me.genre;
-  } else {
-    userGenreData = [
-      { genre: "No favorite genres saved" },
-      { genre: "" },
-      { genre: "" },
-    ];
-  }
-
-  let userVenueData;
-  if (meData?.me.venue) {
-    userVenueData = meData?.me.venue;
-  } else {
-    userVenueData = [
-      { venueName: "No favorite venues saved" },
-      { venueName: "" },
-      { venueName: "" },
-    ];
+    userData = {
+      username: "Loading",
+      concerts: [
+        { date: "Null", concertName: "No upcoming concerts saved" },
+        { date: "Null", concertName: "" },
+        { date: "Null", concertName: "" },
+      ],
+      artists: [
+        { artistName: "No saved artists" },
+        { artistName: "" },
+        { artistName: "" },
+      ],
+      venues: [
+        { venueName: "No favorite venues saved" },
+        { venueName: "" },
+        { venueName: "" },
+      ],
+    };
   }
   // ------------------------------------------------- QUERY_ME END ----------------------------------------------------------------
+
+  const getTopArtists = (artists) => {
+    let frequency = {};
+    let result = [];
+
+    artists.forEach(function(artist) {
+      if (artist.artistName in frequency)
+        frequency[artist.artistName]++;
+      else
+        frequency[artist.artistName] = 1;
+    });
+
+    let sortedKeys = Object.keys(frequency).sort((a, b) => frequency[b] - frequency[a]);
+    result = sortedKeys.slice(0, 3);
+    
+    while (result.length < 3) {
+      result.push('No artist');
+    }
+
+    return result;
+  };
+
+  let topArtists = userData.artists.length > 0 ? getTopArtists(userData.artists) : ['No artist', 'No artist', 'No artist'];
+
+  const getTopVenues = (venues) => {
+    let frequency = {};
+    let result = [];
+
+    venues.forEach(function(venue) {
+      if (venue.venueName in frequency)
+        frequency[venue.venueName]++;
+      else
+        frequency[venue.venueName] = 1;
+    });
+
+    let sortedKeys = Object.keys(frequency).sort((a, b) => frequency[b] - frequency[a]);
+    result = sortedKeys.slice(0, 3);
+    
+    while (result.length < 3) {
+      result.push('No venue');
+    }
+
+    return result;
+  };
+
+  let topVenues = userData.venues.length > 0 ? getTopVenues(userData.venues) : ['No venue', 'No venue', 'No venue'];
+
+  if (loading) return "Loading...";
 
   return (
     // full body
@@ -84,26 +112,22 @@ export default function Home() {
                     <th>Concert</th>
                   </tr>
                 </thead>
-                {loadingMe ? (
-                  <tbody>
-                    <tr>Loading, please wait</tr>
-                  </tbody>
-                ) : (
+                
                   <tbody>
                     <tr className="hover">
-                      <td>{formatDate(userConcertData[0].date)}</td>
-                      <td>{userConcertData[0].concertName}</td>
+                      <td>{formatDate(userData.concerts[0].date)}</td>
+                      <td>{userData.concerts[0].concertName}</td>
                     </tr>
                     <tr className="hover">
-                      <td>{formatDate(userConcertData[1].date)}</td>
-                      <td>{userConcertData[1].concertName}</td>
+                    <td>{formatDate(userData.concerts[1].date)}</td>
+                      <td>{userData.concerts[0].concertName}</td>
                     </tr>
                     <tr className="hover">
-                      <td>{formatDate(userConcertData[2].date)}</td>
-                      <td>{userConcertData[2].concertName}</td>
+                    <td>{formatDate(userData.concerts[2].date)}</td>
+                      <td>{userData.concerts[0].concertName}</td>
                     </tr>
                   </tbody>
-                )}
+                
               </table>
             </div>
             {/* end of upcoming concerts table */}
@@ -120,29 +144,25 @@ export default function Home() {
             {/* Top artists table */}
             <div className="overflow-x-auto">
               <table className="table">
-                {loadingMe ? (
-                  <tbody>
-                    <tr>Loading, please wait</tr>
-                  </tbody>
-                ) : (
+              
                   <tbody>
                     {/* row 1 */}
                     <tr className="hover">
                       <th className="text-accent">1</th>
-                      <td>{userArtistData[0].artistName}</td>
+                      <td>{topArtists[0]}</td>
                     </tr>
                     {/* row 2 */}
                     <tr className="hover">
                       <th className="text-accent">2</th>
-                      <td>{userArtistData[1].artistName}</td>
+                      <td>{topArtists[1]}</td>
                     </tr>
                     {/* row 3 */}
                     <tr className="hover">
                       <th className="text-accent">3</th>
-                      <td>{userArtistData[2].artistName}</td>
+                      <td>{topArtists[2]}</td>
                     </tr>
                   </tbody>
-                )}
+                
               </table>
             </div>
             {/* end of top artists table */}
@@ -159,29 +179,25 @@ export default function Home() {
             {/* Top genres table */}
             <div className="overflow-x-auto">
               <table className="table">
-                {loadingMe ? (
-                  <tbody>
-                    <tr>Loading, please wait</tr>
-                  </tbody>
-                ) : (
+                
                   <tbody>
                     {/* row 1 */}
                     <tr className="hover">
                       <th className="text-accent">1</th>
-                      <td>{userGenreData[0].genre}</td>
+                      <td>{userData.genre}</td>
                     </tr>
                     {/* row 2 */}
                     <tr className="hover">
                       <th className="text-accent">2</th>
-                      <td>{userGenreData[1].genre}</td>
+                      <td>{userData.genre}</td>
                     </tr>
                     {/* row 3 */}
                     <tr className="hover">
                       <th className="text-accent">3</th>
-                      <td>{userGenreData[2].genre}</td>
+                      <td>{userData.genre}</td>
                     </tr>
                   </tbody>
-                )}
+                
               </table>
             </div>
             {/* end of top genres table */}
@@ -198,29 +214,25 @@ export default function Home() {
             {/* Top venues table */}
             <div className="overflow-x-auto">
               <table className="table">
-                {loadingMe ? (
-                  <tbody>
-                    <tr>Loading, please wait</tr>
-                  </tbody>
-                ) : (
+                
                   <tbody>
                     {/* row 1 */}
                     <tr className="hover">
                       <th className="text-accent">1</th>
-                      <td>{userVenueData[0].venueName}</td>
+                      <td>{topVenues[0]}</td>
                     </tr>
                     {/* row 2 */}
                     <tr className="hover">
                       <th className="text-accent">2</th>
-                      <td>{userVenueData[1].venueName}</td>
+                      <td>{topVenues[1]}</td>
                     </tr>
                     {/* row 3 */}
                     <tr className="hover">
                       <th className="text-accent">3</th>
-                      <td>{userVenueData[2].venueName}</td>
+                      <td>{topVenues[2]}</td>
                     </tr>
                   </tbody>
-                )}
+                
               </table>
             </div>
             {/* end of top venues table */}
