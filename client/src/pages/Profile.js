@@ -63,6 +63,52 @@ function Profile() {
   };
   // --------------------- FOLLOW_USER JS END -------------------------
 
+  const getTopArtists = (artists) => {
+    let frequency = {};
+    let result = [];
+
+    artists.forEach(function(artist) {
+      if (artist.artistName in frequency)
+        frequency[artist.artistName]++;
+      else
+        frequency[artist.artistName] = 1;
+    });
+
+    let sortedKeys = Object.keys(frequency).sort((a, b) => frequency[b] - frequency[a]);
+    result = sortedKeys.slice(0, 3);
+    
+    while (result.length < 3) {
+      result.push('No artist');
+    }
+
+    return result;
+  };
+
+  let topArtists = userData.artists.length > 0 ? getTopArtists(userData.artists) : ['No artist', 'No artist', 'No artist'];
+
+  const getTopVenues = (venues) => {
+    let frequency = {};
+    let result = [];
+
+    venues.forEach(function(venue) {
+      if (venue.venueName in frequency)
+        frequency[venue.venueName]++;
+      else
+        frequency[venue.venueName] = 1;
+    });
+
+    let sortedKeys = Object.keys(frequency).sort((a, b) => frequency[b] - frequency[a]);
+    result = sortedKeys.slice(0, 3);
+    
+    while (result.length < 3) {
+      result.push('No venue');
+    }
+
+    return result;
+  };
+
+  let topVenues = userData.venues.length > 0 ? getTopVenues(userData.venues) : ['No venue', 'No venue', 'No venue'];
+
   if (loading) return "Loading...";
 
   return (
@@ -161,17 +207,17 @@ function Profile() {
                 {/* row 1 */}
                 <tr className="hover">
                   <th className="text-accent">1</th>
-                  <td>{userData.artistName}</td>
+                  <td>{topArtists[0]}</td>
                 </tr>
                 {/* row 2 */}
                 <tr className="hover">
                   <th className="text-accent">2</th>
-                  <td>{userData.artistName}</td>
+                  <td>{topArtists[1]}</td>
                 </tr>
                 {/* row 3 */}
                 <tr className="hover">
                   <th className="text-accent">3</th>
-                  <td>{userData.artistName}</td>
+                  <td>{topArtists[2]}</td>
                 </tr>
               </tbody>
             </table>
@@ -182,26 +228,26 @@ function Profile() {
           <div className="collapse-title bg-base-200 text-xl">Top Venues</div>
           {/* Top venues table */}
           <div className="overflow-x-auto">
-            <table className="table">
-              <tbody>
-                {/* row 1 */}
-                <tr className="hover">
-                  <th className="text-accent">1</th>
-                  <td>{userData.venueName}</td>
-                </tr>
-                {/* row 2 */}
-                <tr className="hover">
-                  <th className="text-accent">2</th>
-                  <td>{userData.venueName}</td>
-                </tr>
-                {/* row 3 */}
-                <tr className="hover">
-                  <th className="text-accent">3</th>
-                  <td>{userData.venueName}</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
+        <table className="table">
+          <tbody>
+            {/* row 1 */}
+            <tr className="hover">
+              <th className="text-accent">1</th>
+              <td>{topVenues[0]}</td>
+            </tr>
+            {/* row 2 */}
+            <tr className="hover">
+              <th className="text-accent">2</th>
+              <td>{topVenues[1]}</td>
+            </tr>
+            {/* row 3 */}
+            <tr className="hover">
+              <th className="text-accent">3</th>
+              <td>{topVenues[2]}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
           {/* end of top venues table */}
         </div>
       </div>
