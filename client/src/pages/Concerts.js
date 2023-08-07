@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import SpotifyIcon from '../assets/icons/spotify.png';
+<script src="https://kit.fontawesome.com/435efa4ff0.js" crossorigin="anonymous"></script>
 
 function ConcertList({ concertsData }) {
     return (
@@ -36,6 +38,7 @@ function ConcertList({ concertsData }) {
                                 {spotifyUrl ? (
                                     <a href={spotifyUrl} target="_blank" rel="noopener noreferrer">
                                         {artistName}
+                                        <img src={SpotifyIcon} alt="Spotify" className="inline ml-2 h-4 w-4"/>
                                     </a>
                                 ) : (
                                     artistName
