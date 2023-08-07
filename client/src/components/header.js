@@ -81,7 +81,7 @@ const Header = () => {
   };
 
   return (
-    <div className="navbar bg-base-100 flex md:flex-wrap flex-row justify-stretch">
+    <div className="navbar  bg-base-200 flex md:flex-wrap flex-row justify-stretch">
       <div className="basis-1/2 justify-start">
         <div>
           <a href="/">
