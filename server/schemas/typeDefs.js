@@ -112,7 +112,7 @@ const typeDefs = gql`
     addComment(_id: String!, text: String): Review
     deleteComment(_id: String!, reviewId: String!): Review
     like(reviewId: ID!): Likes
-    unlike(_id: ID!): Likes
+    unlike(reviewId: ID!): Likes
   }
 `;
 

@@ -60,11 +60,11 @@ function LoginSignUpModal({ isOpen, onClose }) {
       if (isLogin) {
         const { data } = await login({ variables: { username, password } });
         Auth.login(data.login.token);
-        Avatar.saveAvatar(data.login.user.avatar);
+        Avatar.saveAvatar(data.login.user.avatar, data.login.user.username);
       } else {
         const { data } = await addUser({ variables: { ...formState } });
         Auth.login(data.addUser.token);
-        Avatar.saveAvatar(data.addUser.user.avatar);
+        Avatar.saveAvatar(data.addUser.user.avatar, data.login.user.username);
       }
       onClose();
     } catch (e) {
