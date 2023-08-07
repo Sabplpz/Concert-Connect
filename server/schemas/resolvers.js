@@ -28,6 +28,13 @@ const resolvers = {
       }
       throw new AuthenticationError("Not logged in");
     },
+    users: async (aprent, args, context) => {
+      if (context.user) {
+        const usersData = await User.find();
+        return usersData;      
+      }
+      throw new AuthenticationError("Not logged in");
+    },
     concert: async (parent, args) => {
       return Concert.findOne({ _id: args._id }).populate("artist").populate("venue");
     },

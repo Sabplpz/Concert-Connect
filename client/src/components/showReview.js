@@ -2,7 +2,7 @@ import React from "react";
 import Avatar from "../utils/avatar";
 import { useState, createContext } from "react";
 import { useQuery } from "@apollo/client";
-import { QUERY_ALL_REVIEWS } from "../utils/queries";
+import { QUERY_ALL_REVIEWS, QUERY_AVATARS } from "../utils/queries";
 import ReviewModal from "./reviewModal";
 import userIcon from "../assets/icons/user.png";
 
@@ -14,6 +14,25 @@ function ShowReview() {
     error,
     data: reviewsData,
   } = useQuery(QUERY_ALL_REVIEWS);
+
+  const {
+    loading: loadingAvatar,
+    error: errorAvatar,
+    data: avatarData,
+  } = useQuery(QUERY_AVATARS);
+
+  const usersAvatars = avatarData?.users;
+
+  const handleUsersAvatars = (username) => {
+    if (usersAvatars) {
+      const avatarString = usersAvatars.filter(
+        (user) => user.username === username
+      );
+      return Avatar.handleAvatar(avatarString[0].avatar);
+    } else {
+      return Avatar.handleAvatar(null);
+    }
+  };
 
   const [showModal, setShowModal] = useState(false);
   const [reviewId, setReviewId] = useState("");
@@ -33,7 +52,7 @@ function ShowReview() {
                 <a href="#" className="block items-center p-3 sm:flex">
                   <img
                     className="mr-6 mb-3 w-12 h-12 rounded-full sm:mb-0"
-                    src={Avatar.handleAvatar()}
+                    src={handleUsersAvatars(review.username)}
                     alt={`${review.username} image`}
                   />
                   <div className="text-bg-neutral-content dark:text-bg-neutral-content">

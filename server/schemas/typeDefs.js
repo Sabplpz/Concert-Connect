@@ -8,7 +8,7 @@ const typeDefs = gql`
     username: String!
     email: String!
     password: String!
-    avatar: String!
+    avatar: String
     concerts: [Concert]
     artists: [Artist]
     venues: [Venue]
@@ -69,6 +69,7 @@ const typeDefs = gql`
 
   type Query {
     me: User
+    users: [User]
     concert(_id: String!): Concert
     concerts: [Concert]
     artists: User

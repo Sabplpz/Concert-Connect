@@ -64,7 +64,7 @@ function LoginSignUpModal({ isOpen, onClose }) {
       } else {
         const { data } = await addUser({ variables: { ...formState } });
         Auth.login(data.addUser.token);
-        Avatar.saveAvatar(data.addUser.user.avatar, data.login.user.username);
+        Avatar.saveAvatar(data.addUser.user.avatar, data.addUser.user.username);
       }
       onClose();
     } catch (e) {
