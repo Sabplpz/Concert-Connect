@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import SpotifyIcon from '../assets/icons/spotify.png';
+import SpotifyIcon from '../assets/icons/spotify green.png';
 <script src="https://kit.fontawesome.com/435efa4ff0.js" crossorigin="anonymous"></script>
 
 function ConcertList({ concertsData }) {
