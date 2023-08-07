@@ -90,27 +90,18 @@ export default function Home() {
                   </tbody>
                 ) : (
                   <tbody>
-                    {/* row 1 */}
-                    {/* {userConcertData && userConcertData.length > 0 && ( */}
                     <tr className="hover">
                       <td>{formatDate(userConcertData[0].date)}</td>
                       <td>{userConcertData[0].concertName}</td>
                     </tr>
-                    {/* )} */}
-                    {/* row 2 */}
-                    {/* {userConcertData && userConcertData.length > 1 && ( */}
                     <tr className="hover">
                       <td>{formatDate(userConcertData[1].date)}</td>
                       <td>{userConcertData[1].concertName}</td>
                     </tr>
-                    {/* )} */}
-                    {/* row 3 */}
-                    {/* {userConcertData && userConcertData.length > 2 && ( */}
                     <tr className="hover">
                       <td>{formatDate(userConcertData[2].date)}</td>
                       <td>{userConcertData[2].concertName}</td>
                     </tr>
-                    {/* )} */}
                   </tbody>
                 )}
               </table>

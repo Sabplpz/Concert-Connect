@@ -17,11 +17,12 @@ const resolvers = {
         const userData = await User.findOne({
           _id: context.user._id,
         })
-          .populate("concerts")
+          .populate({ path: "concerts", options: { sort: { date: 1 } } })
           .populate("artists")
           .populate("venues")
           .populate("follow")
           .populate("reviews")
+          .sort()
           .select("-__v -password");
         return userData;
       }
@@ -51,7 +52,7 @@ const resolvers = {
         .populate("likes");
     },
     reviews: async () => {
-      return await Review.find().populate("likes").populate("comments");
+      return await Review.find().populate("likes").populate("comments").sort({_id: -1});
     },
   },
 
