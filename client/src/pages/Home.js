@@ -18,15 +18,13 @@ export default function Home() {
   const { loading, data } = useQuery(QUERY_ME);
 
   let userData;
-  if (data?.me) {
+  if (data?.me && data.me.concerts.length > 0) {
     userData = data?.me;
   } else {
     userData = {
       username: "Loading",
       concerts: [
-        { date: "Null", concertName: "No upcoming concerts saved" },
-        { date: "Null", concertName: "" },
-        { date: "Null", concertName: "" },
+        { date: null, concertName: "No upcoming concerts saved" },
       ],
       artists: [
         { artistName: "No saved artists" },
@@ -113,20 +111,14 @@ export default function Home() {
                   </tr>
                 </thead>
                 
-                  <tbody>
-                    <tr className="hover">
-                      <td>{formatDate(userData.concerts[0].date)}</td>
-                      <td>{userData.concerts[0].concertName}</td>
+                <tbody>
+                  {userData.concerts.map((concert, index) => (
+                    <tr className="hover" key={index}>
+                      <td>{concert.date ? formatDate(concert.date) : 'No Date'}</td>
+                      <td>{concert.concertName}</td>
                     </tr>
-                    <tr className="hover">
-                    <td>{formatDate(userData.concerts[1].date)}</td>
-                      <td>{userData.concerts[0].concertName}</td>
-                    </tr>
-                    <tr className="hover">
-                    <td>{formatDate(userData.concerts[2].date)}</td>
-                      <td>{userData.concerts[0].concertName}</td>
-                    </tr>
-                  </tbody>
+                  ))}
+                </tbody>
                 
               </table>
             </div>
