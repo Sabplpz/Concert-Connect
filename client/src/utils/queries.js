@@ -55,6 +55,7 @@ export const QUERY_ME = gql`
       }
       follow {
         _id
+        username
       }
     }
   }

@@ -81,7 +81,11 @@ function Profile() {
             <p className="text-base tracking-wide mb-6 md:max-w-lg">
               {userData.follow.length} Followers
             </p>
+            {userData.follow.some(obj => obj.username === userData.username) ? (
+              <button className="btn btn-primary btn-outline" onClick={handleFollowUser} value={userData.username}>Unfollow</button>
+            ) : ( 
             <button className="btn btn-primary btn-outline" onClick={handleFollowUser} value={userData.username}>Follow</button>
+            )}
           </div>
         </div>
       </div>
