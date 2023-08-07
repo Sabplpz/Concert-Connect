@@ -19,11 +19,6 @@ const Header = () => {
 
   const loggedInMenu = (
     <div className="md:flex md:justify-stretch">
-      <a href="/add-concert">
-        <button className="hidden md:btn md:btn-outline btn-secondary md:mr-6 md:shrink">
-          Add Concert
-        </button>
-      </a>
       <div className="dropdown dropdown-end">
         <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
           <div className="w-12 rounded-full shrink-0">
@@ -81,7 +76,7 @@ const Header = () => {
   };
 
   return (
-    <div className="navbar  bg-base-200 flex md:flex-wrap flex-row justify-stretch">
+    <div className="navbar bg-base-200 flex md:flex-wrap flex-row justify-stretch">
       <div className="basis-1/2 justify-start">
         <div>
           <a href="/">
@@ -111,8 +106,17 @@ const Header = () => {
             Search Concerts
           </button>
         </a>
+        <a href="/add-concert">
+        <button className="hidden md:btn md:btn-outline btn-secondary md:mr-6 md:shrink">
+          Add Concert
+        </button>
+      </a>
         {handleLogin()}
       </div>
+      
+
+
+
     </div>
   );
 };
