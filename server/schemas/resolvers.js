@@ -29,7 +29,7 @@ const resolvers = {
       throw new AuthenticationError("Not logged in");
     },
     concert: async (parent, args) => {
-      return Concert.findOne({ _id: args._id });
+      return Concert.findOne({ _id: args._id }).populate("artist").populate("venue");
     },
     concerts: async () => {
       return await Concert.find().populate("artist").populate("venue");
@@ -129,7 +129,7 @@ const resolvers = {
         await User.findByIdAndUpdate(
           context.user._id,
           {
-            $push: { concerts: concertId },
+            $push: { concerts: concertId, artists: artistId, venues: venueId },
           },
           { new: true }
         );
