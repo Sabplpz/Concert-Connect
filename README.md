@@ -41,7 +41,17 @@
   Begin by clicking the "LOGIN" button on the top right corner of the landing page. If you don't already have an account, click "No account? Sign Up". Fill out the required information as for the form, as seen below:  
   ![screenshot of signup modal](./client/src/assets/screenshots/signup-modal.png)  
     
-  Next, click on the ..... (FILL OUT SOON)
+  Next, click on the "ADD CONCERT" button in the navigation bar to begin searching for upcoming concerts.  
+  ![screenshot of search concerts page](./client/src/assets/screenshots/search-concerts.png)  
+
+  Type an artist or band into the search bar, and if they are touring, a dropdown list of their upcoming concerts will appear. Click on the concert you are planning on attending, then press "ADD CONCERT" to save it to your upcoming shows!  
+  ![screenshot of add concert form](./client/src/assets/screenshots/add-concert.png)  
+    
+  By clicking the user avatar in the top right corner, you can follow the links to your feed, your profile, or you can log out.  
+    
+  Your profile page will show you a summary of your upcoming concerts, your favorites, and lots of other info all about you!  
+  ![screenshot of profile page](./client/src/assets/screenshots/profile-page.png)  
+    
   
 
   ## Additional Information
