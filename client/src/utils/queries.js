@@ -12,6 +12,27 @@ export const QUERY_ALL_REVIEWS = gql`
   }
 `;
 
+export const QUERY_ALL_CONCERTS = gql`
+  query concerts {
+    concerts {
+      _id
+      artist {
+        _id
+        artistName
+      }
+      city
+      concertName
+      date
+      genre
+      venue {
+        _id
+        city
+        venueName
+      }
+    }
+  }
+`;
+
 export const QUERY_REVIEW = gql`
   query review($id: String!) {
     review(_id: $id) {

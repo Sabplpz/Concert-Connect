@@ -32,7 +32,7 @@ const resolvers = {
       return Concert.findOne({ _id: args._id });
     },
     concerts: async () => {
-      return await Concert.find();
+      return await Concert.find().populate("artist").populate("venue");
     },
     artists: async (parent, args, context) => {
       if (context.user) {
