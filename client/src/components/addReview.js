@@ -61,12 +61,12 @@ function AddReview() {
               onChange={handleFormChange}
               type="text"
               name="title"
-              className="input input-bordered w-full join-item"
+              className="input input-bordered w-4/6 mr-3"
               placeholder="Add a Review"
             />
 
             <label className="label" for="concert">
-                <p className="label-text">Concert</p>   
+                <p className="label-text mr-1">Concert</p>   
                 <input
                   type="radio"
                   id="concert"
@@ -78,7 +78,7 @@ function AddReview() {
                 />
                 </label>
                 <label className="label" for="artist">
-                <p className="label-text">Artist</p>
+                <p className="label-text mr-1">Artist</p>
                 <input
                   type="radio"
                   id="artist"
@@ -90,7 +90,7 @@ function AddReview() {
                 />
                 </label>
                 <label className="label" for="venue">
-                <p className="label-text">Venue</p>
+                <p className="label-text mr-1">Venue</p>
                 <input
                   type="radio"
                   id="venue"
@@ -161,7 +161,6 @@ function AddReview() {
           {addReviewError && <p>{addReviewError.message}</p>}
         </div>
       </form>
-      <div className="divider"></div>
     </div>
     
   );
