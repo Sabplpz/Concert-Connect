@@ -161,6 +161,7 @@ export default function Home() {
           </div>
         </div>
         {/* end of top artists collapse table */}
+
         {/* top venues collapse table */}
         <div className="collapse">
           <input type="checkbox" />
