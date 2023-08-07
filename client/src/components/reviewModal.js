@@ -4,7 +4,7 @@ import Avatar from "../utils/avatar";
 import { useQuery, useMutation } from "@apollo/client";
 import { useContext, useState } from "react";
 import { idContext } from "./showReview";
-import { QUERY_REVIEW } from "../utils/queries";
+import { QUERY_REVIEW, QUERY_AVATARS } from "../utils/queries";
 import { ADD_COMMENT, LIKE, UNLIKE } from "../utils/mutations";
 
 function ReviewModal({ isOpen, onClose }) {
@@ -24,13 +24,31 @@ function ReviewModal({ isOpen, onClose }) {
     loading: loadingReview,
     error,
     data: reviewData,
-    refetch: reviewRefetch
+    refetch: reviewRefetch,
   } = useQuery(QUERY_REVIEW, {
     variables: { id: reviewId },
   });
 
+  const {
+    loading: loadingAvatar,
+    error: errorAvatar,
+    data: avatarData,
+  } = useQuery(QUERY_AVATARS);
+
+  const usersAvatars = avatarData?.users;
+
+  const handleUsersAvatars = (username) => {
+    if (usersAvatars) {
+      const avatarString = usersAvatars.filter(
+        (user) => user.username === username
+      );
+      return Avatar.handleAvatar(avatarString[0].avatar);
+    } else {
+      return Avatar.handleAvatar(null);
+    }
+  };
+
   if (loadingReview) return <p>Loading reviews...</p>;
-  // if (unlikeError) return <p>Error: {unlikeError.message}</p>;
 
   const review = reviewData?.review || [];
   const comments = review?.comments;
@@ -163,7 +181,7 @@ function ReviewModal({ isOpen, onClose }) {
             <a href="#" className="block items-center p-3 sm:flex ">
               <img
                 className="mr-6 mb-3 w-12 h-12 rounded-full sm:mb-0"
-                src={userIcon}
+                src={handleUsersAvatars(review.username)}
                 alt="User Avatar"
               />
               <div className="text-bg-neutral-content dark:text-bg-neutral-content">
@@ -191,7 +209,7 @@ function ReviewModal({ isOpen, onClose }) {
                 <a href="#" className="block items-center p-3 sm:flex ">
                   <img
                     className="mr-4 mb-3 w-6 h-6 rounded-full sm:mb-0"
-                    src={userIcon}
+                    src={handleUsersAvatars(comment.username)}
                     alt="Jese Leos image"
                   />
                   <div className="text-bg-neutral-content ">

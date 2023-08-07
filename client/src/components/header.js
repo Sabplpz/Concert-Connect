@@ -94,7 +94,7 @@ const Header = () => {
         </div>
       </div>
 
-      {/* Possible future feature of loo */}
+      {/* Possible future feature of looking up concerts*/}
       {/* <div className="basis-1/2 justify-center">
         <div className="form-control">
           <input

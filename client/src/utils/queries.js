@@ -100,3 +100,12 @@ export const QUERY_CONCERT = gql`
     }
   }
 `;
+
+export const QUERY_AVATARS = gql`
+  query avatar {
+    users {
+      username
+      avatar
+    }
+  }
+`;
