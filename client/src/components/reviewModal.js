@@ -1,10 +1,11 @@
 import React from "react";
 import userIcon from "../assets/icons/user.png";
+import Avatar from "../utils/avatar";
 import { useQuery, useMutation } from "@apollo/client";
 import { useContext, useState } from "react";
 import { idContext } from "./showReview";
 import { QUERY_REVIEW } from "../utils/queries";
-import { ADD_COMMENT } from "../utils/mutations";
+import { ADD_COMMENT, LIKE, UNLIKE } from "../utils/mutations";
 
 function ReviewModal({ isOpen, onClose }) {
   const reviewId = useContext(idContext);
@@ -15,6 +16,8 @@ function ReviewModal({ isOpen, onClose }) {
 
   // MUTATION FOR ADD COMMENT
   const [addComment, { error: addCommentError }] = useMutation(ADD_COMMENT);
+  const [like, { error: likeError }] = useMutation(LIKE);
+  const [unlike, { error: unlikeError }] = useMutation(UNLIKE);
 
   // QUERY FOR REVIEW
   const {
@@ -27,9 +30,11 @@ function ReviewModal({ isOpen, onClose }) {
 
   if (loadingReview) return <p>Loading reviews...</p>;
   if (error) return <p>Error: {error.message}</p>;
+  if (unlikeError) return <p>Error: {unlikeError.message}</p>;
 
   const review = reviewData?.review || [];
   const comments = review.comments;
+  const likes = review.likes;
 
   const handleFormChange = (event) => {
     const { name, value } = event.target;
@@ -52,15 +57,87 @@ function ReviewModal({ isOpen, onClose }) {
     }
   };
 
+  const likeReview = async () => {
+    try {
+      await like({ variables: { reviewId: reviewId } });
+    } catch (e) {
+      console.error(e);
+    }
+  };
+
+  const unlikeReview = async () => {
+    try {
+      await unlike({ variables: { reviewId: reviewId } });
+    } catch (e) {
+      console.error(e);
+    }
+  };
+
+  const handleLikes = () => {
+    let username = Avatar.getUsername();
+    let usersArray;
+    if (likes !== null) {
+      usersArray = likes.users;
+    } else {
+      usersArray = [];
+    }
+    if (usersArray.indexOf(username) >= 0) {
+      return (
+        <button
+          className="btn btn-outline btn-secondary btn-sm mr-3"
+          onClick={() => unlikeReview()}
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className="h-6 w-6"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="2"
+              d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
+            />
+          </svg>
+        </button>
+      );
+    } else {
+      return (
+        <button
+          className="btn btn-outline btn-primary btn-sm mr-3"
+          onClick={() => likeReview()}
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className="h-6 w-6"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="2"
+              d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
+            />
+          </svg>
+        </button>
+      );
+    }
+  };
+
   const handleClose = (e) => {
     if (e.target.id === "wrapper") onClose();
   };
 
-  const handleLikes = () => {
-    if (review.likes == null) {
+  const handleLikesCount = () => {
+    if (likes == null) {
       return 0;
     } else {
-      return review.likes.likes_count;
+      let count = likes.likes_count;
+      return count;
     }
   };
 
@@ -97,27 +174,9 @@ function ReviewModal({ isOpen, onClose }) {
                 </div>
                 <div className="text-sm font-normal">{review.text}</div>
                 <span className="inline-flex items-center mb-3 text-xs font-normal text-gray-500">
-                  {handleLikes}
-                  likes
+                  {handleLikesCount()} likes
                 </span>
-                <div className="block items-center mt-1">
-                  <button className="btn btn-outline btn-primary btn-sm mr-3">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      className="h-6 w-6"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth="2"
-                        d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
-                      />
-                    </svg>
-                  </button>
-                </div>
+                <div className="block items-center mt-1">{handleLikes()}</div>
               </div>
             </a>
           </li>

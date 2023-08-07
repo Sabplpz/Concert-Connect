@@ -221,8 +221,8 @@ export const LIKE = gql`
 // Unlike route reduces the like count by one and deleted all users that match the logged in user from the array, it return the like id, review id, like count and users array
 // FYI IF BY ANY CHANCE THE USER LIKED MULTIPLE TIMES, IT ONLY REDUCES IT BY ONE, BUT IT DELETED ALL ARRAY ITEMS WITH THEIR USERNAME
 export const UNLIKE = gql`
-  mutation unlike($id: ID!) {
-    unlike(_id: $id) {
+  mutation unlike($reviewId: ID!) {
+    unlike(reviewId: $reviewId) {
       _id
       likes_count
       reviewId {

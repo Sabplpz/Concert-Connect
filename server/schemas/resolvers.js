@@ -151,7 +151,6 @@ const resolvers = {
     },
     addReview: async (parent, args, context) => {
       if (context.user) {
-        console.log(args);
         const savedReview = await Review.create({
           type: args.type,
           title: args.title,
@@ -324,7 +323,7 @@ const resolvers = {
       if (context.user) {
         const likeLookUp = async () => {
           const checkLike = await Likes.findOne({
-            _id: args._id,
+            reviewId: args.reviewId,
           });
           let currentUsers = checkLike.users;
           const newUsers = currentUsers.filter(function (user) {

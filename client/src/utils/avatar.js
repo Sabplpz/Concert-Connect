@@ -17,13 +17,18 @@ import ticket from "../assets/avatars/ticket.png";
 import mirrorball from "../assets/avatars/mirror-ball.png";
 
 class Avatar {
-  saveAvatar(avatar) {
+  saveAvatar(avatar, username) {
     localStorage.setItem("avatar", avatar);
+    localStorage.setItem("username", username);
     window.location.assign("/");
   }
 
   getAvatar() {
     return localStorage.getItem("avatar");
+  }
+
+  getUsername() {
+    return localStorage.getItem("username");
   }
 
   handleAvatar(avatar) {

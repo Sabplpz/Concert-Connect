@@ -47,19 +47,15 @@ function ShowReview() {
                     <div className="text-sm font-normal">{review.text}</div>
 
                     <div className="block items-center mt-3">
-                      <button className="btn btn-outline btn-primary btn-sm mr-3">
-                        {/* ...rest of the svg code for Like */}
-                        Like
-                      </button>
                       <button
-                        className="btn btn-outline btn-secondary btn-sm"
+                        className="btn btn-outline btn-primary btn-sm"
                         onClick={() => {
                           setReviewId(review._id);
                           setShowModal(true);
                         }}
                       >
                         {/* ...rest of the svg code for Comment */}
-                        Comment
+                        Like & Comment
                       </button>
                     </div>
                   </div>
