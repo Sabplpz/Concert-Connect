@@ -17,7 +17,11 @@ function ReviewModal({ isOpen, onClose }) {
   const [addComment, { error: addCommentError }] = useMutation(ADD_COMMENT);
 
   // QUERY FOR REVIEW
-  const { loading: loadingReview, error, data: reviewData } = useQuery(QUERY_REVIEW, {
+  const {
+    loading: loadingReview,
+    error,
+    data: reviewData,
+  } = useQuery(QUERY_REVIEW, {
     variables: { id: reviewId },
   });
 
@@ -30,7 +34,7 @@ function ReviewModal({ isOpen, onClose }) {
   const handleFormChange = (event) => {
     const { name, value } = event.target;
     setFormState({
-      ...formState,
+      id: reviewId,
       [name]: value,
     });
   };
@@ -38,10 +42,11 @@ function ReviewModal({ isOpen, onClose }) {
   const handleFormSubmit = async (event) => {
     event.preventDefault();
     try {
-      setFormState({
-        id: reviewId,
-      });
       await addComment({ variables: { ...formState } });
+      setFormState({
+        text: "",
+        id: "",
+      });
     } catch (e) {
       console.error(e);
     }
