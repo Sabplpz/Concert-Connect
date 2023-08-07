@@ -10,7 +10,7 @@ import LoginSingUpModal from "./LoginSignUpModal";
 const Header = () => {
   const [showModal, setShowModal] = useState(false);
 
-  const avatar = Avatar.getAvatar()
+  const avatar = Avatar.getAvatar();
 
   const logout = (event) => {
     event.preventDefault();
@@ -82,7 +82,7 @@ const Header = () => {
 
   return (
     <div className="navbar bg-base-100 flex md:flex-wrap flex-row justify-stretch">
-      <div className="basis-1/4 justify-start">
+      <div className="basis-1/2 justify-start">
         <div>
           <a href="/">
             <img
@@ -93,7 +93,9 @@ const Header = () => {
           </a>
         </div>
       </div>
-      <div className="basis-1/2 justify-center">
+
+      {/* Possible future feature of loo */}
+      {/* <div className="basis-1/2 justify-center">
         <div className="form-control">
           <input
             type="text"
@@ -101,8 +103,16 @@ const Header = () => {
             className="input input-bordered input-primary w-64 md:w-96"
           />
         </div>
+      </div> */}
+
+      <div className="basis-1/2 justify-end">
+        <a href="/concerts">
+          <button className="btn btn-outline btn-primary mr-6 shrink">
+            Search Concerts
+          </button>
+        </a>
+        {handleLogin()}
       </div>
-      <div className="basis-1/4 justify-end">{handleLogin()}</div>
     </div>
   );
 };

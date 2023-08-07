@@ -24,17 +24,17 @@ function ReviewModal({ isOpen, onClose }) {
     loading: loadingReview,
     error,
     data: reviewData,
+    refetch: reviewRefetch
   } = useQuery(QUERY_REVIEW, {
     variables: { id: reviewId },
   });
 
   if (loadingReview) return <p>Loading reviews...</p>;
-  if (error) return <p>Error: {error.message}</p>;
-  if (unlikeError) return <p>Error: {unlikeError.message}</p>;
+  // if (unlikeError) return <p>Error: {unlikeError.message}</p>;
 
   const review = reviewData?.review || [];
-  const comments = review.comments;
-  const likes = review.likes;
+  const comments = review?.comments;
+  const likes = review?.likes;
 
   const handleFormChange = (event) => {
     const { name, value } = event.target;
@@ -60,6 +60,7 @@ function ReviewModal({ isOpen, onClose }) {
   const likeReview = async () => {
     try {
       await like({ variables: { reviewId: reviewId } });
+      reviewRefetch({ id: reviewId });
     } catch (e) {
       console.error(e);
     }
@@ -68,6 +69,7 @@ function ReviewModal({ isOpen, onClose }) {
   const unlikeReview = async () => {
     try {
       await unlike({ variables: { reviewId: reviewId } });
+      reviewRefetch({ id: reviewId });
     } catch (e) {
       console.error(e);
     }

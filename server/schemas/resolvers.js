@@ -17,21 +17,22 @@ const resolvers = {
         const userData = await User.findOne({
           _id: context.user._id,
         })
-          .populate("concerts")
+          .populate({ path: "concerts", options: { sort: { date: 1 } } })
           .populate("artists")
           .populate("venues")
           .populate("follow")
           .populate("reviews")
+          .sort()
           .select("-__v -password");
         return userData;
       }
       throw new AuthenticationError("Not logged in");
     },
     concert: async (parent, args) => {
-      return Concert.findOne({ _id: args._id });
+      return Concert.findOne({ _id: args._id }).populate("artist").populate("venue");
     },
     concerts: async () => {
-      return await Concert.find();
+      return await Concert.find().populate("artist").populate("venue");
     },
     artists: async (parent, args, context) => {
       if (context.user) {
@@ -51,7 +52,7 @@ const resolvers = {
         .populate("likes");
     },
     reviews: async () => {
-      return await Review.find().populate("likes").populate("comments");
+      return await Review.find().populate("likes").populate("comments").sort({_id: -1});
     },
   },
 
@@ -128,7 +129,7 @@ const resolvers = {
         await User.findByIdAndUpdate(
           context.user._id,
           {
-            $push: { concerts: concertId },
+            $push: { concerts: concertId, artists: artistId, venues: venueId },
           },
           { new: true }
         );
