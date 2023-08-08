@@ -1,10 +1,32 @@
 import React, { useState } from 'react';
+import { useMutation } from '@apollo/client';
+import { ADD_CONCERT } from '../utils/mutations';
 import axios from 'axios';
 import SpotifyIcon from '../assets/icons/spotify green.png';
 <script src="https://kit.fontawesome.com/435efa4ff0.js" crossorigin="anonymous"></script>
 
 function ConcertList({ concertsData }) {
-    return (
+    const [addConcert, { data }] = useMutation(ADD_CONCERT);
+
+    const handleGoing = async (concert) => {
+        const concertData = {
+            artistName: concert._embedded?.attractions?.[0]?.name || '',
+            concertName: concert.name,
+            date: concert.dates.start.localDate,
+            venueName: concert._embedded?.venues?.[0]?.name || '',
+            city: concert._embedded?.venues?.[0]?.city?.name || '',
+            genre: concert.classifications[0]?.genre?.name || ''
+        };
+
+        try {
+            await addConcert({
+                variables: concertData,
+            });
+            alert('Concert added to your profile!');
+        } catch (err) {
+            console.error('Error adding concert:', err);
+        }
+    };    return (
         <div className="overflow-x-auto mb-20">
             <table className="min-w-full mt-4 border-collapse">
                 <thead>
@@ -55,7 +77,8 @@ function ConcertList({ concertsData }) {
                                 </a>
                             </td>
                             <td className="px-6 py-4">
-                                <button className="btn btn-outline btn-primary md:mt-0">
+                                <button className="btn btn-outline btn-primary md:mt-0"
+                                onClick={() => handleGoing(concert)}>
                                     I'm Going!
                                 </button>
                             </td>
@@ -91,6 +114,8 @@ function Concerts() {
             setConcertsData([]);
         }
     };
+
+    const [addConcert, { data }] = useMutation(ADD_CONCERT);
 
     return (
         <div>
