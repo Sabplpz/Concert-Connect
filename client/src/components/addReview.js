@@ -1,4 +1,5 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { useMutation } from "@apollo/client";
 import { ADD_REVIEW } from "../utils/mutations";
@@ -10,6 +11,8 @@ function AddReview() {
     starRating: "",
     text: "",
   });
+
+  const navigate = useNavigate();
 
   const [addReview, { error: addReviewError }] = useMutation(ADD_REVIEW);
 
@@ -45,7 +48,7 @@ function AddReview() {
       //   :) Request starts below:
 
       await addReview({ variables: { ...formState } });
-      window.location.reload();
+      navigate("/feed");
     } catch (e) {
       console.error(e);
     }
