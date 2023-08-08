@@ -58,13 +58,13 @@ function AddReview() {
     <div>
       <form onSubmit={handleFormSubmit}>
         <div>
-          <div className="join mb-8 w-full">
+          <div className="md:join mb-8 w-full">
             <input
               value={formState.title}
               onChange={handleFormChange}
               type="text"
               name="title"
-              className="input input-bordered w-4/6 mr-3"
+              className="input input-bordered w-full mb-3 md:mb-0 md:w-4/6 md:mr-3"
               placeholder="Add a Review"
             />
 
@@ -113,7 +113,7 @@ function AddReview() {
             className="textarea textarea-bordered w-full mb-3"
             placeholder="Start typing..."
           ></textarea>
-          <div name="starRating" className="rating rating-md block mb-8 ">
+          <div name="starRating" className="rating rating-md block md:mb-8  ">
             Rating:
             <input
               type="radio"
@@ -157,7 +157,7 @@ function AddReview() {
               onClick={handleFormChange}
               className="mask mask-star-2"
             />
-            <button type="submit" className="btn btn-primary btn-outline ml-6">
+            <button type="submit" className="btn btn-primary btn-outline block mt-6 md:inline md:mt-0 md:ml-6">
               Post Review
             </button>
           </div>
