@@ -106,11 +106,7 @@ const Header = () => {
             Search Concerts
           </button>
         </a>
-        <a href="/add-concert">
-        <button className="hidden md:btn md:btn-outline btn-secondary md:mr-6 md:shrink">
-          Add Concert
-        </button>
-      </a>
+
         {handleLogin()}
       </div>
       
