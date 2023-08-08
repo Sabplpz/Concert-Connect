@@ -184,7 +184,7 @@ function ReviewModal({ isOpen, onClose }) {
         <div className="card-body">
         <ol className="mt-3 divide-y divide-bg-primary">
           <li>
-            <Link to="#" className="block flex align-start">
+            <Link to="#" className="flex align-start">
               <img
                 className="mr-6 mb-3 w-12 h-12 rounded-full sm:mb-0"
                 src={handleUsersAvatars(review.username)}

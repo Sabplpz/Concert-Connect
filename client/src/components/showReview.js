@@ -14,7 +14,7 @@ function ShowReview() {
     loading: loadingReview,
     error,
     data: reviewsData,
-  } = useQuery(QUERY_ALL_REVIEWS);
+  } = useQuery(QUERY_ALL_REVIEWS, { pollInterval: 500 });
 
   const {
     loading: loadingAvatar,
@@ -64,7 +64,9 @@ function ShowReview() {
                       reviewed a/an {review.type} - {review.title} ={" "}
                       {review.starRating} stars baby!
                     </div>
-                    <div className="text-sm font-normal block text-left mb-3">{review.text}</div>
+                    <div className="text-sm font-normal block text-left mb-3">
+                      {review.text}
+                    </div>
                     <div className="block justify-start text-left">
                       <button
                         className="btn btn-outline btn-primary btn-sm"
@@ -76,10 +78,9 @@ function ShowReview() {
                         {/* ...rest of the svg code for Comment */}
                         Post Details
                       </button>
-                      </div>
+                    </div>
                   </div>
                 </Link>
-                
               </li>
             </ol>
           </div>
