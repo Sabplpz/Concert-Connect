@@ -19,11 +19,11 @@ const Header = () => {
 
   const loggedInMenu = (
     <div className="md:flex md:justify-stretch">
-      <a href="/add-concert">
+      <Link to="/add-concert">
         <button className="hidden md:btn md:btn-outline btn-secondary md:mr-6 md:shrink">
           Add Concert
         </button>
-      </a>
+      </Link>
       <div className="dropdown dropdown-end">
         <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
           <div className="w-12 rounded-full shrink-0">
@@ -35,19 +35,19 @@ const Header = () => {
           className="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-52"
         >
           <li>
-            <a href="/profile/:username" className="justify-between">
+            <Link to="/profile/:username" className="justify-between">
               Profile
-            </a>
+            </Link>
           </li>
           <li>
-            <a href="/feed" className="justify-between">
+            <Link to="/feed" className="justify-between">
               Feed
-            </a>
+            </Link>
           </li>
           <li>
-            <a href="/add-concert" className="justify-between md:hidden">
+            <Link to="/add-concert" className="justify-between md:hidden">
               Add Concert
-            </a>
+            </Link>
           </li>
           <li onClick={logout}>
             <Link to="/">Logout</Link>
@@ -85,13 +85,13 @@ const Header = () => {
     <div className="navbar bg-base-200 flex md:flex-wrap flex-row justify-stretch">
       <div className="basis-1/2 justify-start">
         <div>
-          <a href="/">
+          <Link to="/">
             <img
               src={Logo}
               alt="Concert-Connect logo"
               className="w-20 md:w-32 btn-ghost"
             />
-          </a>
+          </Link>
         </div>
       </div>
 
@@ -107,11 +107,11 @@ const Header = () => {
       </div> */}
 
       <div className="basis-1/2 justify-end">
-        <a href="/concerts">
+        <Link to="/concerts">
           <button className="btn btn-outline btn-primary mr-6 shrink">
             Search Concerts
           </button>
-        </a>
+        </Link>
 
         {handleLogin()}
       </div>

@@ -1,6 +1,7 @@
 import React from "react";
 import userIcon from "../assets/icons/user.png";
 import Avatar from "../utils/avatar";
+import { Link } from "react-router-dom";
 import { useQuery, useMutation } from "@apollo/client";
 import { useContext, useState } from "react";
 import { idContext } from "./showReview";
@@ -183,7 +184,7 @@ function ReviewModal({ isOpen, onClose }) {
         <div className="card-body">
         <ol className="mt-3 divide-y divide-bg-primary">
           <li>
-            <a href="#" className="block flex align-start">
+            <Link to="#" className="block flex align-start">
               <img
                 className="mr-6 mb-3 w-12 h-12 rounded-full sm:mb-0"
                 src={handleUsersAvatars(review.username)}
@@ -203,7 +204,7 @@ function ReviewModal({ isOpen, onClose }) {
                 </span>
                 <div className="block text-left mt-1 mb-1">{handleLikes()}</div>
               </div>
-            </a>
+            </Link>
           </li>
         </ol>
         {/* user comment */}
@@ -211,7 +212,7 @@ function ReviewModal({ isOpen, onClose }) {
           <div className="mb-4 bg-info-content rounded-lg shadow-lg shadow-base-200/50 hover:bg-neutral-focus ">
             <ol className="mt-3 divide-y divide-bg-primary">
               <li>
-                <a href="#" className="block text-left p-3 sm:flex ">
+                <Link to="#" className="block text-left p-3 sm:flex ">
                   <img
                     className="mr-4 mb-3 w-6 h-6 rounded-full sm:mb-0"
                     src={handleUsersAvatars(comment.username)}
@@ -228,7 +229,7 @@ function ReviewModal({ isOpen, onClose }) {
                     </div>
                     
                   </div>
-                </a>
+                </Link>
               </li>
             </ol>
             

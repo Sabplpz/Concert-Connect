@@ -7,6 +7,7 @@ import { DELETE_REVIEW } from "../utils/mutations";
 import ReviewModal from "./reviewModal";
 import userIcon from "../assets/icons/user.png";
 import trash from "../assets/icons/trash.png";
+import { Link } from "react-router-dom";
 
 export const idContext = createContext();
 
@@ -62,7 +63,7 @@ function UserReview() {
           <div className="p-5 mb-4 bg-base-100 rounded-lg shadow-lg shadow-base-200/50 dark:bg-base-100 dark:border-base-200 hover:bg-neutral-focus dark:hover:bg-neutral-focus">
             <ol className="mt-3 divide-y divide-bg-primary dark:divide-bg-primary">
               <li key={review.id}>
-                <a href="#" className="block items-center p-3 sm:flex">
+                <Link to="#" className="block items-center p-3 sm:flex">
                   <img
                     className="mr-6 mb-3 w-12 h-12 rounded-full sm:mb-0"
                     src={handleUsersAvatars(review.username)}
@@ -91,7 +92,7 @@ function UserReview() {
                       </button>
                     </div>
                   </div>
-                </a>
+                </Link>
               </li>
             </ol>
             <button

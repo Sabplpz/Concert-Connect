@@ -36,7 +36,7 @@
   ## Usage
 
   ### Executing Program
-  Click the following link to visit the application page: (DEPLOYED URL).  
+  Click the following link to visit the application page:  https://limitless-dawn-09471-5eef669ce044.herokuapp.com/ 
     
   Begin by clicking the "LOGIN" button on the top right corner of the landing page. If you don't already have an account, click "No account? Sign Up". Fill out the required information as for the form, as seen below:  
   ![screenshot of signup modal](./client/src/assets/screenshots/signup-modal.png)  
@@ -64,7 +64,7 @@
   Robert Atwood, Dion Baskara, JJ Casseus, Sabrina Centeno, Mia Reid
 
   ### Contributing
-  To help contribute to the project, reach out to me on Github.  
+  To help contribute to the project, reach out to us on Github.  
   There, you can report an issue if you encounter one.  
   GitHub profile: <a href="https://github.com/sabplpz">Click Here</a>
 
