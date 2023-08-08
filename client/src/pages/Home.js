@@ -90,7 +90,7 @@ export default function Home() {
 
   return (
     // full body
-    <div class="p-20 grid grid-cols-1 gap-4 lg:grid-cols-3 lg:gap-8">
+    <div class="p-10 md:p-20 grid grid-cols-1 gap-4 lg:grid-cols-3 lg:gap-8">
       {/* aside column with user stats */}
       <div>
         {/* upcoming concerts collapse table */}
