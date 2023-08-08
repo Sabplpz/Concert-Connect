@@ -61,6 +61,9 @@ const resolvers = {
     reviews: async () => {
       return await Review.find().populate("likes").populate("comments").sort({_id: -1});
     },
+    userReviews: async (parent, args, context) => {
+      return await Review.find({username: context.user.username}).populate("likes").populate("comments").sort({_id: -1});
+    }
   },
 
   Mutation: {

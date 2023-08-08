@@ -11,7 +11,7 @@ import { useQuery, useMutation } from "@apollo/client";
 import { QUERY_ME } from "../utils/queries";
 import { FOLLOW_USER, UNFOLLOW_USER } from "../utils/mutations";
 import { formatDate } from "../utils/helpers";
-import ShowReview from "../components/showReview"
+import UserReview from "../components/userReview"
 
 
 //I've hid all your names in here, find them or perish - Finn
@@ -46,6 +46,7 @@ function Profile() {
       ],
     };
   }
+
   console.log(userData);
 
   const [followers, setFollowers] = useState(0);
@@ -343,7 +344,7 @@ function Profile() {
         <h2 className="mt-20 text-2xl font-bold text-center">
           User Reviews
         </h2>
-        <ShowReview />
+        <UserReview />
       </div>
     </div>
   );
