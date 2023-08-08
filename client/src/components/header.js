@@ -110,7 +110,7 @@ const Header = () => {
       <div className="basis-1/2 justify-end">
         <Link to="/concerts">
           <button className="btn btn-outline btn-primary mr-6 mb-1 shrink">
-            <img src={search} className="w-3"/> <p className="sm:hidden md:hidden lg:contents ">Search Concerts</p>
+            <img src={search} className="w-3"/> <p className="hidden lg:contents ">Search Concerts</p>
           </button>
         </Link>
 

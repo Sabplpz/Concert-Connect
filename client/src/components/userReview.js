@@ -62,12 +62,13 @@ function UserReview() {
          <div className="p-5 mb-4 bg-base-100 rounded-lg shadow-lg shadow-base-200/50 hover:bg-neutral-focus">
          <ol className="mt-3 divide-y divide-bg-primary ">
            <li key={review.id}>
-             <a href="#" className="p-3 flex align-start">
+             <div className="p-3 flex align-start">
                <img
                  className="mr-6 mb-3 w-12 h-12 rounded-full"
                  src={handleUsersAvatars(review.username)}
                  alt={`${review.username} image`}
                />
+
                <div className="text-bg-neutral-content">
                  <div className="text-neutral-content text-base">
                    <span className="text-lg text-secondary">
@@ -96,7 +97,7 @@ onClick={() => handleDeleteReview(review._id)}
 </button>
                    </div>
                </div>
-             </a>
+             </div>
              
            </li>
          </ol>
