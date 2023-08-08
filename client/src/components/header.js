@@ -19,6 +19,11 @@ const Header = () => {
 
   const loggedInMenu = (
     <div className="md:flex md:justify-stretch">
+      <a href="/add-concert">
+        <button className="hidden md:btn md:btn-outline btn-secondary md:mr-6 md:shrink">
+          Add Concert
+        </button>
+      </a>
       <div className="dropdown dropdown-end">
         <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
           <div className="w-12 rounded-full shrink-0">
@@ -54,6 +59,7 @@ const Header = () => {
 
   const preLoginMenu = (
     <div>
+              
       <button
         className="btn btn-outline btn-primary md:mt-0"
         onClick={() => setShowModal(true)}
