@@ -2,6 +2,7 @@ import React from "react";
 import Avatar from "../utils/avatar";
 import { useState, createContext } from "react";
 import { useQuery } from "@apollo/client";
+import { Link } from "react-router-dom";
 import { QUERY_ALL_REVIEWS, QUERY_AVATARS } from "../utils/queries";
 import ReviewModal from "./reviewModal";
 import userIcon from "../assets/icons/user.png";
@@ -49,7 +50,7 @@ function ShowReview() {
           <div className="p-5 mb-4 bg-base-100 rounded-lg shadow-lg shadow-base-200/50 hover:bg-neutral-focus">
             <ol className="mt-3 divide-y divide-bg-primary ">
               <li key={review.id}>
-                <a href="#" className="p-3 flex align-start">
+                <Link to="#" className="p-3 flex align-start">
                   <img
                     className="mr-6 mb-3 w-12 h-12 rounded-full"
                     src={handleUsersAvatars(review.username)}
@@ -77,7 +78,7 @@ function ShowReview() {
                       </button>
                       </div>
                   </div>
-                </a>
+                </Link>
                 
               </li>
             </ol>
