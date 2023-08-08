@@ -6,6 +6,7 @@ import { QUERY_USER_REVIEWS, QUERY_AVATARS } from "../utils/queries";
 import { DELETE_REVIEW } from "../utils/mutations";
 import ReviewModal from "./reviewModal";
 import userIcon from "../assets/icons/user.png";
+import trash from "../assets/icons/trash.png";
 
 export const idContext = createContext();
 
