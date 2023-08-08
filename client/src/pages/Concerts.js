@@ -115,8 +115,6 @@ function Concerts() {
         }
     };
 
-    const [addConcert, { data }] = useMutation(ADD_CONCERT);
-
     return (
         <div>
             <div className="container mx-auto p-4">
