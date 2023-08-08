@@ -42,7 +42,7 @@
   ![screenshot of signup modal](./client/src/assets/screenshots/signup-modal.png)  
     
   Next, click on the "ADD CONCERT" button in the navigation bar to begin searching for upcoming concerts.  
-  ![screenshot of search concerts page](./client/src/assets/screenshots/search-concerts.png)  
+  ![screenshot of add concerts page](./client/src/assets/screenshots/add-concerts-top.png)  
 
   Type an artist or band into the search bar, and if they are touring, a dropdown list of their upcoming concerts will appear. Click on the concert you are planning on attending, then press "ADD CONCERT" to save it to your upcoming shows!  
   ![screenshot of add concert form](./client/src/assets/screenshots/add-concert.png)  
@@ -51,16 +51,17 @@
     
   Your profile page will show you a summary of your upcoming concerts, your favorites, and lots of other info all about you!  
   ![screenshot of profile page](./client/src/assets/screenshots/profile-page.png)  
+
+  On your feed page, you can leave reviews, or see reviews left by other users!  
+  ![screenshot of feed page](./client/src/assets/screenshots/feed-page.PNG)  
     
-  
+  By clicking on the "SEARCH CONCERTS" button in the navigation bar, you can search an artist to see a list of all of their concerts at a quick glance. Use this page to also be redirected to the artists' Spotify page, or even buy tickets by follow the "BUY TICKETS" button  
+  ![screenshot of search concerts page](./client/src/assets/screenshots/all-concert-search.PNG)
 
   ## Additional Information
 
   ### Authors
   Robert Atwood, Dion Baskara, JJ Casseus, Sabrina Centeno, Mia Reid
-
-  ### Questions
-  For any questions, please reach out to me at (ADD LATER)
 
   ### Contributing
   To help contribute to the project, reach out to me on Github.  
@@ -69,11 +70,8 @@
 
   ### License  
   MIT License: For more information,  <a href="https://opensource.org/license/mit/">click here</a>  
-  See also: LICENSE.md file located within directory 
+  See also: LICENSE.md file located within directory
 
   ### Acknowledgements
-  (ADD LATER)
-
-  ### Tests
-  N/A
+  Nickelback for being the hands-down greatest band of all time (Sorry Beatles/BTS/CCR/Tay/Bey)!
   
