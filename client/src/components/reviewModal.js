@@ -103,6 +103,7 @@ function ReviewModal({ isOpen, onClose }) {
     }
     if (usersArray.indexOf(username) >= 0) {
       return (
+        <div>
         <button
           className="btn btn-outline btn-secondary btn-sm mr-3"
           onClick={() => unlikeReview()}
@@ -122,9 +123,11 @@ function ReviewModal({ isOpen, onClose }) {
             />
           </svg>
         </button>
+        </div>
       );
     } else {
       return (
+        <div>
         <button
           className="btn btn-outline btn-primary btn-sm mr-3"
           onClick={() => likeReview()}
@@ -144,6 +147,7 @@ function ReviewModal({ isOpen, onClose }) {
             />
           </svg>
         </button>
+        </div>
       );
     }
   };
@@ -168,7 +172,7 @@ function ReviewModal({ isOpen, onClose }) {
       className="fixed inset-0 bg-black bg-opacity-25 backdrop-blur-sm flex justify-center items-center z-50"
       onClick={handleClose}
     >
-      <div className="bg-black">
+      <div className="card bg-base-100 shadow-xl">
         <button
           className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
           onClick={() => onClose()}
@@ -176,27 +180,28 @@ function ReviewModal({ isOpen, onClose }) {
           ✕
         </button>
         {/* user post */}
-        <ol className="mt-3 divide-y divide-bg-primary dark:divide-bg-primary">
+        <div className="card-body">
+        <ol className="mt-3 divide-y divide-bg-primary">
           <li>
-            <a href="#" className="block items-center p-3 sm:flex ">
+            <a href="#" className="block flex align-start">
               <img
                 className="mr-6 mb-3 w-12 h-12 rounded-full sm:mb-0"
                 src={handleUsersAvatars(review.username)}
                 alt="User Avatar"
               />
-              <div className="text-bg-neutral-content dark:text-bg-neutral-content">
+              <div className="text-bg-neutral-content">
                 <div className="text-neutral-content text-base">
-                  <span className="text-lg text-secondary dark:text-secondary">
+                  <span className="text-lg text-secondary ">
                     {review.username}
                   </span>{" "}
-                  reviwed a/an {review.type} - {review.title} ={" "}
+                  reviewed a/an {review.type} - {review.title} ={" "}
                   {review.starRating} stars baby!
                 </div>
-                <div className="text-sm font-normal">{review.text}</div>
-                <span className="inline-flex items-center mb-3 text-xs font-normal text-gray-500">
+                <div className="text-sm font-normal block text-left">{review.text}</div>
+                <span className="block text-left mb-3 text-xs font-normal text-gray-500">
                   {handleLikesCount()} likes
                 </span>
-                <div className="block items-center mt-1">{handleLikes()}</div>
+                <div className="block text-left mt-1 mb-1">{handleLikes()}</div>
               </div>
             </a>
           </li>
@@ -204,36 +209,37 @@ function ReviewModal({ isOpen, onClose }) {
         {/* user comment */}
         {comments.map((comment) => (
           <div className="mb-4 bg-info-content rounded-lg shadow-lg shadow-base-200/50 hover:bg-neutral-focus ">
-            <ol className="mt-3 divide-y divide-bg-primary dark:divide-bg-primary">
+            <ol className="mt-3 divide-y divide-bg-primary">
               <li>
-                <a href="#" className="block items-center p-3 sm:flex ">
+                <a href="#" className="block text-left p-3 sm:flex ">
                   <img
                     className="mr-4 mb-3 w-6 h-6 rounded-full sm:mb-0"
                     src={handleUsersAvatars(comment.username)}
-                    alt="Jese Leos image"
+                    alt="user avatar"
                   />
                   <div className="text-bg-neutral-content ">
                     <div className="text-neutral-content text-sm">
-                      <span className="text-sm text-secondary dark:text-secondary">
+                      <span className="text-sm text-secondary">
                         {comment.username}
                       </span>{" "}
-                      commented
-                    </div>
-                    <span className="text-base font-normal">
+                      <span className="text-sm font-normal">
                       {comment.text}
                     </span>
+                    </div>
+                    
                   </div>
                 </a>
               </li>
             </ol>
+            
           </div>
         ))}
 
         {/* add comment form */}
-        <div className="join w-full">
-          <form onSubmit={handleFormSubmit}>
+        <div className="w-full">
+          <form onSubmit={handleFormSubmit} className="join">
             <input
-              className="input input-primary w-full rounded-lg shadow-sm text-sm join-item"
+              className="input input-primary rounded-lg shadow-sm text-sm w-96 join-item"
               type="text"
               name="text"
               value={formState.text}
@@ -264,6 +270,7 @@ function ReviewModal({ isOpen, onClose }) {
           </form>
         </div>
       </div>
+    </div>
     </div>
   );
 }

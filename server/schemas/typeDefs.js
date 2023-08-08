@@ -110,7 +110,7 @@ const typeDefs = gql`
     updateReview(_id: ID!, starRating: Int!, text: String): Review
     deleteReview(_id: ID!): User
     followUser(username: String!): User
-    unfollowUser(_id: String!): User
+    unfollowUser(username: String!): User
     addComment(_id: String!, text: String): Review
     deleteComment(_id: String!, reviewId: String!): Review
     like(reviewId: ID!): Likes

@@ -234,14 +234,13 @@ const resolvers = {
     },
     unfollowUser: async (parent, args, context) => {
       if (context.user) {
-        await User.findOneAndUpdate(
-          { _id: context.user._id },
-          { $pull: { follow: args._id } }
-        );
-        const following = await User.findOne({
-          _id: context.user._id,
-        }).populate("follow");
-        return following;
+        const deleteFriend = await User.findOne({
+          username: args.username,
+        });
+        await User.findByIdAndUpdate(context.user._id, {
+          $pull: { follow: deleteFriend._id },
+        });
+        return deleteFriend;
       }
       throw new AuthenticationError("You must log in");
     },

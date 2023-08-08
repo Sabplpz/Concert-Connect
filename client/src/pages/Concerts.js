@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import SpotifyIcon from '../assets/icons/spotify green.png';
+<script src="https://kit.fontawesome.com/435efa4ff0.js" crossorigin="anonymous"></script>
 
 function ConcertList({ concertsData }) {
     return (
@@ -36,6 +38,7 @@ function ConcertList({ concertsData }) {
                                 {spotifyUrl ? (
                                     <a href={spotifyUrl} target="_blank" rel="noopener noreferrer">
                                         {artistName}
+                                        <img src={SpotifyIcon} alt="Spotify" className="inline ml-2 h-4 w-4"/>
                                     </a>
                                 ) : (
                                     artistName
@@ -93,14 +96,14 @@ function Concerts() {
         <div>
             <div className="container mx-auto p-4">
                 <section>
-                    <h2 className="mb-20 mt-20 text-2xl font-bold text-center">Search Concerts:</h2>
-                    <form onSubmit={handleSearch} className="mb-6 flex justify-center items-center gap-4">
-                        <input className="input input-bordered w-24 md:w-auto"
+                    <h2 className="mb-10 mt-20 text-2xl font-bold text-center">Search Concerts</h2>
+                    <form onSubmit={handleSearch} className="mb-10 flex justify-center items-center gap-4">
+                        <input className="input input-bordered w-3/6"
                             type="text"
                             name="keyword"
                             placeholder="Enter artist name"
                         />
-                        <button className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 focus:outline-none focus:ring focus:ring-blue-200 focus:ring-opacity-50" type="submit">
+                        <button className="btn btn-secondary btn-outline" type="submit">
                             Search
                         </button>
                     </form>

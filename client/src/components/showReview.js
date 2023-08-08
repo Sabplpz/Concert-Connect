@@ -46,26 +46,25 @@ function ShowReview() {
     <idContext.Provider value={reviewId}>
       <div>
         {allReviewData.map((review) => (
-          <div className="p-5 mb-4 bg-base-100 rounded-lg shadow-lg shadow-base-200/50 dark:bg-base-100 dark:border-base-200 hover:bg-neutral-focus dark:hover:bg-neutral-focus">
-            <ol className="mt-3 divide-y divide-bg-primary dark:divide-bg-primary">
+          <div className="p-5 mb-4 bg-base-100 rounded-lg shadow-lg shadow-base-200/50 hover:bg-neutral-focus">
+            <ol className="mt-3 divide-y divide-bg-primary ">
               <li key={review.id}>
-                <a href="#" className="block items-center p-3 sm:flex">
+                <a href="#" className="p-3 flex align-start">
                   <img
-                    className="mr-6 mb-3 w-12 h-12 rounded-full sm:mb-0"
+                    className="mr-6 mb-3 w-12 h-12 rounded-full"
                     src={handleUsersAvatars(review.username)}
                     alt={`${review.username} image`}
                   />
-                  <div className="text-bg-neutral-content dark:text-bg-neutral-content">
+                  <div className="text-bg-neutral-content">
                     <div className="text-neutral-content text-base">
-                      <span className="text-lg text-secondary dark:text-secondary">
+                      <span className="text-lg text-secondary">
                         {review.username}{" "}
                       </span>
-                      reviwed a/an {review.type} - {review.title} ={" "}
+                      reviewed a/an {review.type} - {review.title} ={" "}
                       {review.starRating} stars baby!
                     </div>
-                    <div className="text-sm font-normal">{review.text}</div>
-
-                    <div className="block items-center mt-3">
+                    <div className="text-sm font-normal block text-left mb-3">{review.text}</div>
+                    <div className="block justify-start text-left">
                       <button
                         className="btn btn-outline btn-primary btn-sm"
                         onClick={() => {
@@ -74,11 +73,12 @@ function ShowReview() {
                         }}
                       >
                         {/* ...rest of the svg code for Comment */}
-                        Like & Comment
+                        Post Details
                       </button>
-                    </div>
+                      </div>
                   </div>
                 </a>
+                
               </li>
             </ol>
           </div>

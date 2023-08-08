@@ -109,14 +109,10 @@ export const FOLLOW_USER = gql`
 
 // Unfollow a user route return a list of the user's follows after the one has been deleted
 export const UNFOLLOW_USER = gql`
-  mutation unfollowUser($id: String!) {
-    unfollowUser(_id: $id) {
+  mutation unfollowUser($username: String!) {
+    unfollowUser(username: $username) {
       _id
       username
-      follow {
-        _id
-        username
-      }
     }
   }
 `;

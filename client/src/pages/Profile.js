@@ -9,7 +9,7 @@ import Avatar from "../utils/avatar";
 
 import { useQuery, useMutation } from "@apollo/client";
 import { QUERY_ME } from "../utils/queries";
-import { FOLLOW_USER } from "../utils/mutations";
+import { FOLLOW_USER, UNFOLLOW_USER } from "../utils/mutations";
 import { formatDate } from "../utils/helpers";
 import UserReview from "../components/userReview"
 
@@ -19,7 +19,7 @@ import UserReview from "../components/userReview"
 // <button className="btn btn-primary">Like</button>
 
 function Profile() {
-  const { loading, data } = useQuery(QUERY_ME);
+  const { loading, data, refetch } = useQuery(QUERY_ME);
   
   let avatar = Avatar.getAvatar();
 
@@ -47,7 +47,7 @@ function Profile() {
     };
   }
   
-  // --------------------- FOLLOW_USER JS START -------------------------
+  // --------------------- FOLLOW & UNFOLLOW JS START -------------------------
   const [followUser, { data: followUserData }] = useMutation(FOLLOW_USER);
 
   const handleFollowUser = async (event) => {
@@ -60,7 +60,20 @@ function Profile() {
       console.error(err);
     }
   };
-  // --------------------- FOLLOW_USER JS END -------------------------
+
+  const [unfollowUser, { data: unfollowUserData }] = useMutation(UNFOLLOW_USER);
+
+  const handleUnfollowUser = async (event) => {
+    event.preventDefault();
+    try {
+      const { data } = unfollowUser({
+        variables: { username: event.target.value },
+      });
+    } catch (err) {
+      console.error(err);
+    }
+  };
+  // --------------------- FOLLOW AND UNFOLLOW JS END -------------------------
 
   const getTopArtists = (artists) => {
     let frequency = {};
@@ -127,7 +140,7 @@ function Profile() {
               {userData.follow.length} Followers
             </p>
             {userData.follow.some(obj => obj.username === userData.username) ? (
-              <button className="btn btn-primary btn-outline" onClick={handleFollowUser} value={userData.username}>Unfollow</button>
+              <button className="btn btn-primary btn-outline" onClick={handleUnfollowUser} value={userData.username}>Unfollow</button>
             ) : ( 
             <button className="btn btn-primary btn-outline" onClick={handleFollowUser} value={userData.username}>Follow</button>
             )}
@@ -171,32 +184,6 @@ function Profile() {
       </div>
       <div className="grid grid-cols-1 gap-4 lg:grid-cols-3 lg:gap-8 mt-10">
         
-        <div>
-          <div className="collapse-title bg-base-200 text-xl">Top Genres</div>
-          {/* Top genres table */}
-          <div className="overflow-x-auto">
-            <table className="table">
-              <tbody>
-                {/* row 1 */}
-                <tr className="hover">
-                  <th className="text-accent">1</th>
-                  <td>{userData.genre}</td>
-                </tr>
-                {/* row 2 */}
-                <tr className="hover">
-                  <th className="text-accent">2</th>
-                  <td>{userData.genre}</td>
-                </tr>
-                {/* row 3 */}
-                <tr className="hover">
-                  <th className="text-accent">3</th>
-                  <td>{userData.genre}</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-          {/* end of top genres table */}
-        </div>
         <div>
           {/* Top artists table */}
           <div className="collapse-title bg-base-200 text-xl">Top Artists</div>
@@ -333,114 +320,7 @@ function Profile() {
             </tbody>
           </table>
         </div>
-        <div className="join">
-          <button className="join-item btn">1</button>
-          <button className="join-item btn btn-active">2</button>
-          <button className="join-item btn">3</button>
-          <button className="join-item btn">4</button>
-        </div>
-        <h2 className="mt-20 text-2xl font-bold text-center">
-          Favorite Concerts
-        </h2>
-        <div className="overflow-x-auto">
-          <table className="table">
-            {/* head */}
-            <thead>
-              <tr className="border-accent text-base text-neutral-content">
-                <th>Date</th>
-                <th>Concert</th>
-                <th>Venue</th>
-                <th>Location</th>
-              </tr>
-            </thead>
-            <tbody>
-              {/* row 1 */}
-              <tr className="hover">
-                <th>1</th>
-                <td>Cy Ganderton</td>
-                <td>Quality Control Specialist</td>
-                <td>Blue</td>
-                <th>
-                  <button className="btn btn-ghost btn-xs">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      className="h-6 w-6"
-                      fill="fill-white"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth="2"
-                        d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
-                      />
-                    </svg>
-                    Favorite
-                  </button>
-                </th>
-              </tr>
-              {/* row 2 */}
-              <tr className="hover">
-                <th>2</th>
-                <td>Hart Hagerty</td>
-                <td>Desktop Support Technician</td>
-                <td>Purple</td>
-                <th>
-                  <button className="btn btn-ghost btn-xs">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      className="h-6 w-6"
-                      fill="fill-white"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth="2"
-                        d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
-                      />
-                    </svg>
-                    Favorite
-                  </button>
-                </th>
-              </tr>
-              {/* row 3 */}
-              <tr className="hover">
-                <th>3</th>
-                <td>Brice Swyre</td>
-                <td>Tax Accountant</td>
-                <td>Red</td>
-                <th>
-                  <button className="btn btn-ghost btn-xs">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      className="h-6 w-6"
-                      fill="fill-white"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth="2"
-                        d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
-                      />
-                    </svg>
-                    Favorite
-                  </button>
-                </th>
-              </tr>
-            </tbody>
-          </table>
-          <div className="join">
-            <button className="join-item btn">1</button>
-            <button className="join-item btn btn-active">2</button>
-            <button className="join-item btn">3</button>
-            <button className="join-item btn">4</button>
-          </div>
-        </div>
+        
         <h2 className="mt-20 text-2xl font-bold text-center">
           User Reviews
         </h2>

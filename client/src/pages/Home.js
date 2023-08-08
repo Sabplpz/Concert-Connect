@@ -18,15 +18,13 @@ export default function Home() {
   const { loading, data } = useQuery(QUERY_ME);
 
   let userData;
-  if (data?.me) {
+  if (data?.me && data.me.concerts.length > 0) {
     userData = data?.me;
   } else {
     userData = {
       username: "Loading",
       concerts: [
-        { date: "Null", concertName: "No upcoming concerts saved" },
-        { date: "Null", concertName: "" },
-        { date: "Null", concertName: "" },
+        { date: null, concertName: "No upcoming concerts saved" },
       ],
       artists: [
         { artistName: "No saved artists" },
@@ -113,20 +111,14 @@ export default function Home() {
                   </tr>
                 </thead>
                 
-                  <tbody>
-                    <tr className="hover">
-                      {/* <td>{formatDate(userData.concerts[0].date)}</td>
-                      <td>{userData.concerts[0].concertName}</td> */}
+                <tbody>
+                  {userData.concerts.map((concert, index) => (
+                    <tr className="hover" key={index}>
+                      <td>{concert.date ? formatDate(concert.date) : 'No Date'}</td>
+                      <td>{concert.concertName}</td>
                     </tr>
-                    <tr className="hover">
-                    {/* <td>{formatDate(userData.concerts[1].date)}</td>
-                      <td>{userData.concerts[0].concertName}</td> */}
-                    </tr>
-                    <tr className="hover">
-                    {/* <td>{formatDate(userData.concerts[2].date)}</td>
-                      <td>{userData.concerts[0].concertName}</td> */}
-                    </tr>
-                  </tbody>
+                  ))}
+                </tbody>
                 
               </table>
             </div>
@@ -169,41 +161,7 @@ export default function Home() {
           </div>
         </div>
         {/* end of top artists collapse table */}
-        {/* top genres collapse table */}
-        <div className="collapse mb-5">
-          <input type="checkbox" />
-          <div className="collapse-title text-xl font-medium bg-base-200">
-            Your Top Genres
-          </div>
-          <div className="collapse-content">
-            {/* Top genres table */}
-            <div className="overflow-x-auto">
-              <table className="table">
-                
-                  <tbody>
-                    {/* row 1 */}
-                    <tr className="hover">
-                      <th className="text-accent">1</th>
-                      <td>{userData.genre}</td>
-                    </tr>
-                    {/* row 2 */}
-                    <tr className="hover">
-                      <th className="text-accent">2</th>
-                      <td>{userData.genre}</td>
-                    </tr>
-                    {/* row 3 */}
-                    <tr className="hover">
-                      <th className="text-accent">3</th>
-                      <td>{userData.genre}</td>
-                    </tr>
-                  </tbody>
-                
-              </table>
-            </div>
-            {/* end of top genres table */}
-          </div>
-        </div>
-        {/* end of top genres collapse table */}
+
         {/* top venues collapse table */}
         <div className="collapse">
           <input type="checkbox" />
