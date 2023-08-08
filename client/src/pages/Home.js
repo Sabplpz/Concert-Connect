@@ -15,7 +15,7 @@ import ReviewModal from "../components/reviewModal";
 
 export default function Home() {
   // ----------------------------------------------- QUERY_ME START ----------------------------------------------------------------
-  const { loading, data } = useQuery(QUERY_ME);
+  const { loading, data } = useQuery(QUERY_ME, { pollInterval: 1000 });
 
   let userData;
   if (data?.me && data.me.concerts.length > 0) {

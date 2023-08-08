@@ -14,7 +14,7 @@ function ShowReview() {
     loading: loadingReview,
     error,
     data: reviewsData,
-  } = useQuery(QUERY_ALL_REVIEWS, { pollInterval: 500 });
+  } = useQuery(QUERY_ALL_REVIEWS, { pollInterval: 1000 });
 
   const {
     loading: loadingAvatar,

@@ -20,7 +20,7 @@ import UserReview from "../components/userReview"
 // <button className="btn btn-primary">Like</button>
 
 function Profile() {
-  const { loading, data } = useQuery(QUERY_ME);
+  const { loading, data } = useQuery(QUERY_ME, { pollInterval: 1000 });
   
   let avatar = Avatar.getAvatar();
 
