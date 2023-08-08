@@ -7,6 +7,7 @@ import venueIcon from "../assets/icons/venue.png";
 import ticketIcon from "../assets/icons/concert-ticket.png";
 import Avatar from "../utils/avatar";
 
+
 import { useQuery, useMutation } from "@apollo/client";
 import { QUERY_ME } from "../utils/queries";
 import { FOLLOW_USER, UNFOLLOW_USER } from "../utils/mutations";
@@ -202,7 +203,7 @@ function Profile() {
           </div>
         </div>
       </div>
-      <div className="grid grid-cols-1 gap-4 lg:grid-cols-3 lg:gap-8 mt-10">
+      <div className="grid grid-cols-1 gap-4 lg:grid-cols-2 lg:gap-8 mt-10">
         
         <div>
           {/* Top artists table */}
@@ -316,25 +317,6 @@ function Profile() {
                   <td>{userData.concerts[2].concertName}</td>
                   <td>VENUE</td>
                   <td>{userData.concerts[2].city}</td>
-                  <th>
-                    <button className="btn btn-ghost btn-xs">
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        className="h-6 w-6"
-                        fill="fill-white"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth="2"
-                          d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
-                        />
-                      </svg>
-                      Favorite
-                    </button>
-                  </th>
                 </tr>
               )}
             </tbody>
