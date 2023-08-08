@@ -115,16 +115,16 @@ export default function Home() {
                 
                   <tbody>
                     <tr className="hover">
-                      <td>{formatDate(userData.concerts[0].date)}</td>
-                      <td>{userData.concerts[0].concertName}</td>
+                      {/* <td>{formatDate(userData.concerts[0].date)}</td>
+                      <td>{userData.concerts[0].concertName}</td> */}
                     </tr>
                     <tr className="hover">
-                    <td>{formatDate(userData.concerts[1].date)}</td>
-                      <td>{userData.concerts[0].concertName}</td>
+                    {/* <td>{formatDate(userData.concerts[1].date)}</td>
+                      <td>{userData.concerts[0].concertName}</td> */}
                     </tr>
                     <tr className="hover">
-                    <td>{formatDate(userData.concerts[2].date)}</td>
-                      <td>{userData.concerts[0].concertName}</td>
+                    {/* <td>{formatDate(userData.concerts[2].date)}</td>
+                      <td>{userData.concerts[0].concertName}</td> */}
                     </tr>
                   </tbody>
                 

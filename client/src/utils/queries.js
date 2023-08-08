@@ -12,6 +12,28 @@ export const QUERY_ALL_REVIEWS = gql`
   }
 `;
 
+export const QUERY_USER_REVIEWS = gql`
+  query UserReviews {
+    userReviews {
+      _id
+      comments {
+        _id
+        text
+        username
+      }
+      likes {
+        _id
+        likes_count
+      }
+      starRating
+      text
+      title
+      type
+      username
+    }
+  }
+`;
+
 export const QUERY_ALL_CONCERTS = gql`
   query concerts {
     concerts {

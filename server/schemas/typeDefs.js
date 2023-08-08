@@ -76,6 +76,7 @@ const typeDefs = gql`
     venues: User
     review(_id: String!): Review
     reviews: [Review]
+    userReviews: [Review]
     comments: [Comments]
     likes(_id: String!): Likes
   }
