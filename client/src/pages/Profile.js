@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 
 import userIcon from "../assets/icons/user.png";
 import artistIcon from "../assets/icons/album.png";
@@ -19,7 +19,7 @@ import ShowReview from "../components/showReview"
 // <button className="btn btn-primary">Like</button>
 
 function Profile() {
-  const { loading, data, refetch } = useQuery(QUERY_ME);
+  const { loading, data } = useQuery(QUERY_ME);
   
   let avatar = Avatar.getAvatar();
 
@@ -47,29 +47,47 @@ function Profile() {
     };
   }
   console.log(userData);
+
+  const [followers, setFollowers] = useState(0);
+  const [isFollowing, setIsFollowing] = useState(false);
+  
+  useEffect(() => {
+    if (data?.me) {
+      setFollowers(data.me.follow.length);
+      setIsFollowing(data.me.follow.some(obj => obj.username === data.me.username));
+    }
+  }, [data]);
   
   // --------------------- FOLLOW & UNFOLLOW JS START -------------------------
   const [followUser, { data: followUserData }] = useMutation(FOLLOW_USER);
-
+  
   const handleFollowUser = async (event) => {
     event.preventDefault();
     try {
-      const { data } = followUser({
+      const { data } = await followUser({
         variables: { username: event.target.value },
       });
+      if(data) {
+        setIsFollowing(true);
+        setFollowers(followers + 1);
+      }
     } catch (err) {
       console.error(err);
     }
   };
-
+  
   const [unfollowUser, { data: unfollowUserData }] = useMutation(UNFOLLOW_USER);
 
   const handleUnfollowUser = async (event) => {
     event.preventDefault();
     try {
-      const { data } = unfollowUser({
+      const { data } = await unfollowUser({
         variables: { username: event.target.value },
       });
+      if(data) {
+        setIsFollowing(false);
+        setFollowers(followers - 1);
+      }
     } catch (err) {
       console.error(err);
     }
@@ -136,16 +154,16 @@ function Profile() {
             />
           </div>
           <div>
-            <h1 className="text-4xl font-bold my-2">{userData.username}</h1>
-            <p className="text-base tracking-wide mb-6 md:max-w-lg">
-              {userData.follow.length} Followers
-            </p>
-            {userData.follow.some(obj => obj.username === userData.username) ? (
-              <button className="btn btn-primary btn-outline" onClick={handleUnfollowUser} value={userData.username}>Unfollow</button>
-            ) : ( 
-            <button className="btn btn-primary btn-outline" onClick={handleFollowUser} value={userData.username}>Follow</button>
-            )}
-          </div>
+          <h1 className="text-4xl font-bold my-2">{userData.username}</h1>
+        <p className="text-base tracking-wide mb-6 md:max-w-lg">
+          {followers} Followers
+        </p>
+        {isFollowing ? (
+          <button className="btn btn-primary btn-outline" onClick={handleUnfollowUser} value={userData.username}>Unfollow</button>
+        ) : ( 
+          <button className="btn btn-primary btn-outline" onClick={handleFollowUser} value={userData.username}>Follow</button>
+        )}
+      </div>
         </div>
       </div>
       <div className="sm:grid lg:grif-cols-3 grid-cols-3 sm:gap-x-4">
