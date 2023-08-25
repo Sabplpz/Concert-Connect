@@ -5,11 +5,16 @@ import { Link } from "react-router-dom";
 import { useQuery, useMutation } from "@apollo/client";
 import { useContext, useState } from "react";
 import { idContext } from "./showReview";
+import { idUserContext } from "./userReview";
 import { QUERY_REVIEW, QUERY_AVATARS } from "../utils/queries";
 import { ADD_COMMENT, LIKE, UNLIKE } from "../utils/mutations";
 
+
+
 function ReviewModal({ isOpen, onClose }) {
-  const reviewId = useContext(idContext);
+  const feed = useContext(idContext);
+  const user = useContext(idUserContext);
+  const reviewId = feed || user;
   const [formState, setFormState] = useState({
     text: "",
     id: "",
@@ -173,7 +178,7 @@ function ReviewModal({ isOpen, onClose }) {
       className="fixed inset-0 bg-black bg-opacity-25 backdrop-blur-sm flex justify-center items-center z-50"
       onClick={handleClose}
     >
-      <div className="card bg-base-100 shadow-xl">
+      <div className="card bg-base-100 shadow-xl max-h-full">
         <button
           className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
           onClick={() => onClose()}
@@ -208,8 +213,9 @@ function ReviewModal({ isOpen, onClose }) {
           </li>
         </ol>
         {/* user comment */}
+        <div className="overflow-auto max-h-96">
         {comments.map((comment) => (
-          <div className="mb-4 bg-info-content rounded-lg shadow-lg shadow-base-200/50 hover:bg-neutral-focus ">
+          <div className="mb-4 bg-info-content rounded-lg shadow-lg shadow-base-200/50 hover:bg-neutral-focus">
             <ol className="mt-3 divide-y divide-bg-primary">
               <li>
                 <Link to="#" className="block text-left p-3 sm:flex ">
@@ -235,6 +241,7 @@ function ReviewModal({ isOpen, onClose }) {
             
           </div>
         ))}
+        </div>
 
         {/* add comment form */}
         <div className="w-full">

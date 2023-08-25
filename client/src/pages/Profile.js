@@ -13,6 +13,7 @@ import { QUERY_ME } from "../utils/queries";
 import { FOLLOW_USER, UNFOLLOW_USER } from "../utils/mutations";
 import { formatDate } from "../utils/helpers";
 import UserReview from "../components/userReview"
+import ShowReview from "../components/showReview";
 
 
 //I've hid all your names in here, find them or perish - Finn

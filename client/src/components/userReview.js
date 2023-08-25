@@ -9,7 +9,7 @@ import ReviewModal from "./reviewModal";
 import userIcon from "../assets/icons/user.png";
 import trash from "../assets/icons/trash.png";
 
-export const idContext = createContext();
+export const idUserContext = createContext();
 
 function UserReview() {
   const [showModal, setShowModal] = useState(false);
@@ -59,7 +59,7 @@ function UserReview() {
   };
 
   return (
-    <idContext.Provider value={reviewId}>
+    <idUserContext.Provider value={reviewId}>
       <div>
         {allReviewData.map((review) => (
          <div className="p-5 mb-4 bg-base-100 rounded-lg shadow-lg shadow-base-200/50 hover:bg-neutral-focus">
@@ -111,7 +111,7 @@ onClick={() => handleDeleteReview(review._id)}
           onClose={() => setShowModal(false)}
         ></ReviewModal>
       </div>
-    </idContext.Provider>
+    </idUserContext.Provider>
   );
 }
 
