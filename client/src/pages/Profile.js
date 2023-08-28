@@ -13,6 +13,7 @@ import { QUERY_ME } from "../utils/queries";
 import { FOLLOW_USER, UNFOLLOW_USER } from "../utils/mutations";
 import { formatDate } from "../utils/helpers";
 import UserReview from "../components/userReview"
+import ShowReview from "../components/showReview";
 
 
 //I've hid all your names in here, find them or perish - Finn
@@ -20,7 +21,7 @@ import UserReview from "../components/userReview"
 // <button className="btn btn-primary">Like</button>
 
 function Profile() {
-  const { loading, data } = useQuery(QUERY_ME);
+  const { loading, data } = useQuery(QUERY_ME, { pollInterval: 1000 });
   
   let avatar = Avatar.getAvatar();
 

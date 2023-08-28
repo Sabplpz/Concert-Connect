@@ -1,6 +1,7 @@
 import React from "react";
 import Avatar from "../utils/avatar";
 import { useState, createContext } from "react";
+import { useNavigate } from "react-router-dom";
 import { useQuery, useMutation } from "@apollo/client";
 import { QUERY_USER_REVIEWS, QUERY_AVATARS } from "../utils/queries";
 import { DELETE_REVIEW } from "../utils/mutations";
@@ -8,7 +9,7 @@ import ReviewModal from "./reviewModal";
 import userIcon from "../assets/icons/user.png";
 import trash from "../assets/icons/trash.png";
 
-export const idContext = createContext();
+export const idUserContext = createContext();
 
 function UserReview() {
   const [showModal, setShowModal] = useState(false);
@@ -18,7 +19,7 @@ function UserReview() {
     loading: loadingReview,
     error,
     data: reviewsData,
-  } = useQuery(QUERY_USER_REVIEWS);
+  } = useQuery(QUERY_USER_REVIEWS, { pollInterval: 1000 });
 
   const {
     loading: loadingAvatar,
@@ -28,6 +29,8 @@ function UserReview() {
 
   const [deleteReview, { error: deleteReviewError }] =
     useMutation(DELETE_REVIEW);
+
+  const navigate = useNavigate();
 
   const usersAvatars = avatarData?.users;
   const allReviewData = reviewsData?.userReviews || [];
@@ -49,14 +52,14 @@ function UserReview() {
   const handleDeleteReview = async (id) => {
     try {
       await deleteReview({ variables: { id: id } });
-      window.location.reload();
+      navigate("/profile");
     } catch (e) {
       console.error(e);
     }
   };
 
   return (
-    <idContext.Provider value={reviewId}>
+    <idUserContext.Provider value={reviewId}>
       <div>
         {allReviewData.map((review) => (
          <div className="p-5 mb-4 bg-base-100 rounded-lg shadow-lg shadow-base-200/50 hover:bg-neutral-focus">
@@ -108,7 +111,7 @@ onClick={() => handleDeleteReview(review._id)}
           onClose={() => setShowModal(false)}
         ></ReviewModal>
       </div>
-    </idContext.Provider>
+    </idUserContext.Provider>
   );
 }
 
